@@ -1,0 +1,131 @@
+<div class="order-model">
+	<!-- Login modal -->
+	<div id="order-modal">
+		<!-- Login Form -->
+		<div class="order-form default-form">
+			<section class="page-title">
+				<div class="auto-container">
+					<div class="title-outer">
+						<h1>주문/결제</h1>
+					</div>
+				</div>
+			</section>
+			<!--End Page Title-->
+
+			<!--CheckOut Page-->
+			<section class="checkout-page">
+				<div class="auto-container">
+					<div class="row">
+						<div class="column col-lg-6 col-md-6 col-sm-6">
+							<!--Checkout Details-->
+							<div class="checkout-form">
+								<h3 class="title">Billing Details</h3>
+									<div class="row">
+										<!--Form Group-->
+										<div class="form-group col-lg-12 col-md-6 col-sm-6">
+											<div class="field-label">구매자</div>
+											<input type="text" id="order-name" name="user-name" value=""
+												placeholder="">
+										</div>
+
+										<!--Form Group-->
+										<div class="form-group col-lg-12 col-md-6 col-sm-6">
+											<div class="field-label">전화번호</div>
+											<input type="text" id="order-phone" name="user-phone"
+												value="" placeholder="">
+											<div class="error-message-phone" style="color: red; display: none;"></div>
+										</div>
+
+										<!--Form Group-->
+										<div class="form-group col-lg-12 col-md-6 col-sm-6">
+											<div class="field-label">이메일</div>
+											<input type="email" id="order-email" name="user-email"
+												value="" placeholder="">
+											<div class="error-message-email" style="color: red; display: none;"></div>
+										</div>
+									</div>
+							</div>
+							<!--End Checkout Details-->
+						</div>
+
+						<div class="column col-lg-6 col-md-6 col-sm-6">
+							<h2 class="title"></h2>
+							<!--Order Box-->
+							<div class="order-box">
+								<h3>Your Order</h3>
+								<input type="hidden" id="product-id" value="">
+								<table>
+									<thead>
+										<tr>
+											<th><strong>상품</strong></th>
+											<th><strong>금액</strong></th>
+										</tr>
+									</thead>
+									<tbody>
+										<tr class="cart-item">
+											<td class="product-name"></td>
+											<td class="product-total"></td>
+										</tr>
+									</tbody>
+									<tfoot>
+										<tr class="order-total">
+											<td>상품기간</td>
+											<td style = "width: 200px"><span class="product-period">$9,218.00</span></td>
+										</tr>
+									</tfoot>
+								</table>
+							</div>
+							<!--End Order Box-->
+						</div>
+					</div>
+				</div>
+			</section>
+			<!--End CheckOut Page-->
+			<!--Payment Box-->
+			<div class="payment-box">
+				   <!--Payment Options-->
+              <div class="payment-options">
+                <ul>
+                  <li>
+                    <div class="radio-option radio-box">
+                      <input type="radio" name="payment-group" id="credit-card" value="card" data-pg="html5_inicis.INIBillTst" checked>
+                      <label for="credit-card">신용/체크카드</label>
+                    </div>
+                  </li>
+
+                  <li>
+                    <div class="radio-option radio-box">
+                      <input type="radio" name="payment-group" id="bank-transfer" value="trans" data-pg="">
+                      <label for="bank-transfer">계좌이체</label>
+                    </div>
+                  </li>
+
+                  <li>
+                    <div class="radio-option radio-box">
+                      <input type="radio" name="payment-group" id="bank-deposit" value="vbank">
+                      <label for="bank-deposit">무통장입금(가상계좌)</label>
+                    </div>
+                  </li>
+
+                  <li>
+                    <div class="radio-option radio-box">
+                      <input type="radio" name="payment-group" id="kakaopay" value="kakaopay" data-pg="kakaopay.TC0ONETIME">
+                      <label for="kakaopay">카카오페이
+                        <img src="images/icons/paypal.png" alt="">
+                      </label>
+                    </div>
+                  </li>
+                </ul>
+
+                <div class="btn-box">
+                  <a href="#" id="pay-btn" class="theme-btn btn-style-one">Place Order</a>
+                </div>
+              </div>
+			</div>
+			<!--End Payment Box-->
+		</div>
+		<!-- End Login Module -->
+		<script type="text/javascript" src="https://cdn.iamport.kr/js/iamport.payment-1.2.0.js"></script>
+		
+	</div>
+

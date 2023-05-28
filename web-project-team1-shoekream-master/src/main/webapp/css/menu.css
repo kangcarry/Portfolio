@@ -1,0 +1,153 @@
+@import url("cart.css");
+div#header {
+	all: unset; 
+	background-color: #F3F2ED;
+}
+
+div#header h1 {
+	height: 60px;
+	line-height: 60px;
+	margin: 0px 0 0 0;
+	padding-left: 10px;
+	background: black;
+	background-position: center;
+	background-repeat: no-repeat;
+	background-size: 100%
+}
+
+div#header #menu {
+	margin-top:10px; 
+}
+
+#menu {
+	margin: 0 5% 0 5%;
+	align-items: flex-end;
+	
+}
+#menu ul {
+	list-style-type: none;
+	margin: 0;
+	background-color: #fff;
+	vertical-align: baseline;
+}
+
+#menu ul:after {
+	content: '';
+	display: block;
+	clear: both;
+	align-items: flex-end;
+}
+
+#menu li#logo {
+	float: left;
+}
+
+#menu li{
+	float: right;
+	align-items: flex-end;
+}
+
+#menu li a {
+	display: block;
+	color: white;
+	text-align: center;
+	padding: 10px 10px 30px 10px;
+	text-decoration: none;
+}
+#menu .active {
+	background-color: #4CAF50;
+}
+
+#menu li#logo {
+	width: 250px;
+	background: url('../image/logo_shoekream_pt10.png');
+	margin: 0px 10px 0px 10px;
+	background-position: left;
+	background-size: 100%;
+	background-repeat: no-repeat;
+	opacity: 0.8;
+}
+#menu li#logo:hover{
+	opacity: 1;
+}
+#menu li#cart {
+	width: 40px;
+	height: 40px;
+	background: url('../image/icons/cart2.png');
+	margin: 10px 10px 10px 10px;
+	background-position: left;
+	background-size: 100%;
+	background-repeat: no-repeat;
+	opacity: 0.7;
+}
+
+#menu li#cart:hover{
+	opacity: 1;
+}
+
+#menu li#login {
+	width: 35px;
+	height: 35px;
+	background: url('../image/icons/login.png');
+	margin: 10px 10px 10px 10px;
+	background-position: left;
+	background-size: 100%;
+	background-repeat: no-repeat;
+	opacity: 0.7;
+}
+
+#menu li#logout {
+	width: 35px;
+	height: 35px;
+	background: url('../image/icons/logout.png');
+	margin: 10px 10px 10px 10px;
+	background-position: left;
+	background-size: 100%;
+	background-repeat: no-repeat;
+	opacity: 0.7;
+}
+
+#menu li#login:hover{
+	opacity: 1;
+}
+
+#menu li#logout:hover{
+	opacity: 1;
+}
+
+#menu li#join {
+	width: 35px;
+	height: 35px;
+	background: url('../image/icons/join.png');
+	margin: 10px 10px 10px 10px;
+	background-position: left;
+	background-size: 100%;
+	background-repeat: no-repeat;
+	opacity: 0.7;
+}
+
+#menu li#join:hover{
+	opacity: 1;
+}
+
+div#top_navigation span{
+	color : white;
+	font-size: 14px;
+}
+
+#menu li#mypage {
+	width: 40px;
+	height: 40px;
+	background: url('../image/icons/mypage.png');
+	margin: 10px 10px 10px 10px;
+	background-position: left;
+	background-size: 100%;
+	background-repeat: no-repeat;
+	opacity: 0.7;
+}
+
+
+
+#menu limypage:hover{
+	opacity: 1;
+}

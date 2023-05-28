@@ -1,0 +1,321 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+  <meta charset="utf-8">
+  <title>ilhajob</title>
+
+  <!-- Stylesheets -->
+  <link href="css/bootstrap.css" rel="stylesheet">
+  <link href="css/style.css" rel="stylesheet">
+  
+
+  <link rel="shortcut icon" href="images/favicon.png" type="image/x-icon">
+  <link rel="icon" href="images/favicon.png" type="image/x-icon">
+
+  <!-- Responsive -->
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0">
+  <!--[if lt IE 9]><script src="https://cdnjs.cloudflare.com/ajax/libs/html5shiv/3.7.3/html5shiv.js"></script><![endif]-->
+  <!--[if lt IE 9]><script src="js/respond.js"></script><![endif]-->
+  <script defer src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.js"></script>
+  <script defer type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/handlebars.js/4.1.2/handlebars.min.js"></script>
+</head>
+
+<body>
+
+  <div class="page-wrapper dashboard">
+
+    <!-- Preloader -->
+    <div class="preloader"></div>
+
+    <!-- Header Span -->
+    <span class="header-span"></span>
+
+    <!-- Main Header-->
+    <header class="main-header header-shaddow">
+      <div id="main-header" th:include="include_common_top_dashboard::include_common_top_dashboard"></div>
+    </header>
+    <!--End Main Header -->
+
+    <!-- Sidebar Backdrop -->
+    <div class="sidebar-backdrop"></div>
+
+    <!-- User Sidebar -->
+   <div class="user-sidebar" th:include="user-sidebar::user-sidebar"></div>
+    <!-- End User Sidebar -->
+
+    <!-- Dashboard -->
+    <section class="user-dashboard">
+      <div class="dashboard-outer">
+        <div class="upper-title-box">
+          <h3>이력서 작성</h3>
+          <div class="text">새로운 이력서를 작성하세요!</div>
+        </div>
+
+        <div class="row">
+          <div class="col-lg-12">
+            <!-- Ls widget -->
+            <div class="ls-widget">
+              <div class="tabs-box">
+                <div class="widget-title">
+                  <h4>내 이력서</h4>
+                </div>
+
+                <div class="widget-content" th:object="${cvId}">
+                    <div class="row">
+		 		<!-- ************ cv form start  ************ -->
+                  <form class="default-form" name="f">
+                      <!-- Input -->
+                      <input type="hidden" name="userId" th:value="${userId}"/>
+                      
+                      <div class="form-group col-lg-12 col-md-12">
+                        <label>제목</label>
+                        <input type="text" name="cvName" placeholder="제목을 입력하세요.">
+                      </div>
+                      
+                      <div class="form-group col-lg-12 col-md-12">
+                        <label>자기소개</label>
+                        <textarea placeholder="자기소개서를 작성하세요." name="cvDescription"></textarea>
+                      </div>
+
+                      <div class="form-group col-lg-12 col-md-12">
+                        <label>포트폴리오</label>
+                        <input type="text" name="cvPortfolio" placeholder="포트폴리오 사이트를 입력하세요.">
+                      </div>
+                   </form>
+		 		<!-- ************ cv form end  ************ -->
+<!-- 						
+					edu, exp, awards div
+                      <div class="form-group col-lg-12 col-md-12">
+                      
+                      eduForm Start
+	                  <form class="default-form" name="eduForm" id="eduForm">
+	                  	<input type="hidden" name="id" th:value="${cvId}">
+                        Resume / Education
+                        <div class="resume-outer" id="edu-block">
+                          <div class="upper-title">
+                            <h4>학력</h4>
+                            <button type="button" class="add-info-btn" onclick="addEdu()"><span class="icon flaticon-plus"></span> 학력 추가</button>
+                          </div>
+                          Resume BLock
+                          <div class="resume-block" th:object="${eduList}" th:each="edu:${eduList}" th:id="eduBlock+${edu.id}">
+                            <div class="inner" id="edit-block">
+                              <span class="name">E</span>
+                              <div class="title-box">
+                                  <div class="edit-btns col-lg-10 col-md-10"></div>
+                                  <div class="edit-btns col-lg-2 col-md-2">
+									  <input type="hidden" th:id="eduId+${edu.id}" name="eduId" >
+									  <button type="button" th:id="'editBtn(' + ${edu.id} + ')'" th:onclick="'editEdu(' + ${edu.id} + ')'"><span class="la la-pencil"></span></button>
+									  <button type="button" th:id="'updateEdu(' + ${edu.id} + ')'" th:onclick="'updateEdu(' + ${edu.id} + ')'"><span class="la la-check-square-o"></span></button>
+									  <button type="button" th:id="'deleteEdu(' + ${edu.id} + ')'" th:onclick="'deleteEdu(' + ${edu.id} + ')'"><span class="la la-trash"></span></button>
+                                  </div>
+                              </div>
+                              <div class="row">
+                              	<div class="col-lg-6 col-md-6 form-group">
+                              	<label>학교명</label>
+                                <input type="text" class="text" name="eduName" th:id="eduName+${edu.id}" th:placeholder="${edu.eduName}" value="" readonly>
+                                </div>
+                              	<div class="col-lg-6 col-md-6 form-group">
+                                <label>전공</label>
+                                <input type="text" class="text" name="eduMajor" th:id="eduMajor+${edu.id}" th:placeholder="${edu.eduMajor}" value="" readonly>
+                                </div>
+                              	<div class="col-lg-6 col-md-6 form-group">
+                              	<label>학점</label>
+                              	<input type="text" class="text" name="eduScore" th:id="eduScore+${edu.id}" th:placeholder="${edu.eduScore}" value="" readonly>
+                              	</div>                                
+                              	<div class="col-lg-6 col-md-6 form-group">
+                              	<label>추가 정보 입력</label>
+                                <input type="text" class="text" name="eduContent" th:id="eduContent+${edu.id}" th:placeholder="${edu.eduContent}" value="" readonly>
+                              	</div>
+                              	 
+                                <div class="edit-box">
+                              	<div class="form-group col-lg-6 col-md-6">
+                              	<label>입학일</label><br>
+                                <input type="date" class="year" style=display:none name="eduStartDate" th:id="eduStartDate+${edu.id}" value="">
+                                <span class="year year-span" th:value="${edu.eduStartDate}" th:text="${#temporals.format(edu.eduStartDate, 'yyyy-MM-dd')}">2012 - 2014</span>
+                              	</div>
+                              	<div class="form-group col-lg-6 col-md-6">
+                              	<label>졸업일</label><br>
+                                <input type="date" class="year" style=display:none name="eduEndDate" th:id="eduEndDate+${edu.id}" value="">
+                                <span class="year year-span" th:value="${edu.eduEndDate}" th:text="${#temporals.format(edu.eduStartDate, 'yyyy-MM-dd')}">2012 - 2014</span>
+                              	</div>
+                              </div> row end
+                             </div>
+                            </div>
+                          </div>
+                        </div>
+                       </form>
+                      eduForm End
+                      
+					expForm Start
+					<form class="default-form" name="expForm">
+					  <input type="hidden" name="cvId" th:value="${cvId}">
+                        Resume / Work & Experience
+                        <div class="resume-outer theme-blue" id="exp-block">
+                          <div class="upper-title">
+                            <h4>경력 사항</h4>
+                            <button type="button" onclick="addExp()" class="add-info-btn"><span class="icon flaticon-plus"></span> 경력 추가</button>
+                          </div>
+                          Resume BLock
+                          <div class="resume-block" th:each="exp:${expList}" th:id="expBlock+${exp.id}">
+                            <div class="inner">
+                              <span class="name">S</span>
+                              <div class="title-box">
+                                  <div class="edit-btns col-lg-10 col-md-10"></div>
+                                  <div class="edit-btns col-lg-2 col-md-2">
+                                  	<input type="hidden" th:id="expId+${exp.id}" name="expId">
+                                    <button type="button" th:id="'editExpBtn(' + ${exp.id} + ')'" th:onclick="'editExp(' + ${exp.id} + ')'"><span class="la la-pencil"></span></button>
+                                    <button type="button" th:id="'updateExpBtn(' + ${exp.id} + ')'" th:onclick="'updateExp(' + ${exp.id} + ')'"><span class="la la-check-square-o"></span></button>
+                                    <button type="button" th:id="'deleteExpBtn(' + ${exp.id} + ')'" th:onclick="'deleteExp(' + ${exp.id}+ ')'"><span class="la la-trash"></span></button>
+                                    
+                                  </div>
+                              </div>
+                              <div class="row">
+                                <div class="col-lg-6 col-md-6 form-group">
+                                  <label>회사</label>
+                                  <span th:text="${exp.expCorpName}" th:value="${exp.expCorpName}">Spotify Inc.</span>
+		                          <input type="text" class="text" name="expCorpName" th:placeholder="${exp.expCorpName}" readonly>
+                                  <h3 th:text="${exp.expPosition}" th:value="${exp.expPosition}">Product Designer</h3>
+                                </div>
+                                <div class="col-lg-6 col-md-6 form-group">
+                                  <label>직무</label>
+		                        <input type="text" class="text" name="expPosition" th:placeholder="${exp.expPosition}" readonly>
+                                </div>
+                              </div> 
+                           Input expContent
+                              <div class="form-group col-lg-12 col-md-12">
+		                        <label>경력 상세</label>
+		                        <input type="text" class="text" name="expContent" th:placeholder="${exp.expContent}" readonly>
+		                      </div>
+		                        <input type="text" name="name" placeholder="경력 관련 추가 정보를 입력하세요." th:value="${exp.expContent}">
+                                <div class="edit-box">
+                                <div class="form-group col-lg-6 col-md-6">
+		            			<label>경력 시작일</label><br>
+                                  <input type="date" class="year" style=display:none id="hiddenStartDate" name="expStartDate">
+                                  <span class="year year-span" th:value="${exp.expStartDate}" th:text="${#temporals.format(exp.expStartDate, 'yyyy-MM-dd')}">2012 - 2014</span>
+                                </div>
+                                <div class="form-group col-lg-6 col-md-6">
+		            			<label>경력 종료일</label>
+                                  <input type="date" class="year" style=display:none id="hiddenEndDate" name="expEndDate"><br>
+                                  <span class="year year-span" th:value="${exp.expEndDate}" th:text="${#temporals.format(exp.expEndDate, 'yyyy-MM-dd')}">2012 - 2014</span>
+                                </div>
+                                </div>
+		                      </div>
+                            </div>
+                          </div>
+                      </form>
+					expForm End
+
+				awardsForm Start
+					<form class="default-form" name="awardsForm">
+		   			<input type="hidden" name="cvId" th:value="${cvId}">
+                      <div class="form-group col-lg-12 col-md-12">
+                        Resume / Awards
+                        <div class="resume-outer theme-yellow" id="awards-block">
+                          <div class="upper-title">
+                            <h4>수상</h4>
+                            <button type="button" onclick="addAwards()" class="add-info-btn"><span class="icon flaticon-plus"></span>수상 추가</button>
+                          </div>
+                          Resume BLock
+                          <div class="resume-block" th:each="awards:${awardsList}" th:id="awardsBlock+${awards.id}">
+                            <div class="inner">
+                              <span class="name">A</span>
+                              <div class="title-box">
+                              	<div class="edit-btns col-lg-10 col-md-10"></div>
+                                  <div class="edit-btns col-lg-2 col-md-2">
+                                  	<input type="hidden" th:id="awardsId+${awards.id}" name="awardsId">
+                                    <button type="button" th:id="'editAwardsBtn(' + ${awards.id} + ')'" th:onclick="'editAwards(' + ${awards.id} + ')'"><span class="la la-pencil"></span></button>
+                                    <button type="button" th:id="'updateAwardsBtn(' + ${awards.id} + ')'" th:onclick="'updateAwards(' + ${awards.id} + ')'"><span class="la la-check-square-o"></span></button>
+                                    <button type="button" th:id="'deleteAwardsBtn(' + ${awards.id} + ')'" th:onclick="'deleteAwards(' + ${awards.id}+ ')'"><span class="la la-trash"></span></button>
+                                  </div>
+                                 </div>
+                              <div class="row">
+                              	<div class="col-lg-6 col-md-6 form-group">
+                              	<label>수상명</label>
+                              	<input type="text" class="text" name="awardsName" th:placeholder="${awards.awardsName}" readonly>
+                                  <h3 th:text="${awards.awardsName}">Perfect Attendance Programs</h3>
+                                  <span></span>
+                              	</div>
+                              	<div class="col-lg-6 col-md-6 form-group">
+                              	<label>수상 상세</label>
+                              	<input type="text" class="text" name="awardsContent" th:placeholder="${awards.awardsContent}" readonly>
+                              	<div class="text" th:text="${awards.awardsContent}"></div>
+		                        <input type="text" name="name" placeholder="수상관련 추가 정보를 입력하세요." th:value="${awards.awardsContent}">
+                              	</div>
+                              	
+                                <div class="edit-box">
+                                <div class="form-group col-lg-12 col-md-12">
+                                <label>수상일</label><br>
+                                <input type="date" class="year" style=display:none id="hiddenStartDate" name="awardsDate">
+                                  <span class="year year-span" th:value="${awards.awardsDate}" th:text="${#temporals.format(awards.awardsDate, 'yyyy-MM-dd')}">2012 - 2014</span>
+                                </div>
+                                  <span class="year" th:text="${awards.awardsDate}">2012 - 2014</span>
+                                  <div class="edit-btns">
+                                    <button><span class="la la-pencil" onclick=""></span></button>
+                                    <button><span class="la la-trash" onclick="deleteAwards()"></span></button>
+                                  </div>
+                                </div>
+                              </div> row end
+                              
+                              </div>
+                          </div>
+                        </div>
+                      </div>
+                      </form>
+				awardsForm End
+                      
+                     </div>
+ -->
+                      <!-- Input -->
+                      <div class="form-group col-lg-12 col-md-12">
+                        <button class="theme-btn btn-style-one" onclick="writeCv()">저장하기</button>
+                      </div>
+                    </div>
+                  <!-- 
+                   </form>
+                   -->
+ 		<!-- ************ form end  ************ -->
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+    <!-- End Dashboard -->
+
+    <!-- Copyright -->
+    <div class="copyright-text">
+      <div th:include="include_copyright_bottom::include_copyright_bottom"></div>
+    </div>
+    
+  </div><!-- End Page Wrapper -->
+
+  <script src="js/jquery.js"></script>
+  <script src="js/popper.min.js"></script>
+  <script src="js/chosen.min.js"></script>
+  <script src="js/bootstrap.min.js"></script>
+  <script src="js/jquery-ui.min.js"></script>
+  <script src="js/jquery.fancybox.js"></script>
+  <script src="js/jquery.modal.min.js"></script>
+  <script src="js/mmenu.polyfills.js"></script>
+  <script src="js/mmenu.js"></script>
+  <script src="js/appear.js"></script>
+  <script src="js/ScrollMagic.min.js"></script>
+  <script src="js/rellax.min.js"></script>
+  <script src="js/owl.js"></script>
+  <script src="js/wow.js"></script>
+  <script src="js/knob.js"></script>
+  <script src="js/script.js"></script>
+  <script src="js/cv.js"></script>
+  <script src="js/cv-edu.js"></script>
+  <script src="js/cv-exp.js"></script>
+  <script src="js/cv-awards.js"></script>
+  <!--Google Map APi Key-->
+  <script src="http://maps.google.com/maps/api/js?key=AIzaSyDaaCBm4FEmgKs5cfVrh3JYue3Chj1kJMw&#038;ver=5.2.4"></script>
+  <script src="js/map-script.js"></script>
+  <!--End Google Map APi-->
+</body>
+
+</html>

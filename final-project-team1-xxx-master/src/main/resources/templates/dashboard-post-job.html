@@ -1,0 +1,270 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<script type="text/javascript">
+	function create_recruit() {
+		document.f.action = "dashboard-post-job-action";
+		document.method='POST';
+		document.f.submit();
+	}
+</script>
+<head>
+  <meta charset="utf-8">
+  <title>Superio | Just another HTML Template | Post New Job</title>
+
+  <!-- Stylesheets -->
+  <link href="css/bootstrap.css" rel="stylesheet">
+  <link href="css/style.css" rel="stylesheet">
+  
+
+  <link rel="shortcut icon" href="images/favicon.png" type="image/x-icon">
+  <link rel="icon" href="images/favicon.png" type="image/x-icon">
+
+  <!-- Responsive -->
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0">
+  <!--[if lt IE 9]><script src="https://cdnjs.cloudflare.com/ajax/libs/html5shiv/3.7.3/html5shiv.js"></script><![endif]-->
+  <!--[if lt IE 9]><script src="js/respond.js"></script><![endif]-->
+</head>
+
+<body>
+
+  <div class="page-wrapper dashboard ">
+
+    <!-- Preloader -->
+    <div class="preloader"></div>
+
+    <!-- Header Span -->
+    <span class="header-span"></span>
+
+    <!-- Main Header-->
+    <header class="main-header header-shaddow">
+      <div id="main-header" th:include="include_common_top_dashboard::include_common_top_dashboard"></div>
+    </header>
+    <!--End Main Header -->
+
+    <!-- Sidebar Backdrop -->
+    <div class="sidebar-backdrop"></div>
+
+    <!-- User Sidebar -->
+   <div class="user-sidebar" th:include="corp-sidebar::corp-sidebar"></div>
+    <!-- End User Sidebar -->
+
+    <!-- Dashboard -->
+    <section class="user-dashboard">
+      <div class="dashboard-outer">
+        <div class="upper-title-box">
+          <h3>공고 등록</h3>
+          <div class="text">준비되셨나요?</div>
+        </div>
+
+        <div class="row">
+          <div class="col-lg-12">
+            <!-- Ls widget -->
+            <div class="ls-widget">
+              <div class="tabs-box">
+                <div class="widget-title">
+                  <h4>공고 작성</h4>
+                </div>
+
+                <div class="widget-content">
+
+                  <form name="f" class="default-form" method="post">
+                    <div class="row">
+                      <!-- Input -->
+                      <div class="form-group col-lg-12 col-md-12">
+                        <label>공고 제목</label>
+                        <input type="text" name="rcTitle" placeholder="제목을 작성해주세요">
+                      </div>
+
+                      <!-- About Company -->
+                      <div class="form-group col-lg-12 col-md-12">
+                        <label>공고 내용</label>
+                        <textarea name = "rcContent" placeholder="내용을 작성해주세요"></textarea>
+                      </div>
+						
+                      <!-- Input -->
+                      <div class="form-group col-lg-6 col-md-12">
+                        <label>회사명</label>
+                        <input type="text" name="corpName" th:value = "${corp.corpName}">
+                      </div>
+                      
+
+                      <!-- Search Select -->
+                      <div class="form-group col-lg-6 col-md-12">
+                        <label>업종 </label>
+                        <select data-placeholder="카테고리" class="chosen-select multiple" multiple tabindex="4" name="job">
+                          <option value="All">전체</option>
+                          <option value="웹프로그래머">웹프로그램</option>
+                          <option value="응용프로그램l">응용프로그램</option>
+                          <option value="네트워크">네트워크</option>
+                          <option value="웹퍼블리싱">웹퍼블리싱</option>
+                          <option value="게임">게임</option>
+                          <option value="빅데이터AI">빅데이터AI</option>
+                          <option value="소프트웨어/하드웨어">소프트웨어/하드웨어</option>
+                        </select>
+                      </div>
+                  <!--
+                      <div class="form-group col-lg-6 col-md-12">
+                        <label>Job Type</label>
+                        <select class="chosen-select">
+                          <option>Select</option>
+                          <option>Banking</option>
+                          <option>Digital & Creative</option>
+                          <option>Retail</option>
+                          <option>Human Resources</option>
+                          <option>Management</option>
+                        </select>
+                      </div>
+                  -->
+                      <!-- Input -->
+                      <div class="form-group col-lg-6 col-md-12">
+                        <label>급여</label>
+                        <input type="text" name="rcSalary" placeholder="">
+                        <!-- 
+                        <select class="chosen-select">
+                          <option>Select</option>
+                          <option>3000</option>
+                          <option>3500</option>
+                          <option>4000</option>
+                          <option>4500</option>
+                          <option>5000</option>
+                          <option>6000</option>
+                        </select>
+                         -->
+                      </div>
+
+                      <div class="form-group col-lg-6 col-md-12">
+                        <label>자격조건</label>
+                  		<input type="text" name="rcQualification" placeholder="">
+                      </div>
+                      
+                      <div class="form-group col-lg-6 col-md-12">
+                        <label>복리후생</label>
+                  		<input type="text" name="corpWelfare" th:value="${corp.corpWelfare}">
+                      </div>
+					
+					<div class="form-group col-lg-6 col-md-12">
+                        <label>구인직급 </label>
+                        <select data-placeholder="카테고리" class="chosen-select multiple" multiple tabindex="4" name="rcPosition">
+                         <option value="All">전체</option>
+                          <option value="신입">신입</option>
+                          <option value="경력 1년미만">경력 1년미만</option>
+                          <option value="경력 1이상-3년미만">경력 1이상-3년미만</option>
+                          <option value="경력 3년이상">경력 3년이상</option>
+                        </select>
+                      </div>
+                      
+                      
+					<!-- 					
+                      <div class="form-group col-lg-6 col-md-12">
+                        <label>모집시작일</label>
+                       <input name = "rcDate" type="date"/>
+                      </div>
+                      
+                      <div class="form-group col-lg-6 col-md-12">
+                        <label>모집마감일</label>
+                       <input name = "rcDeadLine" type="date"/>
+                      </div>
+                    -->
+                      <!-- Input 
+                      <div class="form-group col-lg-12 col-md-12">
+                        <label>Application Deadline Date</label>
+                        <input type="text" name="name" placeholder="06.04.2020">
+                      </div>
+                  -->
+                      <!-- Input 
+                      <div class="form-group col-lg-6 col-md-12">
+                        <label>Country</label>
+                        <select class="chosen-select">
+                          <option>Australia</option>
+                          <option>Pakistan</option>
+                          <option>Chaina</option>
+                          <option>Japan</option>
+                          <option>India</option>
+                        </select>
+                      </div>
+                  -->
+                      <!-- Input 
+                      <div class="form-group col-lg-6 col-md-12">
+                        <label>City</label>
+                        <select class="chosen-select">
+                          <option>Melbourne</option>
+                          <option>Pakistan</option>
+                          <option>Chaina</option>
+                          <option>Japan</option>
+                          <option>India</option>
+                        </select>
+                      </div>
+                  -->
+                      <!-- Input 
+                      <div class="form-group col-lg-12 col-md-12">
+                        <label>Complete Address</label>
+                        <input type="text" name="name" placeholder="329 Queensberry Street, North Melbourne VIC 3051, Australia.">
+                      </div>
+                  -->
+                      <!-- Input 
+                      <div class="form-group col-lg-6 col-md-12">
+                        <label>Find On Map</label>
+                        <input type="text" name="name" placeholder="329 Queensberry Street, North Melbourne VIC 3051, Australia.">
+                      </div>
+                  -->
+                      <!-- Input 
+                      <div class="form-group col-lg-3 col-md-12">
+                        <label>Latitude</label>
+                        <input type="text" name="name" placeholder="Melbourne">
+                      </div>
+                  -->
+                      <!-- Input 
+                      <div class="form-group col-lg-3 col-md-12">
+                        <label>Longitude</label>
+                        <input type="text" name="name" placeholder="Melbourne">
+                      </div>   
+                  -->
+                      <!-- Input 
+                      <div class="form-group col-lg-12 col-md-12">
+                        <button class="theme-btn btn-style-three">Search Location</button>
+                      </div>
+                  -->
+                      <!-- Input -->
+                      <div class="form-group col-lg-12 col-md-12 text-right">
+                        <button class="theme-btn btn-style-one" type = "button" onClick="create_recruit();">공고등록</button>
+                      </div>
+                    </div>
+                  </form>
+                </div>
+              </div>
+            </div>
+          </div>
+
+
+        </div>
+      </div>
+    </section>
+    <!-- End Dashboard -->
+
+    <!-- Copyright -->
+    <div class="copyright-text">
+      <div th:include="include_copyright_bottom::include_copyright_bottom"></div>
+    </div>
+
+  </div><!-- End Page Wrapper -->
+
+
+  <script src="js/jquery.js"></script>
+  <script src="js/popper.min.js"></script>
+  <script src="js/chosen.min.js"></script>
+  <script src="js/bootstrap.min.js"></script>
+  <script src="js/jquery-ui.min.js"></script>
+  <script src="js/jquery.fancybox.js"></script>
+  <script src="js/jquery.modal.min.js"></script>
+  <script src="js/mmenu.polyfills.js"></script>
+  <script src="js/mmenu.js"></script>
+  <script src="js/appear.js"></script>
+  <script src="js/ScrollMagic.min.js"></script>
+  <script src="js/rellax.min.js"></script>
+  <script src="js/owl.js"></script>
+  <script src="js/wow.js"></script>
+  <script src="js/script.js"></script>
+</body>
+
+</html>

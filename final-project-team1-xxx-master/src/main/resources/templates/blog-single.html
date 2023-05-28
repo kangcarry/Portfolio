@@ -1,0 +1,244 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<script type="text/javascript">
+
+function blogList() {
+	window.location.href='blog-list';
+}
+
+function blogModifyForm() {
+		
+		document.f.action = "blog-modify-form";
+		document.f.method='POST';
+		document.f.submit();
+
+	}
+
+
+function blogRemove() {
+	if (window.confirm("정말 삭제하시겠습니까?")) {
+		document.f.action = "blog-remove-action";
+		document.f.submit();
+	}
+	
+}
+
+function blogcommentRemove() {
+		if (window.confirm("댓글을 삭제하시겠습니까?")) {
+			document.f2.action = "blogcomment_remove";
+			document.f2.submit();
+		}
+	}
+
+function blogCommentUpdateAction() {
+		if (document.f2.commentContent.value == "") {
+		alert("내용을 입력해주세요.");
+		document.f2.commentContent.focus();
+		return false;
+	}
+	
+	document.f2.action = "blogcomment_write_action";
+	document.f2.method='POST';
+	document.f2.submit();
+}
+
+function blogCommentCreateAction() {
+		if (document.f1.commentContent.value == "") {
+		alert("내용을 입력해주세요.");
+		document.f1.commentContent.focus();
+		return false;
+	}
+	document.f1.action = "blogcomment_write_action";
+	document.f1.method='POST';
+	document.f1.submit();
+}
+
+
+function blogLike(){
+	
+	
+	document.f.action = "blog_like";
+	document.f.method='POST';
+	document.f.submit();
+}
+
+</script>
+<meta charset="utf-8">
+<title>ilhajob</title>
+	
+<!-- Stylesheets  -->
+<link href="css/bootstrap.css" rel="stylesheet">
+<link href="css/style.css" rel="stylesheet">
+
+
+<link rel="shortcut icon" href="images/favicon.png" type="image/x-icon">
+<link rel="icon" href="images/favicon.png" type="image/x-icon">
+	
+<!-- Responsive -->
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0">
+<!--[if lt IE 9]><script src="https://cdnjs.cloudflare.com/ajax/libs/html5shiv/3.7.3/html5shiv.js"></script><![endif]-->
+<!--[if lt IE 9]><script src="js/respond.js"></script><![endif]-->
+</head>
+
+<body>
+
+<div class="page-wrapper">
+
+  <!-- Preloader -->
+  <div class="preloader"></div>
+
+  <!-- Header Span -->
+  <span class="header-span"></span>
+
+  <!-- Main Header-->
+  <header class="main-header header-shaddow">
+    <div id="main-header" th:include="include_common_top_dashboard::include_common_top_dashboard"></div>
+  </header>
+  <!--End Main Header -->
+
+  <!-- Blog Single -->
+  <form th:object="${blog}" name="f" method="post" >
+  <section class="blog-single">
+  	<!-- 리스트 !-->
+      <div style="margin-bottom: 10px">
+       <button type="button" class="theme-btn btn-style-one" style="float: right; margin-right:5px;"onclick="blogList();" >목록보기</button>
+       <th:block th:if="${session.id == blog.user.id}">
+       <span><button type="button" class="theme-btn btn-style-one" onclick="blogRemove();"  style="float: right; margin-right:5px;">삭제하기</button></span>
+       <span><button type="button" class="theme-btn btn-style-one" onclick="blogModifyForm();" style="float: right; margin-right:5px;">수정하기</button></span>
+       </th:block>
+      </div>
+    <div class="auto-container">
+      <div class="upper-box">
+        <h3 th:text=${blog.blogTitle}>Keep your face always toward the sunshine - and shadows will fall behind you.</h3>
+        <input type="hidden" th:value="${blog.id}" name="blogId"  />
+        <input type="hidden" th:value="${session.id}" name="userId"  />
+        <ul class="post-info">
+          <li ><span class="thumb"><img src="images/default.jpg" alt=""></span><span th:text="${#strings.substringBefore(blog.user.userEmail,'@')}"></span></li>
+          <li th:text="${#temporals.format(blog.updatedAt,'yyyy-MM-dd HH:mm')}" > August 31, 2021</li>
+          <li th:text="|${#lists.size(blogCommentList)} Comment|"> Comment</li>
+          <li th:text="|${blog.blogReadCount+1} views|">
+        </ul>
+      </div>
+    </div>
+    <th:block th:if = "${blog.blogImage != null}">
+        <figure class="main-image"><img th:src="${blog.blogImage}" src="images/resource/news-1.jpg" alt="" style="width:auto;display: block; margin: auto;"/></figure>
+    </th:block>
+    <th:block th:if = "${blog.blogImage == null}">
+        <figure class="main-image"><img src="images/resource/blog-single.jpg" alt=""/></figure>
+    </th:block>
+    <!-- <figure class="main-image"><img src="images/resource/blog-single.jpg" alt=""></figure> -->
+    <div class="auto-container">
+      <p th:text=${blog.blogContent} style="white-space: pre-wrap;">Aliquam hendrerit sollicitudin purus, 
+      quis rutrum mi accumsan nec. Quisque bibendum orci ac nibh facilisis, 
+      at malesuada orci congue. Nullam tempus sollicitudin cursus. Ut et adipiscing erat. Curabitur this is a text link libero tempus congue.</p>
+      
+      
+      <div>
+      <ul>
+      <li ><span class="thumb">
+  	<img onclick="blogLike();" th:src="@{/images/__${heartState == 1 ? 'heart.png' : 'noheart.png'}__}">
+  	</span>
+		<span th:text="${blog.blogLike}"></span></li>
+     </ul>
+     </div>
+          
+	  				
+	</div>
+	</section>
+	</form>
+	
+      <!-- Comments area -->
+       <section class="blog-single">
+       <div class="auto-container">
+      <form th:object="${blogComment}" name="f2" method="post" >
+        <!-- Comment Box -->
+        <div class="comment-box">
+          <h4>Comment</h4>
+          <!-- Comment -->
+          <div class="comment" th:each="blogComment : ${blogCommentList}">
+            <button th:if="${session.id == blogComment.user.id}" type="button" class="theme-btn btn-style-nine" style="float: right; margin-right:5px;" onclick="blogcommentRemove();">삭제</button>
+			<button th:if="${session.id == blogComment.user.id}" class="theme-btn btn-style-nine" type="button" style="float: right; margin-right:10px;" 
+            data-toggle="collapse"  aria-expanded="false" aria-controls="collapseExample" th:attr="data-target='#collapseExample'+${blogComment.id}" >수정</button> <!-- th:attr="data-target='#collapseExample'+${blogComment.id}" -->
+            <div class="user-thumb"><img src="images/default.jpg" alt=""></div>
+            <div class="comment-info">
+               <input type="hidden" th:value="${blogComment.id}" name="id" id="id">
+                <input type="hidden" th:value="${blog.Id}" name="blogId">
+              <div class="user-name" th:text="${#strings.substringBefore(blogComment.user.userEmail,'@')}">Oscar Cafeo</div>
+              <div class="title" th:text="${#temporals.format(blogComment.updatedAt,'yyyy-MM-dd HH:mm')}">Beautiful courses</div>
+            </div>
+            <div class="text" th:text="${blogComment.commentContent}" style=" white-space: pre-wrap;">
+            Far much that one rank beheld
+             </div>
+			<!--  댓글 수정--> 
+			<div class="collapse" id="collapseExample" th:id="|collapseExample${blogComment.id}|" > <!-- th:id="\collapseExample${blogComment.id}\" -->
+			 <input type="hidden" th:value="${blogComment.id}" name="id" id="id">
+           <input type="hidden" th:value="${blog.id}" name="blogId">
+			 <div class="card card-body" style=" height: 120px;">
+			 <textarea name="commentContent" placeholder="수정할 댓글 내용을 입력하세요." style="color: gray; font-size: 12px;">[[${blogComment.commentContent}]]</textarea>
+
+			</div>
+			<div>
+			
+			
+			  <button class="theme-btn btn-style-nine" type="button" style="float: right;"onclick="blogCommentUpdateAction()">완료</button>
+			</div>  
+			</div>
+          </div>
+        </div>
+			</form>
+			
+      <!-- Comment Form -->
+       <form  th:object="${blogComment}" name="f1" method="post" >
+      <div class="comment-form default-form">
+        <h4>댓글 등록</h4>
+  		<div>
+              <input type="hidden" th:value="${blog.Id}" name="blogId">
+            </div>
+                  <!-- 
+            <div class="col-lg-6 col-md-12 col-sm-12 form-group">
+      		 <label>유저이름</label>
+              <input type="hidden" name="userId" th:value="${blogComment.user.id}" placeholder="Name" required>
+            </div>
+            -->
+            <div class="col-lg-12 col-md-12 col-sm-12 form-group">
+              <textarea name="commentContent" placeholder="Write Comment"></textarea>
+            </div>
+            <div class="col-lg-12 col-md-12 col-sm-12 form-group">
+              <button class="theme-btn btn-style-one" type="button" onclick="blogCommentCreateAction();">등록하기</button>
+            </div>
+          </div>
+       </form>
+    </div>
+  </section>
+      <!--End Comment Form -->
+
+      
+  <!-- End Blog Single -->
+    <!-- Main Footer -->
+    <div th:include="include_main_bottom"></div>
+    <!-- End Main Footer -->
+
+
+  </div><!-- End Page Wrapper -->
+
+
+  <script src="js/jquery.js"></script>
+  <script src="js/popper.min.js"></script>
+  <script src="js/jquery-ui.min.js"></script>
+  <script src="js/chosen.min.js"></script>
+  <script src="js/bootstrap.min.js"></script>
+  <script src="js/jquery.fancybox.js"></script>
+  <script src="js/jquery.modal.min.js"></script>
+  <script src="js/mmenu.polyfills.js"></script>
+  <script src="js/mmenu.js"></script>
+  <script src="js/appear.js"></script>
+  <script src="js/ScrollMagic.min.js"></script>
+  <script src="js/rellax.min.js"></script>
+  <script src="js/owl.js"></script>
+  <script src="js/wow.js"></script>
+  <script src="js/script.js"></script>
+
+</body>
+
+</html>

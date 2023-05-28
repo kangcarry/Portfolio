@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<script type="text/javascript">
+	function login() {
+		document.f.action = "corp_login_action";
+		document.method='POST';
+		document.f.submit();
+	}
+</script>
+<head>
+
+<body>
+
+        <form th:object="${fcorp}" name="f" method="post">
+          <div class="form-group">
+            <label>Username</label>
+            <input type="text" th:value="${fcorp?.corpId}" name="corpId" placeholder="Username" required>&nbsp;&nbsp;
+			<div th:if="${not #strings.isEmpty(msg1)}">
+				<font th:text="${msg1}" color="red"></font></td>
+			</div>
+          </div>
+
+          <div class="form-group">
+            <label>Password</label>
+            <input id="password-field" type="password" th:value="${fcorp?.corpPassword}" name="corpPassword" value="" placeholder="Password">&nbsp;&nbsp; 
+            <div th:if="${not #strings.isEmpty(msg2)}">
+				<font th:text="${msg2}" color="red"></font></td>
+			</div>
+          </div>
+
+          <div class="form-group">
+            <div class="field-outer">
+              <div class="input-group checkboxes square">
+                <input type="checkbox" name="remember-me" value="" id="remember">
+                <label for="remember" class="remember"><span class="custom-checkbox"></span> Remember me</label>
+              </div>
+              <a href="#" class="pwd">Forgot password?</a>
+            </div>
+          </div>
+
+          <div class="form-group">
+            <!-- <button class="theme-btn btn-style-one" type="submit" name="log-in">Log In</button> -->
+            <button class="theme-btn btn-style-one" type="button" name="log-in" onClick="login();">Log In</button>
+          </div>
+        </form>
+</body>
+
+</html>

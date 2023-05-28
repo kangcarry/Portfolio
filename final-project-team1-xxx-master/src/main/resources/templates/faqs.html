@@ -1,0 +1,192 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+  <meta charset="utf-8">
+  <title>ilhajob</title>
+
+  <!-- Stylesheets -->
+  <link href="css/bootstrap.css" rel="stylesheet">
+  <link href="css/style.css" rel="stylesheet">
+  
+
+  <link rel="shortcut icon" href="images/favicon.png" type="image/x-icon">
+  <link rel="icon" href="images/favicon.png" type="image/x-icon">
+
+  <!-- Responsive -->
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0">
+  <!--[if lt IE 9]><script src="https://cdnjs.cloudflare.com/ajax/libs/html5shiv/3.7.3/html5shiv.js"></script><![endif]-->
+  <!--[if lt IE 9]><script src="js/respond.js"></script><![endif]-->
+</head>
+
+<body>
+
+  <div class="page-wrapper">
+
+    <!-- Preloader -->
+    <div class="preloader"></div>
+
+    <!-- Header Span -->
+    <span class="header-span"></span>
+
+    <!-- Main Header-->
+    <header class="main-header header-shaddow">
+      <div id="main-header" th:include="include_common_top_dashboard::include_common_top_dashboard"></div>
+    </header>
+    <!--End Main Header -->
+
+    <!-- Faqs Section -->
+    <section class="faqs-section">
+      <div class="auto-container">
+        <div class="sec-title text-center">
+          <h2>자주하는 질문</h2>
+          <br>
+          <div class="row text col-lg-12">
+          <span class="col-lg-3" id="sign" onclick="scrollToElement(id)">회원가입/로그인</span>
+          <span class="col-lg-3" id="order" onclick="scrollToElement(id)">결제 관련</span>
+          <span class="col-lg-3" id="corp" onclick="scrollToElement(id)">[기업회원] 지원자 관리</span>
+          <span class="col-lg-3" id="user" onclick="scrollToElement(id)">[개인회원] 공고 지원하기</span>
+          </div>
+        </div>
+
+        <h3 id="sign-h">회원가입/로그인</h3>
+        <!--Accordian Box-->
+        <ul class="accordion-box">
+          <!--Block-->
+          <li class="accordion block active-block">
+            <div class="acc-btn active">[개인회원] 가입은 어떻게 하나요?<span class="icon flaticon-add"></span></div>
+            <div class="acc-content current">
+              <div class="content">
+                <p>- 아이디와 비밀번호만으로 간단하게 회원가입 할 수 있습니다.</p>
+                <p>- 네이버/카카오 로그인도 지원합니다.</p>
+              </div>
+            </div>
+          </li>
+
+          <!--Block-->
+          <li class="accordion block">
+            <div class="acc-btn">[기업회원] 가입은 어떻게 하나요?<span class="icon flaticon-add"></span></div>
+            <div class="acc-content">
+              <div class="content">
+                <p>- 아이디와 비밀번호만으로 간단하게 회원가입 할 수 있습니다.</p>
+                <p>- 기업회원의 기능을 이용하기 위해서는 추가 정보 등록 및 승인이 필요합니다.</p>
+              </div>
+            </div>
+          </li>
+
+          <!--Block-->
+          <li class="accordion block">
+            <div class="acc-btn">[기업회원] 왜 공고를 등록할 수 없나요? <span class="icon flaticon-add"></span></div>
+            <div class="acc-content">
+              <div class="content">
+                <p>- 신규 가입의 경우 관리자 승인 전까지는 대기 상태입니다.</p>
+                <p>- 사업자등록번호 등 확인 관리자 승인 과정을 거칩니다.(약 3-5일 소요)</p>
+                <p>- 이후 공고 등록과 채용을 진행 할 수 있습니다.</p>
+              </div>
+            </div>
+          </li>
+        </ul>
+
+        <h3 id="order-h">결제 관련</h3>
+        <!--Accordian Box-->
+        <ul class="accordion-box">
+          <!--Block-->
+          <li class="accordion block active-block">
+            <div class="acc-btn active">[결제] 결제 수단엔 어떤 것들이 있나요?<span class="icon flaticon-add"></span></div>
+            <div class="acc-content current">
+              <div class="content">
+                <p>신용/체크카드, 계좌이체, 무통장입금(가상계좌), 카카오페이를 지원합니다.</p>
+              </div>
+            </div>
+          </li>
+
+          <!--Block-->
+          <li class="accordion block">
+            <div class="acc-btn">[결제] 결제를 취소하고 싶어요. <span class="icon flaticon-add"></span></div>
+            <div class="acc-content">
+              <div class="content">
+                <p>환불 고객센터(1800-0000)로 문의 바랍니다.</p>
+              </div>
+            </div>
+          </li>
+         </ul>
+
+        <h3 id="corp-h">[기업회원] 지원자 관리</h3>
+        <!--Accordian Box-->
+        <ul class="accordion-box">
+          <!--Block-->
+          <li class="accordion block active-block">
+            <div class="acc-btn active">지원자는 어떻게 관리하나요? <span class="icon flaticon-add"></span></div>
+            <div class="acc-content current">
+              <div class="content">
+                <p>공고 리스트 메뉴에서 공고를 관리하고 각 공고별 지원자 수를 볼 수 있습니다.</p>
+                <p>지원자 수를 클릭하여 이력서를 열람/승인/거절 할 수 있습니다.</p>
+              </div>
+            </div>
+          </li>
+        </ul>
+
+        <h3 id="user-h">[개인회원] 공고 지원하기</h3>
+        <!--Accordian Box-->
+        <ul class="accordion-box">
+          <!--Block-->
+          <li class="accordion block active-block">
+            <div class="acc-btn active">공고에 어떻게 지원하나요? <span class="icon flaticon-add"></span></div>
+            <div class="acc-content current">
+              <div class="content">
+                <p>- 원하는 공고의 상세페이지에서 지원하고 싶은 이력서를 선택 후 지원합니다.</p>
+              </div>
+            </div>
+          </li>
+
+          <!--Block-->
+          <li class="accordion block">
+            <div class="acc-btn"> 지원한 공고들을 보고싶어요. <span class="icon flaticon-add"></span></div>
+            <div class="acc-content">
+              <div class="content">
+                <p>- 지원내역에서 지원 리스트를 살펴볼 수 있습니다.</p>
+                <p>- 지원 상태(접수중/접수 확인/합격/불합격)를 확인하거나 지원을 취소할 수 있습니다.</p>
+              </div>
+            </div>
+          </li>
+
+        </ul>
+      </div>
+    </section>
+    <!-- End Faqs Section -->
+
+    <!-- Main Footer -->
+    <div th:include="include_main_bottom"></div>
+    <!-- End Main Footer -->
+
+
+  </div><!-- End Page Wrapper -->
+
+
+  <script src="js/jquery.js"></script>
+  <script src="js/popper.min.js"></script>
+  <script src="js/chosen.min.js"></script>
+  <script src="js/bootstrap.min.js"></script>
+  <script src="js/jquery-ui.min.js"></script>
+  <script src="js/jquery.fancybox.js"></script>
+  <script src="js/jquery.modal.min.js"></script>
+  <script src="js/mmenu.polyfills.js"></script>
+  <script src="js/mmenu.js"></script>
+  <script src="js/appear.js"></script>
+  <script src="js/ScrollMagic.min.js"></script>
+  <script src="js/rellax.min.js"></script>
+  <script src="js/owl.js"></script>
+  <script src="js/wow.js"></script>
+  <script src="js/script.js"></script>
+  <script type="text/javascript">
+	 function scrollToElement(id) {
+		  let rect = document.getElementById(id + "-h").getBoundingClientRect();
+		  //console.log(rect.top, rect.right, rect.bottom, rect.left);
+		  window.scrollBy(0, rect.top - 100);
+		}
+  </script>
+
+</body>
+
+</html>

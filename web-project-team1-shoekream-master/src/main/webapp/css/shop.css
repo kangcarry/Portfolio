@@ -1,0 +1,142 @@
+@import url("menu.css");
+table {
+	width: 100%;
+	height: 100%;
+}
+form,div#f {
+	margin:10px;
+	margin-right: 0px;
+	text-align: center;
+}
+/*
+font-size: 12px; ==> 14px 변경 
+color: #333333; ==> ffffff 변경 start
+*/
+a:link {
+	
+	color: #333333;
+	font-size: 14px;
+	text-decoration: none;
+}
+a:visited {
+	color: #333333;
+	font-size: 14px;
+	text-decoration: none;
+}
+A:active {
+	color: #333333;
+	font-size: 14px;
+	text-decoration: none;
+}
+A:hover {
+	color: #333333;
+	font-size: 14px;
+	/*
+	text-decoration: underline;
+	*/
+}
+
+a.user:link {
+	color: #333333;
+	font-size: 14px;
+	text-decoration: underline;
+}
+a.user:visited {
+	color: #333333;
+	font-size: 14px;
+	text-decoration: underline;
+}
+a.user:active {
+	color: #333333;
+	font-size: 14px;
+	text-decoration: underline;
+}
+
+input,textarea,select{
+	font-size: 12pt;
+	color: #333333;
+}
+
+td {
+	font-size: 14px;
+	color: #333333;
+	line-height: 18px;
+}
+.title {
+	font-size: 14pt;
+	color: #000000;
+	line-height: 22px;
+}
+/*
+font-size: 12px; ==> 14px 변경 
+color: #333333; ==> ffffff 변경 start
+*/
+
+/* Form css */
+.text {
+	font-size: 8pt;
+	color: #333333;
+}
+.textarea {
+	font-size: 8pt;
+	color: #333333;
+}
+.password {
+	font-size: 8pt;
+	color: #333333;
+}
+.file {
+
+	font-size: 8pt;
+	color: #333333;
+}
+.select {
+	font-size: 8pt;
+	color: #333333;
+}
+.gnb_sc .chkout_gnb_wrap .cart_count {
+    display: inline-block;
+    position: relative;
+    height: 15px;
+    margin: 10px 7px 11px;
+    background-color: #21b64f;
+    line-height: 15px;
+    vertical-align: top;
+}
+
+@font-face {
+    font-family: 'GongGothicMedium';
+    src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_20-10@1.0/GongGothicMedium.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+}
+
+@font-face {
+     font-family: 'S-CoreDream-3Light';
+     src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_six@1.2/S-CoreDream-3Light.woff') format('woff');
+     font-weight: normal;
+     font-style: normal;
+}
+
+@font-face {
+     font-family: 'S-CoreDream-5Medium';
+     src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_six@1.2/S-CoreDream-5Medium.woff') format('woff');
+     font-weight: normal;
+     font-style: normal;
+}
+
+.moveTopBtn {
+  position: fixed;
+  bottom: 5rem;
+  right: 10rem;
+  width: 3rem;
+  height: 3rem;
+  opacity:0.3;
+  transition: all 0.2s linear;
+ }
+
+ .moveTopBtn:hover  {
+    opacity:0.9;
+    transform: scale(1.1);
+
+}

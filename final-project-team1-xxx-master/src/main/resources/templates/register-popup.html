@@ -1,0 +1,47 @@
+<div class="model">
+  <!-- Login modal -->
+  <div id="register-modal">
+    <!-- Login Form -->
+    <div class="login-form default-form">
+      <div class="form-inner">
+        <h3>Create a ilhajob Account</h3>
+        <!--Login Form-->
+        <form method="post" id="create-f">
+          <div class="form-group">
+            <div class="btn-box row">
+              <div class="col-lg-6 col-md-12">
+                <a href="#" id="candidate-btn" class="theme-btn btn-style-seven"><i class="la la-user"></i> 개인회원 </a>
+              </div>
+              <div class="col-lg-6 col-md-12">
+                <a href="#" id="corp-btn" class="theme-btn btn-style-four"><i class="la la-briefcase"></i> 기업회원 </a>
+              </div>
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label for="email">Email Address</label>
+            <input class ="invalid-email" type="email" id="email" name="email" placeholder="Email Address" required>
+            <div id="email-error" class="error-message"></div>
+          </div>
+
+          <div class="form-group">
+            <label>Password</label>
+            <input id="password-field" type="password" name="password" value="" placeholder="Password">
+            <div id="password-error" class="error-message"></div>
+          </div>
+          <input type="hidden" id="separate" name="separate" value="user">
+
+          <div class="form-group">
+            <button class="theme-btn btn-style-one " type="button" id="create-btn" name="create-btn">Register</button>
+          </div>
+        </form>
+
+      </div>
+    </div>
+    <!--End Login Form -->
+  </div>
+	
+  
+  
+  <!-- End Login Module -->
+</div>

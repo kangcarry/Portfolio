@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+<meta charset="utf-8">
+<title>Superio | Just another HTML Template | Candidate
+	Dashboard Resume</title>
+
+<!-- Stylesheets -->
+<link href="css/bootstrap.css" rel="stylesheet">
+<link href="css/style.css" rel="stylesheet">
+
+
+<link rel="shortcut icon" href="images/favicon.png" type="image/x-icon">
+<link rel="icon" href="images/favicon.png" type="image/x-icon">
+
+<!-- Responsive -->
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport"
+	content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0">
+<!--[if lt IE 9]><script src="https://cdnjs.cloudflare.com/ajax/libs/html5shiv/3.7.3/html5shiv.js"></script><![endif]-->
+<!--[if lt IE 9]><script src="js/respond.js"></script><![endif]-->
+
+</head>
+
+<body>
+
+	<div class="page-wrapper dashboard">
+
+		<!-- Preloader -->
+		<div class="preloader"></div>
+
+		<!-- Header Span -->
+		<span class="header-span"></span>
+
+		<!-- Main Header-->
+		<header class="main-header header-shaddow">
+			<div id="main-header"
+				th:include="include_common_top_dashboard::include_common_top_dashboard"></div>
+		</header>
+		<!--End Main Header -->
+
+		<!-- Sidebar Backdrop -->
+		<div class="sidebar-backdrop"></div>
+
+		<!-- User Sidebar -->
+		<div id="user-sidebar" th:include="user-sidebar::user-sidebar"></div>
+		<!-- End User Sidebar -->
+
+		<!-- Dashboard -->
+
+		<!-- Invoice Section -->
+		<section class="invoice-section">
+			<div class="auto-container">
+				<div class="upper-box">
+					<button class="theme-btn btn-style-three">Print</button>
+				</div>
+			</div>
+			<div class="auto-container">
+				<div class="invoice-wrap">
+					<div class="invoice-content">
+						<div class="logo-box">
+							<div class="logo">
+								<a href="index.html"><img src="images/logo.svg" alt=""></a>
+							</div>
+							<div class="invoice-id">
+								Invoice # <span>0043128641</span>
+							</div>
+						</div>
+
+						<div class="info-box">
+							<div class="left-column">
+								<div class="info">
+									<h6>Invoice date:</h6>
+									<span th:text="${#temporals.format(#temporals.createNow(), 'yyyy-MM-dd')}">03/10/2021</span>
+								</div>
+
+								<div class="info">
+									<h4>Supplier</h4>
+									<h5>Superio LLC</h5>
+									<p>2301 Ravenswood Rd Madison, WI 53711</p>
+								</div>
+							</div>
+
+							<div class="right-column">
+								<div class="info">
+									<h6>Due date:</h6>
+									<span>03/10/2021</span>
+								</div>
+
+								<div class="info">
+									<h4>Customer</h4>
+									<h5>John Doe</h5>
+									<p>329 Queensberry Street, North Melbourne VIC 3051,
+										Australia.</p>
+								</div>
+							</div>
+						</div>
+
+
+						<div class="table-outer">
+							<table class="default-table invoice-table" >
+								<thead>
+									<tr>
+										<th>상품이름</th>
+										<th>결제수단</th>
+										<th>결제일</th>
+										<th>결제금액</th>
+									</tr>
+								</thead>
+
+								<tbody>
+									<tr th:each="payment:${paymentList}">
+										<td >Standard Plan</td>
+										<td th:text="${payment.paymentMethod}">$443.00</td>
+										<td th:text="${#temporals.format(payment.paymentDate, 'yyyy-MM-dd')}">$9243</td>
+										<td th:text="${#numbers.formatInteger(payment.paymentPrice, 3, 'COMMA') + '원'}">$921.80</td>
+									</tr>
+									<tr>
+										<td><strong>합산 금액</strong></td>
+										<td></td>
+										<td></td>
+										<td><strong th:text="${#numbers.formatInteger(totalPrice, 3, 'COMMA') + '원'}" >$9,750</strong></td>
+									</tr>
+								</tbody>
+							</table>
+						</div>
+					</div>
+					<div class="invoice-footer">
+						<ul class="bottom-links">
+							<li><a href="https://www.superio.com" target="_blank"
+								class="link">www.superio.com</a></li>
+							<li><a href="invoice@superio.com">invoice@superio.com</a></li>
+							<li><a href="tel:123123456">(123) 123-456</a></li>
+						</ul>
+					</div>
+				</div>
+			</div>
+		</section>
+		<!-- End Invoice Section -->
+		<!--End Page Title-->
+
+
+		<!-- End Dashboard -->
+
+		<!-- Copyright -->
+		<div class="copyright-text">
+			<p>© 2021 Superio. All Right Reserved.</p>
+		</div>
+
+	</div>
+	<!-- End Page Wrapper -->
+
+
+	<script src="js/jquery.js"></script>
+	<script src="js/popper.min.js"></script>
+	<script src="js/chosen.min.js"></script>
+	<script src="js/bootstrap.min.js"></script>
+	<script src="js/jquery-ui.min.js"></script>
+	<script src="js/jquery.fancybox.js"></script>
+	<script src="js/jquery.modal.min.js"></script>
+	<script src="js/mmenu.polyfills.js"></script>
+	<script src="js/mmenu.js"></script>
+	<script src="js/appear.js"></script>
+	<script src="js/ScrollMagic.min.js"></script>
+	<script src="js/rellax.min.js"></script>
+	<script src="js/owl.js"></script>
+	<script src="js/wow.js"></script>
+	<script src="js/knob.js"></script>
+	<script src="js/script.js"></script>
+	<script src="js/cv.js"></script>
+
+	<!--Google Map APi Key-->
+	<!-- 	<script
+		src="http://maps.google.com/maps/api/js?key=AIzaSyDaaCBm4FEmgKs5cfVrh3JYue3Chj1kJMw&#038;ver=5.2.4"></script> -->
+	<script src="js/map-script.js"></script>
+	<!--End Google Map APi-->
+</body>
+
+</html>

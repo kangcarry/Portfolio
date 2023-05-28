@@ -1,0 +1,274 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<script type="text/javascript">
+	function recruitModifyForm(form){
+		form.action="recruit-modify-form";
+		form.method='POST';
+		form.submit();
+	}
+	
+	function recruitDelete(form){
+		if(window.confirm("해당 공고를 삭제하시겠습니까?")){
+			//const id=document.getElementById("id").value;
+			//console.log(id);
+			//console.log(document.recruitForm.id.value);
+			form.action="recruit-delete-action";
+			form.method='POST';
+			form.submit();
+			
+		}
+		
+	}
+ 
+</script>
+<head>
+  <meta charset="utf-8">
+  <title>ilhajob</title>
+
+  <!-- Stylesheets -->
+  <link href="css/bootstrap.css" rel="stylesheet">
+  <link href="css/style.css" rel="stylesheet">
+  
+
+  <link rel="shortcut icon" href="images/favicon.png" type="image/x-icon">
+  <link rel="icon" href="images/favicon.png" type="image/x-icon">
+
+  <!-- Responsive -->
+  <!-- <meta http-equiv="X-UA-Compatible" content="IE=edge"> -->
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0">
+  <!--[if lt IE 9]><script src="https://cdnjs.cloudflare.com/ajax/libs/html5shiv/3.7.3/html5shiv.js"></script><![endif]-->
+  <!--[if lt IE 9]><script src="js/respond.js"></script><![endif]-->
+</head>
+
+<body>
+
+  <div class="page-wrapper dashboard ">
+
+    <!-- Preloader -->
+    <div class="preloader"></div>
+
+    <!-- Header Span -->
+    <span class="header-span"></span>
+
+    <!-- Main Header-->
+    <header class="main-header header-shaddow">
+     <div id="main-header" th:insert="include_common_top_dashboard::include_common_top_dashboard"></div>
+    </header>
+    <!--End Main Header -->
+
+    <!-- Sidebar Backdrop -->
+    <div class="sidebar-backdrop"></div>
+
+    <!-- User Sidebar -->
+   		<div id="user-sidebar" th:insert="corp-sidebar::corp-sidebar"></div>
+    <!-- End User Sidebar -->
+
+    <!-- Dashboard -->
+    <section class="user-dashboard">
+      <div class="dashboard-outer">
+        <div class="upper-title-box">
+          <h3><a href="#" th:href="@{corp-detail(corpId=${corp.id})}"><span th:text="|${corp.corpName}|+' '" style="color:black; background-color: #D2F3F8;"/></a>님 안녕하세요!</h3>
+          <div class="text">귀하의 기업 및 공고 정보를 한눈에 제공해드립니다.</div>
+        </div>
+        <div class="row">
+          <div class="ui-block col-xl-3 col-lg-6 col-md-6 col-sm-12">
+            <div class="ui-item">
+              <div class="left">
+                <i class="icon flaticon-briefcase"></i>
+              </div>
+              <div class="right">
+                <a th:text="|${recruitList.size()} 개|" href="dashboard-manage-job" style="font-size: 30px; color: #1967D2; font-weight: bold;"></a>
+                <p>등록된 공고</p>
+              </div>
+            </div>
+          </div>
+          <div class="ui-block col-xl-3 col-lg-6 col-md-6 col-sm-12">
+            <div class="ui-item ui-red">
+              <div class="left">
+                <i class="icon la la-file-invoice"></i>
+              </div>
+              <div class="right">
+                <h4 th:text="|${appList.size()} 명|"></h4>
+                <p>지원자 수</p>
+              </div>
+            </div>
+          </div>
+          <div class="ui-block col-xl-3 col-lg-6 col-md-6 col-sm-12">
+            <div class="ui-item ui-yellow">
+              <div class="left">
+                 <i class="icon la la-comment-o"></i>
+              </div>
+              <div class="right">
+              	<a th:text="|${managerList.size()} 명|" href="dashboard-manager-list" style="font-size: 30px; color: #f9ab00; font-weight: bold;"></a>
+                <p>매니저 수</p>
+              </div>
+            </div>
+          </div>
+          <!--  
+          <div class="ui-block col-xl-3 col-lg-6 col-md-6 col-sm-12">
+            <div class="ui-item ui-green">
+              <div class="left">
+                <i class="icon la la-bookmark-o"></i>
+              </div>
+              <div class="right">
+                <h4>32</h4>
+                <p>Shortlist</p>
+              </div>
+            </div>
+          </div>
+        </div>
+		
+        <div class="row">
+
+		
+          <div class="col-xl-7 col-lg-12">
+             Graph widget 
+            <div class="graph-widget ls-widget">
+              <div class="tabs-box">
+                <div class="widget-title">
+                  <h4>Your Profile Views</h4>
+                  <div class="chosen-outer">
+                    <!--Tabs Box-->
+                   <!-- <select class="chosen-select">
+                      <option>Last 6 Months</option>
+                      <option>Last 12 Months</option>
+                      <option>Last 16 Months</option>
+                      <option>Last 24 Months</option>
+                      <option>Last 5 year</option>
+                    </select>
+                  </div>
+                </div>
+			
+                <div class="widget-content">
+                  <canvas id="chart" width="100" height="45"></canvas>
+                </div>
+              </div>
+            </div>
+          </div>
+			-->
+		
+          <!--<div class="col-xl-5 col-lg-12">
+            <!-- Notification Widget 
+            <div class="notification-widget ls-widget">
+              <div class="widget-title">
+                <h4>Notifications</h4>
+              </div>
+              <div class="widget-content">
+                <ul class="notification-list">
+                  <li><span class="icon flaticon-briefcase"></span> <strong>Wade Warren</strong> applied for a job <span class="colored">Web Developer</span></li>
+                  <li><span class="icon flaticon-briefcase"></span> <strong>Henry Wilson</strong> applied for a job <span class="colored">Senior Product Designer</span></li>
+                  <li class="success"><span class="icon flaticon-briefcase"></span> <strong>Raul Costa</strong> applied for a job <span class="colored">Product Manager, Risk</span></li>
+                  <li><span class="icon flaticon-briefcase"></span> <strong>Jack Milk</strong> applied for a job <span class="colored">Technical Architect</span></li>
+                  <li class="success"><span class="icon flaticon-briefcase"></span> <strong>Michel Arian</strong> applied for a job <span class="colored">Software Engineer</span></li>
+                  <li><span class="icon flaticon-briefcase"></span> <strong>Ali Tufan</strong> applied for a job <span class="colored">UI Designer</span></li>
+                </ul>
+              </div>
+            </div>
+          </div>
+			-->
+
+          <div class="widget-content">
+                  <div class="table-outer">
+                    <table class="default-table manage-job-table" id="recruitList-table">
+                      <thead>
+                        <tr>
+                          <th>회사명</th>
+                          <th>공고명</th>
+                          <th>지원자 현황</th>
+                          <th>등록일/마감일</th>
+                          <th>진행상태</th>
+                          <th>기능</th>
+                        </tr>
+                      </thead>
+
+                      <tbody>
+                        <tr th:each="recruit:${recruitList}">
+                        <form class="default-form" name="recruitForm" method="post">
+                        <!-- form자리 버튼 포스트로 넘길용도 -->
+                         <td >
+                            <a th:text="${recruit.corp.corpName}" ><h6 >Senior Full Stack Engineer, Creator Success</h6></a>
+                            <!-- span class="info"><i class="icon flaticon-map-locator"></i> London, UK</span-->
+                          </td>
+                          <td >
+                            <a th:text="${recruit.rcTitle}" th:href="@{recruit-detail(id=${recruit.id})}" href="#"><h6 >Senior Full Stack Engineer, Creator Success</h6></a>
+                            <!-- span class="info"><i class="icon flaticon-map-locator"></i> London, UK</span-->
+                          </td>
+                          <th:block th:if = "${recruit.rcAppCount>0}">
+	                          <td class="applied"><a th:href="@{dashboard-applicants(id=${recruit.id})}" 
+	                          						 th:text="|지원자 ${recruit.rcAppCount} 명|"	href="#" >지원자 이력서 보기</a></td>
+	                      </th:block>
+	                      <th:block th:unless="${recruit.rcAppCount>0}">
+		                      <td>지원자 없음</td>
+	                      </th:block>
+                          <td>
+						      <ul>
+						        <li th:text="|등록일 : ${#temporals.format(recruit.rcDate, 'yyyy-MM-dd')}|"></li>
+						        <li th:text="|마감일 : ${#temporals.format(recruit.rcDeadline, 'yyyy-MM-dd')}|"></li>
+
+						      </ul>
+						  </td>
+						  
+						  <!-- 0:승인 , 1:진행중 , 2:마감 예상중... 결정필요-->
+                          <th:block th:if="${recruit.rcStatus==0}">
+                          	<td class="status">진행중</td>
+                          </th:block>
+                          <th:block th:if="${recruit.rcStatus==1}">
+                          	<td class="status-end">마감</td>
+                          </th:block>
+                          <td>
+                            <div class="option-box">
+                              	<input type="hidden" name="id" th:value="${recruit.id}"/>
+                              <ul class="option-list">
+                                <li><button data-text="Modify Recruit" type="button" onClick="recruitModifyForm(this.form)"><span class="la la-pencil"></span></button></li>
+                                <!-- li><button data-text="Modify Recruit" value="수정" onClick="recruitModifyForm();"><span class="la la-pencil"></span></button></li-->
+                                <li><button data-text="Delete Recruit" type="button" onClick="recruitDelete(this.form)"><span class="la la-trash"></span></button></li>
+                              </ul>
+                            </div>
+                          </td>
+            			</form>
+                        </tr>
+                      </tbody>
+                    </table>
+                  </div>
+                </div>
+        </div>
+      </div>
+    </section>
+    <!-- End Dashboard -->
+    <div th:value="${nameList}" id="nameList"></div>
+    <div th:value="${rcCountList}" id="rcCountList"></div>
+    
+    
+    <!-- Copyright -->
+    <div class="copyright-text">
+      <div th:include="include_copyright_bottom::include_copyright_bottom"></div>
+    </div>
+
+  </div><!-- End Page Wrapper -->
+
+
+  <script src="js/jquery.js"></script>
+  <script src="js/popper.min.js"></script>
+  <script src="js/chosen.min.js"></script>
+  <script src="js/bootstrap.min.js"></script>
+  <script src="js/jquery-ui.min.js"></script>
+  <script src="js/jquery.fancybox.js"></script>
+  <script src="js/jquery.modal.min.js"></script>
+  <script src="js/mmenu.polyfills.js"></script>
+  <script src="js/mmenu.js"></script>
+  <script src="js/appear.js"></script>
+  <script src="js/ScrollMagic.min.js"></script>
+  <script src="js/rellax.min.js"></script>
+  <script src="js/owl.js"></script>
+  <script src="js/wow.js"></script>
+  <script src="js/script.js"></script>
+
+  <!-- Chart.js // documentation: http://www.chartjs.org/docs/latest/ -->
+  <script src="js/chart.min.js"></script>
+  <script>
+  </script>
+
+</body>
+
+</html>

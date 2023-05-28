@@ -1,0 +1,415 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+<meta charset="utf-8">
+<title>ilhajob</title>
+
+<!-- Stylesheets -->
+<link href="css/bootstrap.css" rel="stylesheet">
+<link href="css/style.css" rel="stylesheet">
+
+
+<link rel="shortcut icon" href="images/favicon.png" type="image/x-icon">
+<link rel="icon" href="images/favicon.png" type="image/x-icon">
+
+<!-- Responsive -->
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport"
+	content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0">
+<!--[if lt IE 9]><script src="https://cdnjs.cloudflare.com/ajax/libs/html5shiv/3.7.3/html5shiv.js"></script><![endif]-->
+<!--[if lt IE 9]><script src="js/respond.js"></script><![endif]-->
+
+<!-- Handlebars -->
+<!-- script  defer type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/handlebars.js/4.1.2/handlebars.min.js"></script-->
+<style type="text/css">
+	.changeTag{
+	background: rgba(25, 103, 210, 0.15);
+					    color: #1967D2;
+					    padding-left: 20px;
+					    padding-right: 20px;
+					    padding-top: 8px;
+					    padding-bottom: 8px;
+					    margin-bottom: 10px;
+					    border-radius: 20px;
+					    font-size: 17px;
+	}
+</style>
+
+<script
+	src="https://cdnjs.cloudflare.com/ajax/libs/handlebars.js/4.7.7/handlebars.min.js"></script>
+	<script src="js/app_corp.js" type="module"></script>
+</head>
+
+<!-- 원래 되는 것:corpName, job으로 검색하기 ajax-->
+<!-- script>
+  $(document).ready(function() {
+    $('#searchInput').on('input', function() {
+      var corpName = $('#searchInput').val();
+      var job = $('select[name="job"]').val();
+      $.ajax({
+        url: '/search',
+        method: 'GET',
+        data: {
+          corpName: corpName,
+          job: job
+        },
+        success: function(results) {
+          var template = Handlebars.compile($('#searchTemplate').html());
+          if (results.length > 0) {
+            $('#searchResults').html(template({ results: results }));
+          } else {
+            $('#searchResults').html('');
+            $('#searchResults').append('<div class="alert alert-warning">검색 결과가 없습니다.</div>');
+          }
+        }
+      });
+    });
+  });
+</script-->
+<!--script>
+		$(function(){
+			$("#search-form").submit(function(event){
+				event.preventDefault();
+				var corpName=$("#corpName").val();
+				window.location.href="/final-project-team1-ilhajob/search?corpName="+corpName;
+			});
+		});	
+		
+	</script-->
+
+<body>
+
+	<div class="page-wrapper">
+
+		<!-- Preloader -->
+		<div class="preloader"></div>
+
+		<!-- Header Span -->
+		<span class="header-span"></span>
+
+		<!-- Main Header-->
+		<header class="main-header">
+			<div id="main-header"
+				th:include="include_common_top_dashboard::include_common_top_dashboard"></div>
+		</header>
+		<!--End Main Header -->
+
+		<!--Page Title-->
+		<section class="page-title">
+			<div class="auto-container">
+				<!-- Job Search Form -->
+				<div class="job-search-form">
+					<form id="search-form" th:action="@{/search}" method="get">
+						<div class="row">
+							<!-- Form Group -->
+							<div class="form-group col-lg-5 col-md-12 col-sm-12">
+
+								<span class="icon flaticon-search-1"></span> <input type="text"
+									id="searchInput" name="corpName" placeholder="기업명을 입력하세요.">
+							</div>
+							<!-- 검색 카테고리 추가 -->
+							<div class="form-group col-lg-5 col-md-12 col-sm-12 location">
+								<span class="icon flaticon-briefcase"></span> <select
+									class="chosen-select" name="job">
+									<option value="">직군을 입력하세요.</option>
+									<option value="웹프로그래머">웹프로그래머</option>
+									<option value="응용프로그램">응용프로그램</option>
+									<option value="네트워크">네트워크</option>
+									<option value="웹퍼블리싱">웹퍼블리싱</option>
+									<option value="게임">게임</option>
+									<!-- option value="디자인/컴퓨터강사">디자인/컴퓨터강사</option-->
+									<option value="빅데이터ai">빅데이터ai</option>
+									<option value="소프트웨어/하드웨어">소프트웨어/하드웨어</option>
+								</select>
+							</div>
+
+							<div class="form-group col-lg-2 col-md-12 col-sm-12 text-right">
+							<!--input type="hidden" name="selectedJob" th:value="${selectedJob}"-->
+								<button type="submit" class="theme-btn btn-style-one">기업
+									찾기</button>
+							</div>
+						</div>
+					</form>
+				</div>
+
+				<!-- 검색 결과 표시할 영역 -->
+				<div id="searchResults"></div>
+		</section>
+
+		<!--End Page Title-->
+
+		<!-- Listing Section -->
+		<section class="ls-section">
+			<div class="auto-container">
+				<div class="filters-backdrop"></div>
+
+				<div class="row">
+					<!-- Content Column -->
+					<div class="content-column col-lg-12 col-md-12 col-sm-12">
+						<div class="ls-outer">
+							<button type="button"
+								class="theme-btn btn-style-two toggle-filters">Show
+								Filters</button>
+
+							<!-- ls Switcher -->
+							<div class="ls-switcher" style="margin-bottom: 20px">
+								<div class="showing-result">
+									<div class="text">
+										Showing
+										<!-- <strong>41-60</strong> of  -->
+										<strong th:text="${corpList.size()}"></strong> employer
+									</div>
+								</div>
+								<!--  <button class="changeTag" name="all" value="전체">전체</button>-->
+
+								<div th:each="tag: ${tagList}" th:if="${tag.tagId}>3">
+									<button class="changeTag" name="${tag.tagName}"
+										th:text="${tag.tagName}" th:value="${tag.tagId}">코프태그</button>
+								</div>
+								<div class="sort-by">
+									<!-- select class="chosen-select">
+										<option>필터</option>
+										<option>회사원규모</option>
+										<option>신규등록순</option>
+										<option>회사명순</option>
+										<option>매출크기</option>
+									</select-->
+
+								</div>
+							</div>
+
+							<div id="corp-main-list">
+								<div class="row">
+									<!-- Company Block Four -->
+						
+									<div class="company-block-four col-xl-3 col-lg-4 col-md-6 col-sm-12"
+										th:each="corp: ${corpList}">
+										<div class="inner-box">
+											<!-- button class="bookmark-btn">
+												<span class="flaticon-bookmark"></span>
+											</button-->
+											<span class="featured" th:if="${rcCountMap[corp.id]>0}" style="background-color:mistyrose; color: red">채용중</span> 
+											<th:block th:if = "${corp.corpStoredFileName != null}">
+										        <span class="company-logo">
+											        <img th:src="${corp.corpStoredFileName}" alt="" style="width:80px; height:80px"/>
+										        </span>
+										    </th:block>
+										    <th:block th:if = "${corp.corpStoredFileName == null}">
+										        <figure class="company-logo"><img src="images/resource/company-logo/6-1.png" alt=""/></figure>
+										    </th:block>
+											<h4>
+												<a th:href="@{/corp-detail(corpId=${corp.id})}"
+													th:text="${corp.corpName}"></a>
+											</h4>
+											<ul class="job-info">
+												<li><span class="icon flaticon-map-locator"></span>
+												<span th:utext="${corp.corpAddress}+ '<br>' + ${corp.corpAddressDetail}"><br /> </span>
+												</li>
+												<li><span class="icon flaticon-briefcase"></span> 
+													<span th:text="${corp.corpWelfare}"> </span>
+												</li>
+											</ul>
+											<span th:each="corpTag:${corpTagList}"><span class="job-type"
+													style="margin-right: 1px; margin-bottom: 5px"
+													th:if="${corpTag.corp.Id}==${corp.id}" th:text="${corpTag.tag.tagName}">Open Jobs – 2</span>
+											</span>
+										</div>
+									</div>
+								</div>
+								<!-- Pagination 시작 -->
+								<nav class="ls-pagination">
+								    <ul>
+								        <li th:unless="${curPage == blockBegin-1}" class="prev"><a th:href="${queryString}+${prePage}"><i class="fa fa-arrow-left"></i></a></li>
+								        
+								       	<li th:if="${i == blockBegin-1}"><a class="current-page" th:text="${curPage+1}" ></a></li>
+								        <th:block th:each="i, index : ${#numbers.sequence(blockBegin-1, totalPage-1)}" >
+								            <li th:if="${i == curPage}"><a class="current-page" th:text="${curPage+1}" ></a></li>
+								            <li th:unless="${i == curPage}"><a th:text="${i+1}" th:href="${queryString}+${i}"></a></li>
+								        </th:block>
+								        
+								        <li th:unless="${curPage == totalPage-1}" class="next"><a th:href="${queryString}+${nextPage}"><i class="fa fa-arrow-right"></i></a></li>
+								    </ul>
+								</nav> 
+							<!-- Pagination 끝 -->
+							
+							</div>
+							<!-- 검색어 없을 때 표시할 영역 -->
+							<!--  div class="alert alert-warning" style="color: white;"></div-->
+						</div>
+					</div>
+				</div>
+			</div>
+		</section>
+		<!--End Listing Page Section -->
+
+
+		<!-- Main Footer -->
+		<div th:include="include_main_bottom"></div>
+		<!-- End Main Footer -->
+
+
+	</div>
+	<!-- End Page Wrapper -->
+
+	<!-- corp-search-template: handlebars -->
+	<script id="searchTemplate" type="text/x-handlebars-template">
+  <div class="row">
+  {{#each results}}
+  <div class="company-block-four col-xl-3 col-lg-4 col-md-6 col-sm-12">
+    <div class="inner-box">
+      <button class="bookmark-btn"><span class="flaticon-bookmark"></span></button>
+  	  {{#if rcCountMap}}
+        {{#if rcCountMap.[id]>0}}
+          <span class="featured" style="background-color:mistyrose; color: red">채용중</span>
+        {{/if}}
+      {{/if}}
+      <span class="company-logo"><img src="images/resource/company-logo/6-1.png" alt=""></span>
+      <h4><a href="/corp-detail?corpId={{id}}">{{corpName}}</a></h4>
+      <ul class="job-info">
+        <li><span class="icon flaticon-map-locator"></span>{{corpAddress}}<br>{{corpAddressDetail}}</li>
+        <li><span class="icon flaticon-briefcase"></span>{{corpWelfare}}</li>
+      </ul>
+      {{#each tags}}
+      <span class="job-type" style="margin-right: 1px; margin-bottom: 5px">{{tag.tagName}}</span>
+      {{/each}}
+    </div>
+  </div>
+ </div>
+
+  			  {{/each}}
+  				<nav class="ls-pagination mb-5">
+				  <ul>
+					<input class="corpName-data" type="hidden" value="{{corpName}}">
+				    {{#unless (eq nowPage 0)}}
+				      <li class="prev">
+				        <a href="{{url}}?tagId={{tagId}}&page={{prePage}}" class="prev-link"><i class="fa fa-arrow-left"></i></a>
+				      </li>
+				      <li class="prev">
+				        <a href="{{url}}?tagId={{tagId}}&page={{prePage}}" class="prev-link">{{nowPage}}</a>
+						<input class="prev-data" type="hidden" value="{{prePage}}">
+				      </li>
+				    {{/unless}}
+				    
+				    <li class="current-page">
+				      <a class="current-page">{{add nowPage 1}}</a>
+				    </li>
+				
+				    {{#if (not (eq nowPage (subtract totalPage 1)))}}
+				      <li class="next">
+				        <a href="{{url}}?tagId={{tagId}}&page={{nextPage}}" class="next-link">{{add nowPage 2}}</a>
+				      </li>
+				      <li class="next">
+				        <a href="{{url}}?tagId={{tagId}}&page={{nextPage}}" class="next-link"><i class="fa fa-arrow-right"></i></a>
+						<input class="next-data" type="hidden" value="{{nextPage}}">
+				      </li>
+				    {{/if}}
+				
+					{{#each page}}
+				      {{#if (and (gte this (subtract nowPage 1)) (lte this (add nowPage 1)))}}
+				        <li>
+				          <a href="{{../url}}?corpName={{corpName}}&page={{this}}"></a>
+				        </li>
+				      {{/if}}
+				    {{/each}}
+				  </ul>
+				</nav>
+</script>
+
+	<script type="text/x-handlebars-template" id="tag-filter-template">
+			<div class="row">
+				{{#each data}}
+			   <div class="company-block-four col-xl-3 col-lg-4 col-md-6 col-sm-12">
+                  <div class="inner-box" >
+					 {{#with ../rcCountMap}}
+       					 {{#if (lookup this ../corp.id)}}
+        					  <span class="featured" style="background-color:mistyrose; color: red">채용중</span>
+       					 {{/if}}
+      				{{/with}}
+					{{#if corp.corpStoredFileName}}
+						<span class="company-logo">
+						<img src="{{corp.corpStoredFileName}}" alt="" style="width:80px; height:80px"/>
+						</span>
+					{{else}}
+						<figure class="company-logo">
+						<img src="images/resource/company-logo/6-1.png" alt=""/>
+						</figure>
+					{{/if}}
+                    <h4><a href="corp-detail?corpId={{corp.id}}">{{corp.corpName}}</a></h4>
+                    <ul class="job-info">
+                      <li><span class="icon flaticon-map-locator" style="margin-top:23px"></span>
+                      	  <span><br/>{{corp.corpAddress}}
+                      	  </span>
+                      </li>
+						</ul>
+ 						<ul class="job-info">
+                     		 <li><span class="icon flaticon-briefcase">
+						  </span>
+                     	  <span>{{corp.corpWelfare}}
+                     	  </span>
+                    		  </li>
+						</ul>
+							<span class="job-type" style="margin-right:1px; margin-bottom: 5px" >{{tag.tagName}}</span>
+                	</div>
+                </div>
+				{{/each}}
+			</div>
+			<nav class="ls-pagination mb-5">
+				  <ul>
+					<input class="tag-data" type="hidden" value="{{tagId}}">
+				    {{#unless (eq nowPage 0)}}
+				      <li class="prev">
+				        <a href="{{url}}?tagId={{tagId}}&page={{prePage}}" class="prev-link"><i class="fa fa-arrow-left"></i></a>
+				      </li>
+				      <li class="prev">
+				        <a href="{{url}}?tagId={{tagId}}&page={{prePage}}" class="prev-link">{{nowPage}}</a>
+						<input class="prev-data" type="hidden" value="{{prePage}}">
+				      </li>
+				    {{/unless}}
+				    
+				    <li class="current-page">
+				      <a class="current-page">{{add nowPage 1}}</a>
+				    </li>
+				
+				    {{#if (not (eq nowPage (subtract totalPage 1)))}}
+				      <li class="next">
+				        <a href="{{url}}?tagId={{tagId}}&page={{nextPage}}" class="next-link">{{add nowPage 2}}</a>
+				      </li>
+				      <li class="next">
+				        <a href="{{url}}?tagId={{tagId}}&page={{nextPage}}" class="next-link"><i class="fa fa-arrow-right"></i></a>
+						<input class="next-data" type="hidden" value="{{nextPage}}">
+				      </li>
+				    {{/if}}
+				
+					{{#each page}}
+				      {{#if (and (gte this (subtract nowPage 1)) (lte this (add nowPage 1)))}}
+				        <li>
+				          <a href="{{../url}}?tagId={{tagId}}&page={{this}}"></a>
+				        </li>
+				      {{/if}}
+				    {{/each}}
+				  </ul>
+				</nav>
+	</script>
+
+	<script src="js/jquery-3.6.0.min.js"></script>
+	<script src="js/jquery.js"></script>
+	<script src="js/popper.min.js"></script>
+	<script src="js/jquery-ui.min.js"></script>
+	<script src="js/chosen.min.js"></script>
+	<script src="js/bootstrap.min.js"></script>
+	<script src="js/jquery.fancybox.js"></script>
+	<script src="js/jquery.modal.min.js"></script>
+	<script src="js/mmenu.polyfills.js"></script>
+	<script src="js/mmenu.js"></script>
+	<script src="js/appear.js"></script>
+	<script src="js/ScrollMagic.min.js"></script>
+	<script src="js/rellax.min.js"></script>
+	<script src="js/owl.js"></script>
+	<script src="js/wow.js"></script>
+	<script src="js/script.js"></script>
+	
+
+</body>
+
+</html>

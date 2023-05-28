@@ -1,0 +1,372 @@
+<!DOCTYPE html>
+<html lang="en"  xmlns:th="http://www.thymeleaf.org">
+<script type="text/javascript">
+function reviewCreate(){
+	
+	if (isNaN(document.f.reviewGrade.value)) {
+	    alert("리뷰의 평점은 숫자만 입력하세요.");
+	    document.f.reviewGrade.focus();
+	    return false;
+	}
+	document.f.action = "review_write_action";
+	document.f.method='POST';
+	document.f.submit();
+	
+}
+
+function reviewDelete(){
+	document.d.action = "review_delete";
+	document.d.method='POST';
+	document.d.submit();
+}
+
+
+</script>
+
+<head>
+  <meta charset="utf-8">
+  <title>ilhajob</title>
+
+  <!-- Stylesheets -->
+  <link href="css/bootstrap.css" rel="stylesheet">
+  <link href="css/style.css" rel="stylesheet">
+  
+
+  <link rel="shortcut icon" href="images/favicon.png" type="image/x-icon">
+  <link rel="icon" href="images/favicon.png" type="image/x-icon">
+
+  <!-- Responsive -->
+  <meta http-equiv="X-UA-Compatible" content="IE=EmulateIE7">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0">
+  <!--[if lt IE 9]><script src="https://cdnjs.cloudflare.com/ajax/libs/html5shiv/3.7.3/html5shiv.js"></script><![endif]-->
+  <!--[if lt IE 9]><script src="js/respond.js"></script><![endif]-->
+  <!-- <script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=f247f5f61cc50440b7f98463c59221b6"></script> -->
+  <script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=f247f5f61cc50440b7f98463c59221b6&libraries=services"></script>
+  
+</head>
+
+<body>
+
+  <div class="page-wrapper">
+
+    <!-- Preloader -->
+    <div class="preloader"></div>
+
+    <!-- Header Span -->
+    <span class="header-span"></span>
+
+    <!-- Main Header-->
+    <header class="main-header">
+      <div id="main-header" th:include="include_common_top_dashboard::include_common_top_dashboard"></div>
+    </header>
+    <!--End Main Header -->
+    <!-- Job Detail Section -->
+    <section class="job-detail-section">
+      <!-- Upper Box -->
+<!-- div th:if="${#strings.startsWith('dododo/corp' + corp.id + '.png', '/') and T(org.springframework.util.ResourceUtils).getFile('classpath:static/' + #strings.replace('dododo/corp' + corp.id + '.png', '/', System.getProperty('file.separator')))?.exists()}"
+     th:style="'background-image: url(dododo/corp' + ${corp.id} + '.png);'"
+     class="upper-box">
+</div>
+
+<!-- div th:unless="${#strings.startsWith('dododo/corp' + corp.id + '.png', '/') and T(org.springframework.util.ResourceUtils).getFile('classpath:static/' + #strings.replace('dododo/corp' + corp.id + '.png', '/', System.getProperty('file.separator')))?.exists()}"
+     th:style="'background-image: url(images/background/3.png);'"
+     class="upper-box">
+</div-->
+
+      
+        <div th:style="'background-image: url(dododo/corp' + ${corp.id} + '.png);'"  style="background-image: url(images/background/3.png)" class="upper-box"></div>
+        <div class="auto-container">
+          <!-- Job Block -->
+          <div class="job-block-seven">
+            <div class="inner-box">
+              <div class="content">
+                <span class="company-logo"><img th:src="${corp.corpStoredFileName}" src="images/resource/company-logo/5-1.png" alt="" style="width:150px"></span>
+                <h4><a th:text="${corp.corpName}" href="#" th:href="@{__${corp.corpWebsite}__}" target="_blank" th:if="${corp.corpWebsite != null}">Invision</a></h4>
+                <ul class="job-info">
+                  <li class="icon flaticon-map-locator"><span th:utext="' ' + ${corp.corpAddress}+ '<br>&nbsp;&nbsp;' + ${corp.corpAddressDetail}"></span></li>
+                  <li class="icon flaticon-telephone-1"><span th:text="' ' + ${corp.corpPhone}"></span></li>
+                  <li class="icon flaticon-mail"><span th:text="' ' + ${corp.corpWebsite}"></span></li>
+                </ul>
+                <ul class="job-other-info">
+                  <li th:text="|★현재 진행중인 구직공고: ${recruitCount}개★|" class="time">
+                  Open Jobs – 3
+                  </li>
+                   <li th:each ="corpTag : ${corpTagList}" class="time">
+                   		<span th:text = "${corpTag.tag.tagName}"></span>
+                  </li>
+                </ul>
+              </div>
+
+              <div class="btn-box">
+                <!-- a  href="#" class="theme-btn btn-style-one to-recruit">지원하기</a-->
+                <!--<button class="bookmark-btn"><i class="flaticon-bookmark"></i></button>-->
+              </div>
+            </div>
+          </div>
+        </div>
+     
+
+      <div class="job-detail-outer">
+        <div class="auto-container">
+          <div class="row">
+            <div class="content-column col-lg-8 col-md-12 col-sm-12">
+              <div class="job-detail">
+                <h4>About Company</h4>
+                <p th:text="${corp.corpComment}">Moody’s Corporation, often referred to as Moody’s, is an American business and financial services company. It is the holding company for Moody’s Investors Service (MIS), an American credit rating agency, and Moody’s Analytics (MA), an American provider of financial analysis software and services.</p>
+                <h4>Company Welfare</h4>
+                <p th:text="${corp.corpWelfare}"></p>
+                <div class="row images-outer">
+				<!--                 
+				<h4>Company Images</h4>
+                  <div class="col-lg-3 col-md-3 col-sm-6">
+                    <figure class="image"><a href="images/resource/employers-single-1.png" class="lightbox-image" data-fancybox="gallery"><img src="images/resource/employers-single-1.png" alt=""></a></figure>
+                  </div>
+                  <div class="col-lg-3 col-md-3 col-sm-6">
+                    <figure class="image"><a href="images/resource/employers-single-2.png" class="lightbox-image" data-fancybox="gallery"><img src="images/resource/employers-single-2.png" alt=""></a></figure>
+                  </div>
+                  <div class="col-lg-3 col-md-3 col-sm-6">
+                    <figure class="image"><a href="images/resource/employers-single-3.png" class="lightbox-image" data-fancybox="gallery"><img src="images/resource/employers-single-3.png" alt=""></a></figure>
+                  </div>
+                  <div class="col-lg-3 col-md-3 col-sm-6">
+                    <figure class="image"><a href="images/resource/employers-single-4.png" class="lightbox-image" data-fancybox="gallery"><img src="images/resource/employers-single-4.png" alt=""></a></figure>
+                  </div> 
+                -->
+                </div>
+              </div>
+
+              <!-- Related Jobs -->
+              <div class="related-jobs">
+                <div class="title-box">
+                  <h3>Recruit [공고]</h3>
+                  <div class="text">해당 기업의 공고 리스트를 제공합니다.</div>
+                </div>
+
+                <!-- Job Block -->
+                <div th:each="recruit:${recruitList}" class="job-block">
+                  <div class="inner-box">
+                    <div class="content">
+                      <span class="company-logo"><img src="images/icons/smallplant.png" alt=""></span>
+                      <h4><a th:text="${recruit.rcTitle}" th:href="@{recruit-detail(id=${recruit.id})}" href="#" >Product Designer / UI Designer</a></h4>
+                      <!-- h4><a th:text="${recruit.rcTitle}" th:href="@{recruit-detail(id=${recruit.id})}" href="#" >Product Designer / UI Designer</a></h4-->
+                      <ul class="job-info" >
+                        <li><span class="icon flaticon-map-locator"></span><span th:utext="${corp.corpAddress}+ '<br>&nbsp;&nbsp;' + ${corp.corpAddressDetail}">주소</span></li>
+                        <li><span class="icon flaticon-clock-3"></span><span th:text="'마감일 : ' + ${#temporals.format(recruit.rcDeadline, 'yyyy-MM-dd')}"></span></li>
+                        <li><span class="icon flaticon-money"></span><span th:text="${#numbers.formatInteger(recruit.rcSalary,3,'COMMA')+' 	만원'}"></span></li>
+                      </ul>
+                      <ul class="job-other-info">
+                        <th:block th:if="${recruit.rcStatus==0}">
+                      	<li class="count" style="background-color:#FDFD96;">공고진행중</li>
+                      	<!--li class="count" th:text="|${recruit.rcReadCount}회 조회중|" style="background-color:#FDFD96;">Private</li-->
+                      	</th:block>
+                      	<th:block th:if="${recruit.rcStatus==1}">
+                      	<li class="count" style="background-color:mistyrose; color: red">★ 마감 ★</li>
+                      	<!--li class="count" th:text="|${recruit.rcReadCount}회 조회중|" style="background-color:#FDFD96;">Private</li-->
+                      	</th:block>
+                      </ul>
+                    </div>
+                  </div>
+                </div>
+
+              </div>
+              	 <h3>Review [리뷰]</h3><br>
+	             <div class="text">해당 기업의 리뷰 리스트를 제공합니다.</div>
+	             <th:block th:if="${session.role== null || (#session.getAttribute('role') == 'user' && #session.getAttribute('paymentStatus') != 1)}">
+	             <p>상품을 구매하고 리뷰를 확인해 보세요!</p><p><a href="product"> 바로 구매하러 가기</a></p>
+	             </th:block>
+	        
+		      <th:block th:if="${session.role== null || (#session.getAttribute('role') == 'user' && #session.getAttribute('paymentStatus') != 1)}">
+		      	<div id="blur-content" class="blur-content">
+		      	  <div class="your-blurred-content">
+	               <!-- Comments area -->
+			        <div class="comments-area">
+			          <!-- Comment Box -->
+			          <div class="comment-box">
+			            <br><h4>Comment</h4>
+			            <!-- Comment -->
+			            <div class="comment">
+			              <div class="user-thumb"><img src="images/icons/smallplane.png" alt=""></div>
+			              <div class="comment-info">
+			                <div class="review-title">좋은회사예요</div>
+			                <div class="review-grade">★★★★</div>
+			              </div>
+			              <div class="review-content">복지최고!</div>
+		               </div>
+			            <div class="comment">
+			              <div class="user-thumb"><img src="images/icons/smallplane.png" alt=""></div>
+			              <div class="comment-info">
+			                <div class="review-title">연봉상승률 높은 회사예요</div>
+			                <div class="review-grade">★★★</div>
+			              </div>
+			              <div class="review-content">연봉 상승률 20% 이상! 사장님 쵝오!!!</div>
+		               </div>
+		              </div>
+			         </div>
+			        </div>
+	     		   <div class="hover-trigger"></div>
+		        </div>  
+		       </th:block>
+		       
+		       <th:block th:if="${(#session.getAttribute('role') == 'user' and #session.getAttribute('paymentStatus') == 1) or #session.getAttribute('corp') == 'corp'}">
+		       <form name="d">
+              <!-- 여기 리뷰 LIST -->
+
+	               <!-- Comments area -->
+			        <div class="comments-area">
+			          <!-- Comment Box -->
+			          <div class="comment-box">
+			            <br><h4>Comment</h4>
+			            <!-- Comment -->
+			            <div th:each="review:${reviewList}" class="comment">
+			              <div class="user-thumb"><img src="images/icons/smallplane.png" alt=""></div>
+			              <div class="comment-info">
+			                <div th:text="${review.reviewTitle}" class="review-title">Oscar Cafeo</div>
+			                <div class="review-grade" style="color: Gold" th:text="${#strings.repeat('★', review.reviewGrade)}">Beautiful courses</div>
+			              </div>
+			              <div th:text="${review.reviewContent}" class="review-content">Far much that one rank beheld bluebird after outside ignobly allegedly more when oh arrogantly vehement tantaneously eel valiantly petted this along across highhandedly much.</div>
+			           
+			          
+	    					<th:block th:if = "${loginUser!=null}">
+    							 <th:block th:if="${loginUser.id==review.user.id}">  
+	    						<input th:value="${review.corp.id}" type="hidden" name="corpId" /> 
+	    						<input th:value="${review.id}" type="hidden" name="id" /> 
+    							<li><button data-text="Delete Aplication" onclick="reviewDelete()" th:value="${review.id}"><span class="la la-trash"></span></button></li>
+  							</th:block>  
+  						</th:block>  
+		              </div>
+		            </div>
+			      </div>
+		        </form>
+		        </th:block>
+		        <div id="session-role" th:attr="data-session-role=${session.role}" style="display:none;"></div>
+		        <div id="session-paymentStatus" th:attr="data-session-ps=${session.paymentStatus}" style="display:none;"></div>
+		        
+		        
+		        <!-- Comment Form -->
+	        <th:block th:if = "${loginUser!=null && #session.getAttribute('paymentStatus') == 1}">
+               <th:block th:if="${count==0}"> <!--  -->
+		        <div class="comment-form default-form">
+		          <h4>리뷰 등록</h4>
+		         <form id ="review-form" name ="f" method="post" >
+		         <input th:value="${corp.id}" type="hidden" id="corpId" name="corpId" />
+		         	
+		            <div class="row clearfix">
+		              <div class="col-lg-6 col-md-12 col-sm-12 form-group">
+		                <label>제목</label>
+		                <input type="text" name="reviewTitle" placeholder="리뷰제목" required>
+		              </div>
+		              <div class="col-lg-6 col-md-12 col-sm-12 form-group">
+		                <label>평점</label>
+		                <input type="text" name="reviewGrade" placeholder="평점" required>
+		              </div>
+		              <div class="col-lg-12 col-md-12 col-sm-12 form-group">
+		                <label>댓글내용</label>
+		                <textarea name="reviewContent" placeholder="내용"></textarea>
+		              </div>
+		              <div class="col-lg-12 col-md-12 col-sm-12 form-group">
+		           <button class="theme-btn btn-style-one" type="button" onClick="reviewCreate()" name="submit-form">리뷰 등록</button>    
+		          <!--ajax      <button class="theme-btn btn-style-one" type="button" id="reviewCreate-btn" name="reviewCreate-btn">리뷰 등록</button> -->    
+		              </div>
+		            </div>
+		          </form>
+		        </div>
+			        </th:block> <!--  -->
+			        
+		        </th:block>  
+		        <!--End Comment Form -->
+		        </div>
+		      
+		        
+		        
+		        
+		        
+		        
+           
+
+            <div class="sidebar-column col-lg-4 col-md-12 col-sm-12">
+              <aside class="sidebar">
+                <div class="sidebar-widget company-widget">
+                  <div class="widget-content">
+
+                    <ul class="company-info mt-0">
+                      <li>산업 : <span th:text="${corp.job}">Software</span></li>
+                      <li>직원수 : <span th:text="${corp.corpSize}">501-1,000</span></li>
+                      <li>설립일 : <span th:text="${#temporals.format(corp.corpEst, 'yyyy-MM-dd')}">2011</span></li>
+                      <li>전화번호 : <span th:text="${corp.corpPhone}">123 456 7890</span></li>
+                      <li>이메일 : <span th:text="${corp.corpWebsite}">info@joio.com</span></li>
+                      <li>위치 : <span th:utext="${corp.corpAddress} + '<br>' + ${corp.corpAddressDetail}">London, UK</span>
+                      				<input type="hidden"  id="corp-location" th:value="${corp.corpAddress}">
+                      </li>
+                      <li>SNS |	 홈페이지:
+                        <div class="social-links">
+                          <a href="#"><i class="fab fa-facebook-f"></i></a>
+                          <a href="#"><i class="fab fa-twitter"></i></a>
+                          <a href="#"><i class="fab fa-instagram"></i></a>
+                          <a href="#"><i class="fab fa-linkedin-in"></i></a>
+                        </div>
+                      </li>
+                    </ul>
+					<div class="btn-box">
+					<a th:href="@{__${corp.corpWebsite}__}" class="theme-btn btn-style-three" th:text="${corp.corpWebsite}" target="_blank" th:if="${corp.corpWebsite != null}">
+					    <button>www.www.com</button>
+					  </a>
+					</div>
+					                    
+                    <!-- div class="btn-box"><a href="#"  onclick="location.href='${corpWebsite}'" class="theme-btn btn-style-three" th:text="${corp.corpWebsite}"><button>www.www.com</button></a></div-->
+                  </div>
+                </div>
+
+                <div class="sidebar-widget">
+                  <!-- Map Widget -->
+                  <h4 class="widget-title">위치	</h4>
+                  <div class="widget-content">
+                    <div class="map-outer mb-0">
+                      <div class="map-kakao" id="map-kakao" style="width:350px;height:400px;"></div>
+                   </div>
+                  </div>
+                 </div>
+              </aside>
+             </div>
+            </div>
+          </div>
+         </div>
+       </section>
+    <!-- </div> -->
+    <!-- End Job Detail Section -->
+    
+    <!-- Main Footer -->
+    <div th:include="include_main_bottom"></div>    
+    <!-- End Main Footer -->
+
+
+  </div><!-- End Page Wrapper -->
+
+  <script src="js/jquery.js"></script>
+  <script src="js/popper.min.js"></script>
+  <script src="js/jquery-ui.min.js"></script>
+  <script src="js/chosen.min.js"></script>
+  <script src="js/bootstrap.min.js"></script>
+  <script src="js/jquery.fancybox.js"></script>
+  <script src="js/jquery.modal.min.js"></script>
+  <script src="js/mmenu.polyfills.js"></script>
+  <script src="js/mmenu.js"></script>
+  <script src="js/appear.js"></script>
+  <script src="js/ScrollMagic.min.js"></script>
+  <script src="js/rellax.min.js"></script>
+  <script src="js/owl.js"></script>
+  <script src="js/wow.js"></script>
+  <script src="js/script.js"></script>
+  <script src="js/maps.js"></script>
+  <script src="js/review.js"></script>
+  
+</body>
+
+<script type="text/javascript">
+$('.to-recruit').on('click', function() {
+	  $('html, body').animate({
+	    scrollTop: $('.related-jobs').offset().top
+	  }, 100);
+	});
+
+</script>
+</html>

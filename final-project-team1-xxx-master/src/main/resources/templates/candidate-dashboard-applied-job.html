@@ -1,0 +1,204 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+  <meta charset="utf-8">
+  <title>ilhajob</title>
+
+  <!-- Stylesheets -->
+  <link href="css/bootstrap.css" rel="stylesheet">
+  <link href="css/style.css" rel="stylesheet">
+  
+
+  <link rel="shortcut icon" href="images/favicon.png" type="image/x-icon">
+  <link rel="icon" href="images/favicon.png" type="image/x-icon">
+
+  <!-- Responsive -->
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0">
+  <!--[if lt IE 9]><script src="https://cdnjs.cloudflare.com/ajax/libs/html5shiv/3.7.3/html5shiv.js"></script><![endif]-->
+  <!--[if lt IE 9]><script src="js/respond.js"></script><![endif]-->
+<script type="text/javascript">
+window.onload = function() {
+	  const statusCellList = document.getElementsByName('appStatus');
+	  for (let i = 0; i < statusCellList.length; i++) {
+	    const statusCell = statusCellList[i];
+	    const statusValue = parseInt(statusCell.getAttribute('value'));
+	    if (statusValue === 0) {
+	      statusCell.textContent = '접수중';
+	    } else if (statusValue === 1) {
+	      statusCell.textContent = '접수 확인';
+	    } else if (statusValue === 2) {
+	      statusCell.textContent = '합격';
+	      statusCell.className = 'status';
+	    } else if (statusValue === 3) {
+	      statusCell.textContent = '불합격';
+	      statusCell.className = 'status-end';
+	    } else {
+	      statusCell.textContent = 'Unknown status';
+	    }
+	  }
+	};
+</script>
+</head>
+
+<body>
+
+  <div class="page-wrapper dashboard">
+
+    <!-- Preloader -->
+    <div class="preloader"></div>
+
+    <!-- Header Span -->
+    <span class="header-span"></span>
+
+    <!-- Main Header-->
+   <header class="main-header header-shaddow">
+      <div id="main-header" th:include="include_common_top_dashboard::include_common_top_dashboard"></div>
+    </header>
+    <!--End Main Header -->
+
+    <!-- Sidebar Backdrop -->
+    <div class="sidebar-backdrop"></div>
+
+    <!-- User Sidebar -->
+		<div class="user-sidebar" th:include="user-sidebar::user-sidebar"></div>   
+    <!-- End User Sidebar -->
+
+    <!-- Dashboard -->
+    <section class="user-dashboard">
+      <div class="dashboard-outer">
+        <div class="upper-title-box">
+          <h3>지원한 공고</h3>
+          <div class="text">지원하신 공고 목록을 확인하세요.</div>
+        </div>
+
+        <div class="row">
+          <div class="col-lg-12">
+            <!-- Ls widget -->
+            <div class="ls-widget">
+              <div class="tabs-box">
+                <div class="widget-title">
+                  <h4>지원한 공고</h4>
+                </div>
+
+                <div class="widget-content">
+                  <div class="table-outer">
+                    <table class="default-table manage-job-table">
+                      <thead>
+                        <tr>
+                          <th class=>기업명</th>
+                          <th>공고명</th>
+                          <th>공고 마감일</th>
+                          <th>공고 지원일</th>
+                          <th>상태</th>
+                          <th>관리</th>
+                        </tr>
+                      </thead>
+				<!-- form 걸어봄 --><form name="f">
+                      <tbody>
+                        <tr th:each="app:${appList}">
+                        <td th:text="${app.recruit.corp.corpName}">회사명</td>
+                          <td>
+                            <!-- Job Block -->
+                            <div class="job-block">
+                              <div class="inner-box">
+                                <div class="content">
+                                  <span class="company-logo"><img src="images/icons/smallplant.png" alt=""></span>
+                                  <h4><a href="#" 
+                                  		th:href="@{recruit-detail(id=${app.recruit.id})}" 
+                      		 			th:text="${app.recruit.rcTitle}" >Senior Full Stack Engineer, Creator Success</a></h4>
+                                  <ul class="job-info">
+                                    <li th:text="${app.recruit.rcPosition}"><span class="icon flaticon-briefcase"></span> Segment</li>
+                                    <li th:text=${app.recruit.corp.corpAddress}><span class="icon flaticon-map-locator"></span> London, UK</li>
+                                  </ul>
+                                </div>
+                              </div>
+                            </div>
+                          </td>
+                          <td th:text="${#temporals.format(app.recruit.rcDeadline, 'yyyy-MM-dd')}">Dec 5, 2020</td>
+                          <td th:text="${#temporals.format(app.appCreateDate, 'yyyy-MM-dd')}">Dec 5, 2020</td>
+                          <td th:name="appStatus" th:value="${app.appStatus}">Active</td>
+                          <td>
+                            <div class="option-box">
+                              <ul class="option-list">
+                         		<input type="hidden" id="appId" name="appId" th:value="${app.id}"/>  
+                                <li><button type="button" data-text="이력서 보기" th:id="appliedCvBtn+${app.id}" th:onclick="'appliedCvView(' + ${app.id} + ')'"><span class="la la-eye"></span></button></li>
+                                <li><button type="button" data-text="지원 취소" th:id="applyCancleBtn+${app.id}" th:onclick="'applyCancle(' + ${app.id} + ')'"><span class="la la-trash"></span></button></li>
+                              </ul>
+                            </div>
+                          </td>
+                        </tr>
+                      </tbody>
+                           <!-- form종료 --> </form>
+
+                    </table>
+                        <div class="copyright-text" th:if="${appList.size()==0}">
+		                <p>아직 지원한 공고가 없습니다.</p>
+		                <p><a href="recruit-list">공고 둘러보기</a></p>
+		                </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+    <!-- End Dashboard -->
+
+    <!-- Copyright -->
+    <div class="copyright-text">
+      <div th:include="include_copyright_bottom::include_copyright_bottom"></div>
+    </div>
+
+  </div><!-- End Page Wrapper -->
+
+
+  <script src="js/jquery.js"></script>
+  <script src="js/popper.min.js"></script>
+  <script src="js/chosen.min.js"></script>
+  <script src="js/bootstrap.min.js"></script>
+  <script src="js/jquery-ui.min.js"></script>
+  <script src="js/jquery.fancybox.js"></script>
+  <script src="js/jquery.modal.min.js"></script>
+  <script src="js/mmenu.polyfills.js"></script>
+  <script src="js/mmenu.js"></script>
+  <script src="js/appear.js"></script>
+  <script src="js/ScrollMagic.min.js"></script>
+  <script src="js/rellax.min.js"></script>
+  <script src="js/owl.js"></script>
+  <script src="js/wow.js"></script>
+  <script src="js/knob.js"></script>
+  <script src="js/script.js"></script>
+  <script src="js/cv.js"></script>
+  
+<!--   <script>
+	/*
+	 * appStatus
+	 * 0 : 접수중(디폴트)
+	 * 1 : [제출된 이력서 클릭 시]접수확인
+	 * 2 : [승인 버튼 클릭 시]합격
+	 * ?? 3 : [거절 버튼 클릭 시]불합격
+	 */
+	 const statusCellList = document.getElementsByName('appStatus');
+	 for (let i = 0; i < statusCellList.length; i++) {
+	   const statusCell = statusCellList[i];
+	   const statusValue = parseInt(statusCell.getAttribute('value'));
+	   if (statusValue === 0) {
+	     statusCell.textContent = '접수중';
+	   } else if (statusValue === 1) {
+	     statusCell.textContent = '접수 확인';
+	   } else if (statusValue === 2) {
+	     statusCell.textContent = '합격';
+	   } else if (statusValue === 3) {
+	     statusCell.textContent = '불합격';
+	   } else {
+	     statusCell.textContent = 'Unknown status';
+	   }
+	 }
+</script> -->
+  
+</body>
+
+</html>

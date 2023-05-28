@@ -1,0 +1,193 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+
+</head>
+
+<div th:fragment="include_common_top">
+      <div class="container-fluid">
+        <!-- Main box -->
+        <div class="main-box">
+          <!--Nav Outer -->
+          <div class="nav-outer">
+            <div class="logo-box">
+              <div class="logo"><a href="index"><img src="images/일하잡1111.png" alt="" title=""></a></div>
+            </div>
+
+            <nav class="nav main-menu">
+              <ul class="navigation" id="navbar">
+                <li class="current dropdown">
+                  <span>홈</span>
+                </li>
+
+                <li class="dropdown has-mega-menu" id="has-mega-menu">
+                  <span>공고</span>
+                  <div class="mega-menu">
+                    <div class="mega-menu-bar row">
+                      <div class="column col-lg-3 col-md-3 col-sm-12">
+                          <h3>공고</h3>
+                        <ul>
+                          <li><a href="recruit-list">공고리스트</a></li>
+                        </ul>
+                      </div>
+						
+                      <div class="column col-lg-3 col-md-3 col-sm-12">
+                        <!-- <h3>Jobs Single</h3>-->
+                        <ul>
+                          <!--<li><a href="recruit-detail">공고상세보기</a></li>-->
+                        </ul>
+                      </div>
+                    </div>
+                  </div>
+                </li>
+
+                <li class="dropdown">
+                  <span>기업</span>
+                  <ul>
+                    <li class="dropdown">
+                      <span>기업 리스트</span>
+                      <ul>
+                        <li><a href="corp-list">기업 리스트</a></li>
+                      </ul>
+                    </li>
+					<!--  
+                    <li class="dropdown">
+                      <span>기업 상세보기</span>
+                      <ul>
+                        <li><a href="corp-detail">Employers Single v1</a></li>
+                      </ul>
+                    </li>
+                    -->
+                    <li><a href="dashboard">기업 대시보드</a></li>
+                  </ul>
+                </li>
+                <li class="dropdown">
+                  <span>구직자</span>
+                  <ul>
+                    <li class="dropdown">
+                      <span>구직자 리스트</span>
+                      <ul>
+                        <li><a href="candidates-list-v3">구직자 리스트</a></li>
+                      </ul>
+                    </li>
+
+                    <li class="dropdown">
+                      <span>구직자 상세보기</span>
+                      <ul>
+                        <li><a href="candidates-single-v1">구직자 상세보기</a></li>
+                      </ul>
+                    </li>
+                    <li><a href="candidate-dashboard">구직자 상세보기</a></li>
+                  </ul>
+                </li>
+                <li class="dropdown">
+                  <span>블로그</span>
+                  <ul>
+                    <li><a href="blog-list">블로그 리스트</a></li>
+                    <li><a href="blog-single">블로그 상세보기</a></li>
+                  </ul>
+                </li>
+
+                <li class="dropdown">
+                  <span>페이지</span>
+                  <ul>
+                    <li class="dropdown">
+                      <span>쇼핑</span>
+                      <ul>
+                        <li><a href="shop">상품 리스트</a></li>
+                        <li><a href="shop-single">상품 상세보기</a></li>
+                        <li><a href="shopping-cart">장바구니</a></li>
+                        <li><a href="shop-checkout">로그아웃</a></li>
+                        <li><a href="order-completed">결제성공</a></li>
+                        <li><a href="login">로그인</a></li>
+                        <li><a href="register">가입</a></li>
+                      </ul>
+                    </li>
+                    <li><a href="about">About</a></li>
+                    <li><a href="pricing">가격</a></li>
+                    <li><a href="faqs">자주묻는 질문</a></li>
+                    <li><a href="terms">기간</a></li>
+                    <li><a href="invoice">결제내역</a></li>
+                    <li><a href="contact">연락</a></li>
+                  </ul>
+                </li>
+
+                <!-- Only for Mobile View -->
+                <li class="mm-add-listing">
+                  <a href="add-listing" class="theme-btn btn-style-one">Job Post</a>
+                  <span>
+                    <span class="contact-info">
+                      <span class="phone-num"><span>Call us</span><a href="tel:1234567890">123 456 7890</a></span>
+                      <span class="address">329 Queensberry Street, North Melbourne VIC <br>3051, Australia.</span>
+                      <a href="mailto:support@superio.com" class="email">support@superio.com</a>
+                    </span>
+                    <span class="social-links">
+                      <a href="#"><span class="fab fa-facebook-f"></span></a>
+                      <a href="#"><span class="fab fa-twitter"></span></a>
+                      <a href="#"><span class="fab fa-instagram"></span></a>
+                      <a href="#"><span class="fab fa-linkedin-in"></span></a>
+                    </span>
+                  </span>
+                </li>
+              </ul>
+            </nav>
+            <!-- Main Menu End-->
+          </div>
+
+          <div class="outer-box">
+            <!-- Login/Register -->
+            <div class="btn-box">
+            <th:block th:if = "${session.sUserId == null} and ${session.sCorpId == null}">
+              <a href="login-popup" class="theme-btn btn-style-six call-modal">로그인 / 회원가입</a>
+              <a href="dashboard-post-job" class="theme-btn btn-style-five">채용 공고</a>
+            </th:block>
+            <th:block th:if = "${session.sUserId != null and session.sCorpId == null}">
+            	<a href = "candidate-dashboard-profile" class="theme-btn btn-style-five" th:text="${session.sUserId+'님'}"></a>
+            </th:block>
+            <th:block th:if = "${session.sCorpId != null and session.sUserId == null}">
+            	<a href = "dashboard-company-profile" class="theme-btn btn-style-five" th:text="${session.sCorpId+'님'}"></a>
+            </th:block>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Sticky Header  -->
+      <div class="sticky-header">
+        <div class="auto-container">
+
+          <div class="main-box">
+            <div class="logo-box">
+              <div class="sticky-logo"><a href="index"><img src="images/logo.svg" alt="" title=""></a></div>
+            </div>
+
+            <!--Keep This Empty / Menu will come through Javascript-->
+          </div>
+        </div>
+      </div>
+      <!-- End Sticky Menu -->
+
+      <!-- Mobile Header -->
+      <div class="mobile-header">
+        <div class="logo"><a href="index"><img src="images/logo.svg" alt="" title=""></a></div>
+
+        <!--Nav Box-->
+        <div class="nav-outer clearfix">
+
+          <div class="outer-box">
+            <!-- Login/Register -->
+            <div class="login-box">
+              <a href="login" class="call-modal"><span class="icon-user"></span></a>
+            </div>
+
+            <a href="#nav-mobile" class="mobile-nav-toggler navbar-trigger"><span class="flaticon-menu-1"></span></a>
+          </div>
+        </div>
+      </div>
+
+      <!-- Mobile Nav -->
+      <div id="nav-mobile"></div>
+      
+   </div>
+   

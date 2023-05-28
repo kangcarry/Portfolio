@@ -1,0 +1,354 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<script type="text/javascript">
+	function increaseReadCount(form){
+		form.action="increase-readCount-action";
+		form.method='POST';
+		form.submit();
+	}
+	
+	/*
+	function increaseReadCount(button) {
+	    var recruitId = button.getAttribute("data-recruit-id");
+	    var xhr = new XMLHttpRequest();
+	    xhr.onreadystatechange = function() {
+	        if (xhr.readyState === 4 && xhr.status === 200) {
+	            // 조회수 증가 성공한 경우 실행할 코드
+	        }
+	    }
+	    xhr.open("POST", "/increase-readCount-action?id=" + recruitId, true);
+	    xhr.send();
+	}
+	*/
+</script>
+
+<head>
+  <meta charset="utf-8">
+  <title>ilhajob</title>
+  
+  <style>
+  		.hidden-img { display: none;}
+  		.show-img { display: block;}
+		.changeTag{
+						background: rgba(25, 103, 210, 0.15);
+					    color: #1967D2;
+					    padding-left: 20px;
+					    padding-right: 20px;
+					    padding-top: 8px;
+					    padding-bottom: 8px;
+					    margin-bottom: 10px;
+					    border-radius: 20px;
+					    font-size: 17px;
+					}
+  </style>
+
+  <!-- Stylesheets -->
+  <link href="css/bootstrap.css" rel="stylesheet">
+  <link href="css/style.css" rel="stylesheet">
+  
+
+  <link rel="shortcut icon" href="images/favicon.png" type="image/x-icon">
+  <link rel="icon" href="images/favicon.png" type="image/x-icon">
+
+  <!-- Responsive -->
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0">
+  <!--[if lt IE 9]><script src="https://cdnjs.cloudflare.com/ajax/libs/html5shiv/3.7.3/html5shiv.js"></script><![endif]-->
+  <!--[if lt IE 9]><script src="js/respond.js"></script><![endif]-->
+<script
+	src="https://cdnjs.cloudflare.com/ajax/libs/handlebars.js/4.7.7/handlebars.min.js"></script>
+</head>
+
+<body>
+
+  <div class="page-wrapper">
+
+    <!-- Preloader -->
+    <div class="preloader"></div>
+
+    <!-- Header Span -->
+    <span class="header-span"></span>
+
+    <!-- Main Header-->
+    <header class="main-header">
+     <div id="main-header" th:include="include_common_top_dashboard::include_common_top_dashboard"></div>
+    </header>
+    <!--End Main Header -->
+
+    <!--Page Title-->
+    <section class="page-titlFe">
+      <div class="auto-container">
+        <div class="title-outer">
+          <h1></h1><br><br>
+          <ul class="page-breadcrumb">
+            <li>구직공고 목록입니다</li>
+            <li><a href="index">메인으로 돌아가기</a></li>
+          </ul>
+        </div>
+      </div>
+    </section>
+    <!--End Page Title-->
+
+    <!-- Listing Section -->
+    <section class="ls-section">
+      <div class="auto-container">
+        <div class="filters-backdrop"></div>
+
+        <div class="row">
+      
+          <!-- Content Column -->
+          <div class="content-column col-lg-12">
+            <div class="ls-outer">
+              <!-- ls Switcher -->
+              <div class="ls-switcher">
+                <div class="showing-result show-filters">
+                  <div class="text">Showing <strong th:text="${recruitList.size()}">41-60</strong> of <strong></strong> Recruits</div>
+                </div>
+               <!--   <button class="changeTag" name="all" value="99999">전체</button>-->
+                <div th:each="tag: ${tagList}" th:if="${tag.tagId}<4">
+					<button class="changeTag" name="${tag.tagName}"
+					th:text="${tag.tagName}" th:value="${tag.tagId}">코프태그</button>
+                </div>
+                
+                <div class="sort-by">
+                <form action="/recruit-list" method="get">
+                  <select class="chosen-select" name="order" onchange="location.href='recruit-list?sortType='+this.value;">
+                    <option>정렬선택</option>
+                    <option value="rcDeadlinedesc">마감일 내림차순</option>
+                    <option value="rcDeadlineasc">마감일 오름차순</option>
+                  </select>
+                  </form>
+                </div>
+                
+              </div>
+			<div id="recruit-main-list">
+              <div class="row">
+                <!-- Job Block -->
+                <div th:each="recruit:${recruitList}"  class="job-block col-lg-6 col-md-12 col-sm-12"><!-- th:if="${recruit.rcStatus==0}" 마감 제외 -->
+                 <form class="default-form" name="readCount" method="post">
+                  <div class="inner-box">
+                    <div class="content">
+                      <span class="company-logo"><img src="images/icons/smallplant.png" alt=""></span>
+                      <input type="hidden" name="id" th:value="${recruit.id}"/>
+                      <h4>
+                      		<a href="#"
+                      		 th:href="@{recruit-detail(id=${recruit.id})}" 
+                      		 th:text="${recruit.rcTitle}" 
+                      		 onClick="increaseReadCount(this.form);">Recruiting Coordinator</a></h4>
+                      <ul class="job-info">
+                        <li><span class="icon flaticon-clock-3" style="color: lightcoral;"></span><p th:text="|마감일: ${#temporals.format(recruit.rcDeadline, 'yyyy-MM-dd')}|" style="color:lightcoral;"></p></li>
+                        <li><span class="icon flaticon-briefcase"></span><span th:text="${recruit.rcPosition}"></span></li>
+                        <li><span class="icon flaticon-map-locator"></span> <span th:text="${recruit.corp.corpAddress}"></span></li>
+                        <li><span class="icon flaticon-money" ></span><span th:text="${#numbers.formatInteger(recruit.rcSalary,3,'COMMA')+' 	만원'}"></span></li>
+                      </ul>
+                      <ul class="job-other-info">
+                      	<th:block th:if="${recruit.rcStatus==0}">
+                      	<li class="count" style="background-color:#FDFD96;">공고진행중</li>
+                      	<!--li class="count" th:text="|${recruit.rcReadCount}회 조회중|" style="background-color:#FDFD96;">Private</li-->
+                      	</th:block>
+                      	<th:block th:if="${recruit.rcStatus==1}">
+                      	<li class="count" style="background-color:mistyrose; color: red">★ 마감 ★</li>
+                      	<!--li class="count" th:text="|${recruit.rcReadCount}회 조회중|" style="background-color:#FDFD96;">Private</li-->
+                      	</th:block>
+                      	<div th:each="recruitTag : ${recruitTagList}">
+                      	<div th:each="tag:${tagList}">
+                        <li class="time" th:if = "${recruit.id}==${recruitTag.recruit.Id} and ${tag.tagId}==${recruitTag.tag.tagId}"  th:text ="${tag.tagName}">Full Time</li>
+                        </div>
+                        </div>
+                        <!--  
+                         <li class="privacy">Private</li>
+                        <li class="required">Urgent</li>
+                        -->
+                      </ul>
+                      <!-- 리크루트 스크랩 ajax로 -->
+	                      <div th:if = "${loginUser}!=null">
+	                      	<form action="recruit_scrap_insert_delete">
+								<button th:value="${recruit.id}" class="bookmark-btn" name = "id" id="check-bookmark" type="button">
+										<img id = "id1" src="images/bookmark.png" style="width: 23px; margin-left: 2px;"  th:class="${status[recruit.id]}==1 ? 'show-img' : 'hidden-img'">
+										<img id = "id2" src="images/bookmark-bin.png" th:class="${status[recruit.id]}==0 ? 'show-img' : 'hidden-img'" style="width: 17px; margin-left: 5px;"></img>
+								</button>
+							</form>
+						</div>
+
+                  </div>
+                </div>
+                </form>
+              </div>
+            </div>
+
+ <!-- Pagination 시작-->
+<!--                 <nav class="ls-pagination mb-5">
+				  <ul>
+				    <li th:each="page:${#numbers.sequence(0,totalPage -1)}" th:if="${page >= nowPage-1 and page <= nowPage+1}">
+				      <a th:href="@{recruit-list?page=}+${pageStat.index}"></a>
+				    </li>
+				    <li th:unless="${nowPage == 0}" class="prev">
+				      <a th:href="@{recruit-list?page=}+${prePage}"><i class="fa fa-arrow-left"></i></a>
+				    </li>
+				    <li class="prev">
+				      <a th:unless="${nowPage == 0}" th:text="${nowPage}" th:href="@{recruit-list?page=}+${prePage}"><i class="fa fa-arrow-left"></i></a>
+				    </li>
+				    <li>
+				      <a class="current-page" th:text="${nowPage+1}"></a>
+				    </li>
+				    <li class="next">
+				      <a th:unless="${nowPage == totalPage-1}" th:text="${nowPage+2}" th:href="@{recruit-list?page=}+${nextPage}"><i class="fa fa-arrow-right"></i></a>
+				    </li>
+				    <li th:unless="${nowPage == totalPage-1}" class="next">
+				      <a th:href="@{recruit-list?page=}+${nextPage}"><i class="fa fa-arrow-right"></i></a>
+				    </li>
+				    <li></li>
+				    <th:block th:if="${nowPage != 0}">
+				    <li></li>
+				    <li></li>
+				    </th:block>
+				  </ul>
+				</nav> -->
+				<nav class="ls-pagination">
+				    <ul>
+				        <li th:unless="${curPage == blockBegin-1}" class="prev"><a th:href="${queryString}+${prePage}"><i class="fa fa-arrow-left"></i></a></li>
+				        
+				       	<li th:if="${i == blockBegin-1}"><a class="current-page" th:text="${curPage+1}" ></a></li>
+				        <th:block th:each="i, index : ${#numbers.sequence(blockBegin-1, totalPage-1)}" >
+				            <li th:if="${i == curPage}"><a class="current-page" th:text="${curPage+1}" ></a></li>
+				            <li th:unless="${i == curPage}"><a th:text="${i+1}" th:href="${queryString}+${i}"></a></li>
+				        </th:block>
+				        
+				        <li th:unless="${curPage == totalPage-1}" class="next"><a th:href="${queryString}+${nextPage}"><i class="fa fa-arrow-right"></i></a></li>
+				    </ul>
+				</nav> 
+<!-- Pagination 끝-->
+            </div>
+          </div>
+        </div>
+      </div>
+      </div>
+    </section>
+    <!--End Listing Page Section -->
+
+
+    <!-- Main Footer -->
+    <div th:include="include_main_bottom"></div>
+    <!-- End Main Footer -->
+    <input type="text" th:value="${queryString}">
+
+  </div><!-- End Page Wrapper -->
+
+	<!-- 리크루트 태그 선택시 ajax요청 -->
+	<script type="text/x-handlebars-template" id="recruit-tag-template">
+		<div class="row">
+                <!-- Job Block -->
+				{{#each data}}
+                <div class="job-block col-lg-6 col-md-12 col-sm-12" > 
+                  <div class="inner-box">
+                    <div class="content">
+                      <span class="company-logo"><img src="images/icons/smallplant.png" alt=""></span>
+                      <h4>
+							<a href="recruit-detail?id={{recruit.id}}" 
+							onClick="increaseReadCount(this.form);">
+							{{recruit.rcTitle}}</a></h4>
+                      <ul class="job-info">
+                        <li><span class="icon flaticon-clock-3" style="color: lightcoral;"></span><span style="color: lightcoral;">마감일:</span><span style="color: lightcoral;">{{dateFormat "YYYY-MM-DD" recruit.rcDeadline}}</span></li>
+                        <li>{{recruit.rcPosition}}<span class="icon flaticon-briefcase"></span></li>
+                        <li>{{recruit.corp.corpAddress}}<span class="icon flaticon-map-locator"></span></li>
+                        <li><span class="icon flaticon-money"></span>{{recruit.rcSalary}}<span>만원</span></li>
+                      </ul>	
+                      <ul class="job-other-info">
+						{{#if (eq recruit.rcStatus 0)}}
+  							<li class="count" style="background-color:#FDFD96;">공고진행중</li>
+						{{/if}}
+						{{#if (eq recruit.rcStatus 1)}}
+  							<li class="count" style="background-color:mistyrose; color: red;">★ 마감 ★</li>
+						{{/if}}
+						{{#each tagList}}
+                        <li class="time" >{{tagName}}</li>
+						{{/each}}
+						{{#unless tagList}}
+						<li class="time" >{{tag.tagName}}</li>
+						{{/unless}}
+                        <!--  
+                         <li class="privacy">Private</li>
+                        <li class="required">Urgent</li>
+                        -->
+                      </ul>
+								{{#if ../loginUser}}
+   									 <form action="recruit_scrap_insert_delete">
+        								<button class="bookmark-btn" name="id" id="check-bookmark" type="button" value="{{recruit.id}}">
+											{{#with ../status}}
+        								  {{#ifEquals (lookup this ../recruit.id) 1}}
+													<img id="id1" src="images/bookmark.png" style="width: 23px; margin-left: 2px;" class="show-img">
+													<img id="id2" src="images/bookmark-bin.png" style="width: 17px; margin-left: 5px;" class="hidden-img">
+													{{else}}
+													<img id="id1" src="images/bookmark.png" style="width: 23px; margin-left: 2px;" class="hidden-img">
+													<img id="id2" src="images/bookmark-bin.png" style="width: 17px; margin-left: 5px;" class="show-img">
+										 {{/ifEquals}}
+											{{/with}}
+										</button>
+    								</form>
+								{{/if}}
+                    </div>
+                  </div>
+                </div>
+				{{/each}}
+				
+              </div>
+				<nav class="ls-pagination mb-5">
+				  <ul>
+					<input class="tag-data" type="hidden" value="{{tagId}}">
+				    {{#unless (eq nowPage 0)}}
+				      <li class="prev">
+				        <a href="{{url}}?tagId={{tagId}}&page={{prePage}}" class="prev-link"><i class="fa fa-arrow-left"></i></a>
+				      </li>
+				      <li class="prev">
+				        <a href="{{url}}?tagId={{tagId}}&page={{prePage}}" class="prev-link">{{nowPage}}</a>
+						<input class="prev-data" type="hidden" value="{{prePage}}">
+				      </li>
+				    {{/unless}}
+				    
+				    <li class="current-page">
+				      <a class="current-page">{{add nowPage 1}}</a>
+				    </li>
+				
+				    {{#if (not (eq nowPage (subtract totalPage 1)))}}
+				      <li class="next">
+				        <a href="{{url}}?tagId={{tagId}}&page={{nextPage}}" class="next-link">{{add nowPage 2}}</a>
+				      </li>
+				      <li class="next">
+				        <a href="{{url}}?tagId={{tagId}}&page={{nextPage}}" class="next-link"><i class="fa fa-arrow-right"></i></a>
+						<input class="next-data" type="hidden" value="{{nextPage}}">
+				      </li>
+				    {{/if}}
+				
+					{{#each page}}
+				      {{#if (and (gte this (subtract nowPage 1)) (lte this (add nowPage 1)))}}
+				        <li>
+				          <a href="{{../url}}?tagId={{tagId}}&page={{this}}"></a>
+				        </li>
+				      {{/if}}
+				    {{/each}}
+				  </ul>
+				</nav>
+	</script>
+
+	<!-- End리크루트 태그 선택시 ajax요청 -->
+  <script src="js/jquery.js"></script>
+  <script src="js/popper.min.js"></script>
+  <script src="js/jquery-ui.min.js"></script>
+  <script src="js/chosen.min.js"></script>
+  <script src="js/bootstrap.min.js"></script>
+  <script src="js/jquery.fancybox.js"></script>
+  <script src="js/jquery.modal.min.js"></script>
+  <script src="js/mmenu.polyfills.js"></script>
+  <script src="js/mmenu.js"></script>
+  <script src="js/appear.js"></script>
+  <script src="js/ScrollMagic.min.js"></script>
+  <script src="js/rellax.min.js"></script>
+  <script src="js/owl.js"></script>
+  <script src="js/wow.js"></script>
+  <script src="js/script.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.29.1/moment.min.js"></script>
+	<script src="js/app_recruit.js" type="module"></script>
+	<script src="js/app_recruit_scrap.js" type="module"></script>
+</body>
+
+</html>

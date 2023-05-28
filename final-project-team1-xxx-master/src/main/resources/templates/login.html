@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<script type="text/javascript">
+	
+	function login(){
+		document.f.action = "user_login_action";
+		document.method='POST';
+		document.f.submit(); 
+	}
+
+
+</script>
+<script src="https://code.jquery.com/jquery-latest.min.js"></script>
+<script src="https://t1.kakaocdn.net/kakao_js_sdk/2.1.0/kakao.min.js"></script>
+<head>
+  <meta charset="utf-8">
+  <title>ilhajob</title>
+
+  <!-- Stylesheets -->
+  <link href="css/bootstrap.css" rel="stylesheet">
+  <link href="css/style.css" rel="stylesheet">
+  
+
+  <link rel="shortcut icon" href="images/favicon.png" type="image/x-icon">
+  <link rel="icon" href="images/favicon.png" type="image/x-icon">
+
+  <!-- Responsive -->
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0">
+  <!--[if lt IE 9]><script src="https://cdnjs.cloudflare.com/ajax/libs/html5shiv/3.7.3/html5shiv.js"></script><![endif]-->
+  <!--[if lt IE 9]><script src="js/respond.js"></script><![endif]-->
+</head>
+
+<body>
+
+  <div class="page-wrapper">
+
+    <!-- Preloader -->
+    <div class="preloader"></div>
+
+    <!-- Main Header-->
+    <header class="main-header">
+      <div class="container-fluid">
+        <!-- Main box -->
+        <div class="main-box">
+          <!--Nav Outer -->
+          <div class="nav-outer">
+            <div class="logo-box">
+              <div class="logo"><a href="index"><img src="images/일하잡1111.png" alt="" title=""></a></div>
+            </div>
+          </div>
+
+          <div class="outer-box">
+            <!-- Login/Register -->
+            <div class="btn-box">
+              <a href="login-popup" class="theme-btn btn-style-three call-modal">로그인 / 회원가입</a>
+              <!-- <a href="dashboard-post-job" class="theme-btn btn-style-one"><span class="btn-title">Job Post</span></a> -->
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Mobile Header -->
+      <div class="mobile-header">
+        <div class="logo"><a href="index"><img src="images/일하잡1111.png" alt="" title=""></a></div>
+      </div>
+
+      <!-- Mobile Nav -->
+      <div id="nav-mobile"></div>
+    </header>
+    <!--End Main Header -->
+
+    <!-- Info Section -->
+    <div class="login-section">
+      <div class="image-layer" style="background-image: url(images/index-16/header/배경4.jpg);"></div>
+      <div class="outer-box">
+        <!-- Login Form -->
+        <div class="login-form default-form">
+          <div class="form-inner">
+            <h3>Login to ilhajob</h3>
+            <!--Login Form-->
+            <form name="f" th:object="${fuser}" method="post">
+              <div class="form-group">
+                <label>User Email</label>
+                <input type="text" th:value="${fuser?.userEmail}" name="userEmail" placeholder="Username" required><br>
+	                <font color="red" th:text="${msg1}"></font>
+              </div>
+
+              <div class="form-group">
+                <label>Password</label>
+                <input id="password-field" type="password" th:value="${fuser?.userPassword}"  name="userPassword" value="" placeholder="Password"><br>
+	                <font color="red" th:text="${msg2}"></font>
+              </div>
+
+              <div class="form-group">
+                <div class="field-outer">
+                  <div class="input-group checkboxes square">
+                    <input type="checkbox" name="remember-me" value="" id="remember">
+                    <label for="remember" class="remember"><span class="custom-checkbox"></span> Remember me</label>
+                  </div>
+                  <a href="#" class="pwd">Forgot password?</a>
+                </div>
+              </div>
+
+              <div class="form-group">
+                <button class="theme-btn btn-style-one" type="submit" name="log-in" onClick="login()">Log In</button>
+              </div>
+            </form>
+
+            <div class="bottom-box">
+              <div class="text">Don't have an account? <a href="register-popup" class="call-modal signup">Signup</a></div>
+              <div class="divider"><span>or</span></div>
+              <div class="btn-box row">
+              
+                <div class="col-lg-6 col-md-12">
+				<a href="https://nid.naver.com/oauth2.0/authorize?response_type=code&client_id=DiVm26H4q1ntqiN1E6LX&state=NAVER_LOGIN_TEST&redirect_uri=http://localhost/final-project-team1-ilhajob/naver_login_action" ><img src="/final-project-team1-ilhajob/images/naver/naver_icon.png" width="50px" height="50px"/></a>
+	            </div>
+	            
+	            <th:block th:if = "${kakaoProfile == null}">
+	            <div class="col-lg-6 col-md-12">
+				<a href="https://kauth.kakao.com/oauth/authorize?client_id=a6d14f150ac48d2473522d64212f6633&redirect_uri=http://localhost/final-project-team1-ilhajob/kakao_login_action&response_type=code"><img src="/final-project-team1-ilhajob/images/kakao/kakao_icon.png" width="50px" height="50px" /></a>
+	            </div>
+	          	</th:block>
+              </div>
+            </div>
+          </div>
+        </div>
+        <!--End Login Form -->
+      </div>
+    </div>
+    <!-- End Info Section -->
+  </div><!-- End Page Wrapper -->
+<script type="text/javascript">
+	displayToken();
+	</script>
+
+  <script src="js/jquery.js"></script>
+  <script src="js/popper.min.js"></script>
+  <script src="js/chosen.min.js"></script>
+  <script src="js/bootstrap.min.js"></script>
+  <script src="js/jquery-ui.min.js"></script>
+  <script src="js/jquery.fancybox.js"></script>
+  <script src="js/jquery.modal.min.js"></script>
+  <script src="js/mmenu.polyfills.js"></script>
+  <script src="js/mmenu.js"></script>
+  <script src="js/appear.js"></script>
+  <script src="js/ScrollMagic.min.js"></script>
+  <script src="js/rellax.min.js"></script>
+  <script src="js/owl.js"></script>
+  <script src="js/wow.js"></script>
+  <script src="js/script.js"></script>
+</body>
+
+</html>

@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+  <meta charset="utf-8">
+  <title>ilhajob</title>
+
+  <!-- Stylesheets -->
+  <link href="css/bootstrap.css" rel="stylesheet">
+  <link href="css/style.css" rel="stylesheet">
+  
+
+  <link rel="shortcut icon" href="images/favicon.png" type="image/x-icon">
+  <link rel="icon" href="images/favicon.png" type="image/x-icon">
+
+  <!-- Responsive -->
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0">
+  <!--[if lt IE 9]><script src="https://cdnjs.cloudflare.com/ajax/libs/html5shiv/3.7.3/html5shiv.js"></script><![endif]-->
+  <!--[if lt IE 9]><script src="js/respond.js"></script><![endif]-->
+</head>
+
+<body>
+
+  <div class="page-wrapper">
+
+    <!-- Preloader -->
+    <div class="preloader"></div>
+
+    <!-- Header Span -->
+    <span class="header-span"></span>
+
+    <!-- Main Header-->
+    <header class="main-header header-shaddow">
+       <div id="main-header" th:include="include_common_top::include_common_top"></div>
+    </header>
+    <!--End Main Header -->
+
+    <!--Page Title-->
+    <section class="page-title">
+      <div class="auto-container">
+        <div class="title-outer">
+          <h1>Shopping Cart</h1>
+          <ul class="page-breadcrumb">
+            <li><a href="index.html">Home</a></li>
+            <li>Shopping Cart</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+    <!--End Page Title-->
+
+    <!--Cart Section-->
+    <section class="cart-section">
+      <div class="auto-container">
+        <div class="row">
+          <div class="column col-lg-8 col-md-12 col-sm-12">
+            <!--Cart Outer-->
+            <div class="cart-outer">
+              <div class="table-outer">
+                <table class="default-table ">
+                  <thead class="cart-header">
+                    <tr>
+                      <th class="product-name">Product</th>
+                      <th class="product-thumbnail">&nbsp;</th>
+                      <th class="product-price">Price</th>
+                      <th class="product-quantity">Quantity</th>
+                      <th class="product-subtotal">Subtotal</th>
+                      <th class="product-remove">&nbsp;</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr class="cart-item">
+                      <td class="product-thumbnail"><a href="shop-single.html"><img src="images/resource/products/cart-img.png" alt=""></a></td>
+                      <td class="product-name"><a href="shop-single.html">Album</a></td>
+                      <td class="product-price">$298</td>
+                      <td class="product-quantity">
+                        <div class="item-quantity"> <input type="number" class="qty" name="qty" value="1"> </div>
+                      </td>
+                      <td class="product-subtotal"><span class="amount">$1.298</span></td>
+                      <td class="product-remove"> <a href="#" class="remove"><span class="flaticon-dustbin"></span></a></td>
+                    </tr>
+
+                    <tr class="cart-item">
+                      <td class="product-thumbnail"><a href="shop-single.html"><img src="images/resource/products/cart-img.png" alt=""></a></td>
+                      <td class="product-name"><a href="shop-single.html">Album</a></td>
+                      <td class="product-price">$298</td>
+                      <td class="product-quantity">
+                        <div class="item-quantity"> <input type="number" class="qty" name="qty" value="1"> </div>
+                      </td>
+                      <td class="product-subtotal"><span class="amount">$1.298</span></td>
+                      <td class="product-remove"> <a href="#" class="remove"><span class="flaticon-dustbin"></span></a></td>
+                    </tr>
+
+                    <tr class="cart-item">
+                      <td class="product-thumbnail"><a href="shop-single.html"><img src="images/resource/products/cart-img.png" alt=""></a></td>
+                      <td class="product-name"><a href="shop-single.html">Album</a></td>
+                      <td class="product-price">$298</td>
+                      <td class="product-quantity">
+                        <div class="item-quantity"> <input type="number" class="qty" name="qty" value="1"> </div>
+                      </td>
+                      <td class="product-subtotal"><span class="amount">$1.298</span></td>
+                      <td class="product-remove"> <a href="#" class="remove"><span class="flaticon-dustbin"></span></a></td>
+                    </tr>
+
+
+                  </tbody>
+                </table>
+              </div>
+
+              <div class="cart-options clearfix">
+                <div class="apply-coupon">
+                  <div class="form-group">
+                    <input type="text" name="coupon-code" class="input" placeholder="Coupon Code">
+                  </div>
+                  <div class="form-group">
+                    <button type="button" class="theme-btn btn-style-one">Apply Coupon</button>
+                  </div>
+                  <div class="form-group pull-right">
+                    <button type="button" class="theme-btn btn-style-three">update cart</button>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="column col-lg-4 col-md-12 col-sm-12">
+            <div class="totals-table-outer">
+              <ul class="totals-table">
+                <li>
+                  <h3>Cart Totals</h3>
+                </li>
+                <li><span class="col">Subtotal</span><span class="col price">$186.00</span></li>
+                <li><span class="col">Total</span><span class="col price">$186.00</span></li>
+              </ul>
+              <button type="submit" class="theme-btn btn-style-one proceed-btn">Proceed to Checkout</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+    <!--End Cart Section-->
+
+
+    <!-- Main Footer -->
+    <div th:include="include_main_bottom"></div>
+    <!-- End Main Footer -->
+
+
+  </div><!-- End Page Wrapper -->
+
+
+  <script src="js/jquery.js"></script>
+  <script src="js/popper.min.js"></script>
+  <script src="js/chosen.min.js"></script>
+  <script src="js/bootstrap.min.js"></script>
+  <script src="js/jquery-ui.min.js"></script>
+  <script src="js/jquery.fancybox.js"></script>
+  <script src="js/jquery.modal.min.js"></script>
+  <script src="js/mmenu.polyfills.js"></script>
+  <script src="js/mmenu.js"></script>
+  <script src="js/appear.js"></script>
+  <script src="js/ScrollMagic.min.js"></script>
+  <script src="js/rellax.min.js"></script>
+  <script src="js/owl.js"></script>
+  <script src="js/wow.js"></script>
+  <script src="js/script.js"></script>
+
+</body>
+
+</html>

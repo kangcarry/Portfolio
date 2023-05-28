@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+
+  <link href="css/bootstrap.css" rel="stylesheet">
+  <link href="css/style.css" rel="stylesheet">
+
+</head>
+
+<div th:fragment="user-sidebar">
+      <div class="sidebar-inner">
+        <ul class="navigation">
+          <li><a href="candidate-dashboard"> <i class="la la-home"></i> 대시보드</a></li>
+          <li><a href="candidate-dashboard-profile"><i class="la la-user-tie"></i>내 프로필</a></li>
+          <li><a href="cv-write-form"><i class="la la-file-invoice"></i>이력서 작성</a></li>
+          <li><a href="cv-detail"><i class="la la-file-invoice"></i>이력서 관리</a></li>
+      	  <!-- <li><a href="cv-list"><i class="la la-file-invoice"></i>(삭제예정)이력서 관리</a></li> -->
+       	  <li><a href="candidate-dashboard-applied-job"><i class="la la-briefcase"></i> 지원 내역 </a></li>
+      	  <li><a href="candidate-dashboard-job-alerts"><i class="la la-bell"></i>공고알림</a></li>
+          <li><a href="candidate-dashboard-shortlisted-resume"><i class="la la-bookmark-o"></i>공고 스크랩</a></li>
+      <!--<li><a href="dashboard-messagesl"><i class="la la-comment-o"></i>Messages</a></li>--> 
+        <li><a href="dashboard-change-password"><i class="la la-lock"></i>비밀번호 변경</a></li> 
+      <!--<li><a href="dashboard-profile"><i class="la la-user-alt"></i>View Profile</a></li>--> 
+          <li><a href="product"><i class="la la-shopping-bag"></i>상품구매</a></li>
+          <li><a href="dashboard-packages"><i class="la la-receipt"></i>구매내역</a></li>
+          <li><a href="user_logout_action"><i class="la la-sign-out"></i>로그아웃</a></li>
+          <li><a href="delete-action"><i class="la la-trash"></i>회원탈퇴</a></li>
+        </ul>
+      </div>
+</div>
+   

@@ -1,0 +1,336 @@
+html, body {
+	margin: 0;
+	padding: 0
+}
+
+body {
+	font: 76% arial, sans-serif;
+	text-align: center
+}
+
+p {
+	margin: 0 10px 10px
+}
+
+a {
+	padding: 5px;
+	text-decoration: none;
+	color: #000000;
+}
+div#header {
+	background-color: #F3F2ED;
+	background: #fff url('../image/nav_bg01.png');
+	background-position: center;
+	background-repeat: no-repeat;
+	background-size: 100%
+}
+div#header h1 {
+	height: 80px;
+	line-height: 80px;
+	margin: 17px 0 0 0;
+	padding-left: 10px;
+}
+/***************** menu start****************/
+/***************** menu end****************/
+div#container {
+	text-align: center;
+	margin: 0 auto;
+	
+}
+
+div#content p {
+	line-height: 1.4
+}
+
+div#user_content  {
+	margin-left: 20%;
+	margin-top: 2%;	
+}
+div#user_view  {
+	margin-top: 0;	
+}
+div#user_navigation {
+	float: left;
+    width: 200px;
+    height: 350px;
+    margin: 0 auto;
+}
+
+div#user_navigation ol {
+	margin: 15px 10px;
+	padding: 0;
+	list-style-type: none;
+}
+
+div#user_navigation .mypage {
+	padding: 0;
+	font-size: 24pt;
+	font-weight: 900;
+	text-align: left;
+	list-style-type: none;
+}
+
+div#user_navigation .mypage_title {
+	padding: 0;
+	font-size: 14pt;
+	font-weight: 900;
+	text-align: left;
+}
+
+div#user_navigation .mypage_title a {
+	padding: 0;
+	font-size: 14pt;
+	font-weight: 900;
+	text-align: left;
+}
+
+div#user_navigation .mypage_item {
+	padding: 0;
+	font-size: 10pt;
+	text-align: left;
+	opacity: 0.8;
+}
+
+div#user_navigation li {
+	margin-bottom: 5px;
+}
+
+div#user_navigation p {
+	margin-top: 20px;
+	margin-left: 15px
+}
+/*
+div#extra{background:#CCC8B3;}
+*/
+div#footer {
+	background: #000000;
+}
+
+div#footer p {
+	margin: 0;
+	padding: 5px 10px
+}
+
+
+/*
+div#navigation{float:left;width:150px;height:350px;margin-left:-700px}
+*/
+/*
+div#wrapper{float:left;width:100%}
+*/
+div#wrapper {
+	margin: 0 auto;
+	width: 80%;
+	height: 100%;
+}
+
+div#content {
+	margin: 0 0 0 0px
+}
+
+div#login_content {
+	width: 400px;
+    margin: 0 auto;
+}
+div#join_content {
+	width: 600px;
+    margin: 0 auto;
+}
+
+
+div#footer {
+	clear: left;
+	width: 100%
+}
+div.member-grade-box {
+	-webkit-text-size-adjust: 100%;
+    color: #000;
+    -webkit-box-direction: normal;
+    -webkit-box-sizing: border-box;
+    margin: 0;
+    font: inherit;
+    font-style: normal;
+    height: 200px;
+    margin-bottom: 30px;
+    padding: 0 36px 0 46px;
+    border: 4px solid #d5d5d5;
+    display: -webkit-flex;
+    -webkit-box-pack: start;
+    justify-content: flex-start;
+    -webkit-box-align: center;
+    align-items: center;
+    
+}
+
+div#psuedo{
+	height: 50px;
+}
+
+div.grade-info-box {
+	-webkit-text-size-adjust: 100%;
+    color: #000;
+    -webkit-box-direction: normal;
+    -webkit-box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    border: 0;
+    width: 370px;
+    font: inherit;
+    font-style: normal;
+    position: relative;
+    -webkit-box-flex: 1;
+    flex: 1;
+    padding-left: 28px;
+}
+
+span.grade-info{
+	-webkit-text-size-adjust: 100%;
+    color: #000;
+    -webkit-box-direction: normal;
+    -webkit-box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    border: 0;
+    font: inherit;
+    font-style: normal;
+    display: block;
+    font-family: "Montserrat","Noto Sans KR",sans-serif;
+    font-size: 22px;
+    letter-spacing: -1.1px;
+}
+div.right-box{
+	-webkit-text-size-adjust: 100%;
+    color: #000;
+    -webkit-box-direction: normal;
+    -webkit-box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    border: 0;
+    font: inherit;
+    font-style: normal;
+    width: 412px;
+}
+div.shopping-info point{
+	-webkit-text-size-adjust: 100%;
+    color: #000;
+    -webkit-box-direction: normal;
+    -webkit-box-sizing: border-box;
+    margin: 0;
+    border: 0;
+    font: inherit;
+    font-style: normal;
+    position: relative;
+    display: inline-flex;
+    flex-wrap: wrap;
+    min-height: 90px;
+    padding: 3px 30px 3px 29px;
+    border-left: 1px solid #d5d5d5;
+    vertical-align: top;
+    width: 239px;
+}
+div.shopping-info{
+	-webkit-text-size-adjust: 100%;
+    color: #000;
+    -webkit-box-direction: normal;
+    -webkit-box-sizing: border-box;
+    margin: 0;
+    border: 0;
+    font: inherit;
+    font-style: normal;
+    position: relative;
+    display: inline-flex;
+    flex-wrap: wrap;
+    width: 173px;
+    min-height: 90px;
+    padding: 3px 30px 3px 29px;
+    border-left: 1px solid #d5d5d5;
+    vertical-align: top;
+    padding-right: 0;
+}
+span.info-title{
+	-webkit-text-size-adjust: 100%;
+    -webkit-box-direction: normal;
+    -webkit-box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    border: 0;
+    font: inherit;
+    font-style: normal;
+    display: inline-block;
+    color: #666;
+    font-size: 14px;
+    letter-spacing: -.7px;
+    vertical-align: top;
+    text-align: center;
+}
+img.icon-cart{
+	width:30px;
+	height:30px;
+    margin-right: 4px;
+    background: url(../image/top_cart.png);
+    background-repeat: no-repeat;
+    vertical-align: -10px;
+}
+img.icon-order{
+	width:30px;
+	height:30px;
+    margin-right: 4px;
+    background: url(../image/order.png);
+    background-size: 90%;
+    background-repeat: no-repeat;
+    vertical-align: -10px;
+}
+img.icon-board{
+	width:30px;
+	height:30px;
+    margin-right: 4px;
+    background: url(../image/board.png);
+    background-size: 90%;
+    background-repeat: no-repeat;
+    vertical-align: -10px;
+}
+img.icon-reply{
+	width:30px;
+	height:30px;
+    margin-right: 4px;
+    background: url(../image/reply.png);
+    background-size: 90%;
+    background-repeat: no-repeat;
+    vertical-align: -10px;
+}
+
+.member-grade-box .right-box .shopping-info .info-item .info-data .unit {
+    color: #000;
+    font-size: 12px;
+    font-weight: 400;
+    vertical-align: 1px;
+    text-align: right;
+}
+
+.member-grade-box .right-box .shopping-info .info-item .info-data>a {
+    display: block;
+    text-align: right;
+}
+
+.member-grade-box .right-box .shopping-info .info-item .info-data {
+    display: inline-block;
+    color: #ee1c25;
+    font-family: "Montserrat","Noto Sans KR",sans-serif;
+    font-size: 21px;
+    font-weight: 700;
+    vertical-align: top;
+}
+
+img#p_search{
+	border: none;
+	height: 60px
+}
+
+.add_button{
+	 height:30px; 
+	 width:120px;
+/*
+	 background-color: white;
+*/
+}    
+    

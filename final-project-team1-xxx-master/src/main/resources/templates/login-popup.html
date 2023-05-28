@@ -1,0 +1,83 @@
+<div class="model">
+  <!-- Login modal -->
+  <div id="login-modal">
+    <!-- Login Form -->
+    <div class="login-form default-form">
+      <div class="form-inner">
+        <h3>Login to ilhajob</h3>
+        <!--Login Form-->
+        <form id="login-f" name="login-f" method="post">
+          <div class="form-group">
+            <div class="btn-box row">
+              <div class="col-lg-6 col-md-12">
+                <a id="candidate-btn" class="theme-btn btn-style-seven"><i class="la la-user"></i> 개인회원 </a>
+              </div>
+              <div class="col-lg-6 col-md-12">
+                <a id="corp-btn" class="theme-btn btn-style-four"><i class="la la-briefcase"></i> 기업회원 </a>
+              </div>
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label for="email">User Email</label>
+            <input type="email" id="email" name="email" placeholder="User Email" required>
+          </div>
+
+          <div class="form-group">
+            <label>Password</label>
+            <input id="password-field" type="password" name="password" value="" placeholder="Password">
+          </div>
+          <input type="hidden" id="separate" name="separate" value="user">
+
+          <div class="form-group">
+            <div class="field-outer">
+              <div class="input-group checkboxes square">
+                <input type="checkbox" name="remember-me" value="" id="remember">
+                <label for="remember" class="remember"><span class="custom-checkbox"></span> Remember me</label>
+              </div>
+              <a href="#" class="pwd">Forgot password?</a>
+            </div>
+          </div>
+
+          <div class="form-group">
+            <button class="theme-btn btn-style-one" type="button" id="log-in" name="log-in">Log In</button>
+          </div>
+        </form>
+
+        <div class="bottom-box">
+          <div class="text">Don't have an account? <a href="register-popup" class="call-modal signup">Signup</a></div>
+          <div id="or" class="divider"><span>or</span></div>
+          <div id="snsLogin" class="btn-box row">
+            <div class="col-lg-6 col-md-12">
+			<a href="https://nid.naver.com/oauth2.0/authorize?response_type=code&client_id=L3CEOCdDQYP2uDz56Hrc&state=NAVER_LOGIN_TEST&redirect_uri=http://localhost/final-project-team1-ilhajob/naver_login_action" ><img src="/final-project-team1-ilhajob/images/naver/naver_icon.png" width="50px" height="50px"/></a>
+            </div>
+            <div class="col-lg-6 col-md-12">
+			<a href="https://kauth.kakao.com/oauth/authorize?client_id=472148705f1525f2972ff19a16dcf681&redirect_uri=http://localhost/final-project-team1-ilhajob/kakao_login_action&response_type=code"><img src="/final-project-team1-ilhajob/images/kakao/kakao_icon.png" width="50px" height="50px" /></a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!--End Login Form -->
+  </div>
+  <!-- End Login Module -->
+  
+  
+
+  <script type="text/javascript">
+    // Open modal in AJAX callback
+    jQuery('.call-modal.signup').on('click', function(event) {
+      event.preventDefault();
+      this.blur();
+      jQuery.get(this.href, function(html,data) {
+    	console.log(data);
+        jQuery(html).appendTo('body').modal({
+          fadeDuration: 300,
+          fadeDelay: 0.15
+        });
+      });
+    });
+ 
+  </script>
+ <script src="js/rememberId.js"></script>
+</div>

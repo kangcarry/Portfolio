@@ -1,0 +1,45 @@
+#logging:
+#  level:
+#    org:
+#      springframework:
+#        beans: debug
+#        context: debug
+#      hibernate:
+#        type:
+#          descriptor:
+ #           sql: trace
+  
+spring:
+  thymeleaf:    prefix: classpath:templates/
+    suffix: .html
+    check-template-location: true
+    mode: HTML
+  datasource:
+    url: jdbc:oracle:thin:@182.237.0126.19:1521:XE
+    username: F2211JDEVELOPER#TEAM1
+    password: F2211JDEVELOPER#TEAM1
+  jpa:
+    show-sql: true
+    generate-ddl: true
+    properties:
+      hibernate:
+        default_batch_fetch_size: 1000
+        format_sql: true
+        use_sql_comments: true
+    hibernate:
+      ddl-auto: update
+#    defer-datasource-initialization: true   
+##   sql초기화  
+#  sql:
+#    init:
+#      mode: always
+#      schema-locations:
+#      - classpath:ilhajob.ddl
+#      data-locations:
+#      - classpath:ilhajob-insert2.sql
+#      continue-on-error: true
+server:  port: 80  servlet:    context-path: /final-project-team1-ilhajob
+    encoding:      charset: UTF-8
+      enabled: true
+      force: true
+      

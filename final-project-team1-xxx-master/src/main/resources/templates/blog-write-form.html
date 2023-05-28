@@ -1,0 +1,188 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+  <script type="text/javascript">
+  
+ 
+  
+  function blogList() {
+  	window.location.href='blog-list';
+  }
+  
+  
+  function blogCreate() {
+		if (document.f.blogCateSeq.value == "") {
+			alert("카테고리를 선택하세요.");
+			document.f.blogCateSeq.focus();
+			return false;
+		}
+		if (document.f.blogTitle.value == "") {
+			alert("블로그 제목을 입력하세요.");
+			document.f.blogTitle.focus();
+			return false;
+		}
+		if (document.f.blogContent.value == "") {
+			alert("내용을 입력하십시요.");
+			document.f.blogContent.focus();
+			return false;
+		}
+
+		if (document.f.blogImage.value == "") {
+			alert("이미지를 넣어주세요.");
+			document.f.blogImage.focus();
+			return false;
+		}
+
+		document.f.action = "blog_write_action";
+		document.f.method='POST';
+		document.f.submit();
+	}
+
+  </script>
+
+<head>
+  <meta charset="utf-8">
+  <title>ilhajob</title>
+
+  <!-- Stylesheets -->
+  <link href="css/bootstrap.css" rel="stylesheet">
+  <link href="css/style.css" rel="stylesheet">
+  
+
+  <link rel="shortcut icon" href="images/favicon.png" type="image/x-icon">
+  <link rel="icon" href="images/favicon.png" type="image/x-icon">
+
+  <!-- Responsive -->
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0">
+  <!--[if lt IE 9]><script src="https://cdnjs.cloudflare.com/ajax/libs/html5shiv/3.7.3/html5shiv.js"></script><![endif]-->
+  <!--[if lt IE 9]><script src="js/respond.js"></script><![endif]-->
+  <script src="js/image-upload.js" type="module"></script>
+</head>
+
+
+<body>
+	<!-----------대쉬보드 CSS 훔쳐옴-------------->
+	
+  <div class="page-wrapper">
+
+    <!-- Preloader -->
+    <div class="preloader"></div>
+
+    <!-- Header Span -->
+    <span class="header-span"></span>
+
+    <!-- Main Header-->
+    <header class="main-header header-shaddow">
+      <div id="main-header" th:include="include_common_top_dashboard::include_common_top_dashboard"></div>
+    </header>
+    <!--End Main Header -->
+	<!-- Sidebar Backdrop -->
+    <div class="sidebar-backdrop"></div>
+
+
+    <!-- Sidebar Page Container -->
+    <div class="sidebar-page-container">
+      <div class="auto-container">
+        <div class="row">
+  
+
+    <!-- Dashboard -->
+    <section class="user-dashboard">
+      <div class="dashboard-outer">
+        <div class="upper-title-box">
+          <h3>새 블로그 작성</h3>
+          <div class="text" ></div>
+        </div>
+        <!-- Blog Write Form -->
+        		  <!-- Select Category -->
+                  <form class="default-form" name="f" id="board-form">
+                    <div class="row">
+                     
+                      <!-- Input Title 
+                      <div class="form-group col-lg-12 col-md-12">
+                        <label name = "userId">유저아이디</label>
+                        <input type="text" name="userId" placeholder="유저아이디넣기">
+                      </div>-->
+                      
+                       <div class="form-group col-lg-6 col-md-12">
+                        <label></label>
+                        <select name="blogCateId" class="chosen-select">
+                          <option value="">카테고리를 선택하세요.</option>
+                          <option value="1">카테고리1</option>
+                          <option value="2">카테고리2</option>
+                          <option value="3">카테고리3</option>
+                          <option value="4">카테고리4</option>
+                        </select>
+                      </div>
+                    
+                      <!-- Input Title -->
+                      <div class="form-group col-lg-12 col-md-12">
+                        <label name = "blogTitle">제목</label>
+                        <input type="text" name="blogTitle" placeholder="제목을 입력하세요.">
+                      </div>
+						
+					<!-- Input Image -->
+				  <div class="form-group col-lg-6 col-md-12">
+                  	<label >이미지</label>
+                  	<div class="text">최대 파일 크기는 1MB이고 최소 치수는 330x300이며 적합한 파일은 .jpg 및 .png입니다</div>
+                  </div>
+					<div class="uploading-outer">
+				     <div class="uploadButton">
+				       <input class="uploadButton-input" type="file" name="blog-images" accept="image/*" id="upload" multiple>
+				       <label class="uploadButton-button ripple-effect" for="upload">
+				          <img id="preview" src="" alt="" style="width:300px" /></label>
+				       <span class="uploadButton-file-name"></span>
+					   <!-- <button class="theme-btn btn-style-one" id="board-main-upload-btn">업로드</button> -->
+				     </div>
+				    </div>
+					  
+					  
+                      <!-- Input Content -->
+                      <div class="form-group col-lg-12 col-md-12">
+                        <label>내용</label>
+                        <textarea name ="blogContent" placeholder="내용을 입력하세요." style="height: 300px; overflow: auto;" ></textarea>
+                      </div>
+
+                      <!-- Input -->
+                      <div class="form-group col-lg-12 col-md-12 text-right">
+                        <button type="button" class="theme-btn btn-style-one blog-upload-btn" style="float:right;" onClick="blogCreate();" >작성완료</button>
+                      <span><button type="button" class="theme-btn btn-style-one" style="float:right; margin-right:5px;" onclick="blogList();" >목록보기</button></span>
+                      </div>
+                    </div>
+   	             </form>
+      		 	</div>
+   			 </section>
+     	 </div>
+  	 </div>
+   </div>
+    <!-- End Write Form -->
+    
+	<!-- Main Footer -->
+    <div th:include="include_main_bottom"></div>
+    <!-- End Main Footer -->
+
+  </div><!-- End Page Wrapper -->
+
+
+  <script src="js/jquery.js"></script>
+  <script src="js/popper.min.js"></script>
+  <script src="js/chosen.min.js"></script>
+  <script src="js/bootstrap.min.js"></script>
+  <script src="js/jquery-ui.min.js"></script>
+  <script src="js/jquery.fancybox.js"></script>
+  <script src="js/jquery.modal.min.js"></script>
+  <script src="js/mmenu.polyfills.js"></script>
+  <script src="js/mmenu.js"></script>
+  <script src="js/appear.js"></script>
+  <script src="js/ScrollMagic.min.js"></script>
+  <script src="js/rellax.min.js"></script>
+  <script src="js/owl.js"></script>
+  <script src="js/wow.js"></script>
+  <script src="js/script.js"></script>
+  <!--Google Map APi Key-->
+  <script src="http://maps.google.com/maps/api/js?key=AIzaSyDaaCBm4FEmgKs5cfVrh3JYue3Chj1kJMw&#038;ver=5.2.4"></script>
+  <script src="js/map-script.js"></script>
+  <!--End Google Map APi-->
+</body>
+
+</html>

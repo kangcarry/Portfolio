@@ -1,0 +1,483 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+  <meta charset="utf-8">
+  <title>ilhajob</title>
+  
+  <style>
+  		.hidden-img { display: none;}
+  		.show-img { display: block;}
+  </style>
+
+  <!-- Stylesheets -->
+  <link href="css/bootstrap.css" rel="stylesheet">
+  <link href="css/style.css" rel="stylesheet">
+  
+
+  <link rel="shortcut icon" href="images/favicon.png" type="image/x-icon">
+  <link rel="icon" href="images/favicon.png" type="image/x-icon">
+
+  <!-- Responsive -->
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0">
+  <!--[if lt IE 9]><script src="https://cdnjs.cloudflare.com/ajax/libs/html5shiv/3.7.3/html5shiv.js"></script><![endif]-->
+  <!--[if lt IE 9]><script src="js/respond.js"></script><![endif]-->
+<script
+	src="https://cdnjs.cloudflare.com/ajax/libs/handlebars.js/4.7.7/handlebars.min.js"></script>
+<script type="text/javascript">
+//Handlebars 커스텀 헬퍼: ifEqual
+
+</script>
+</head>
+
+<body>
+
+  <div class="page-wrapper">
+
+    <!-- Preloader -->
+    <div class="preloader"></div>
+
+    <!-- Header Span -->
+    <span class="header-span"></span>
+
+    <!-- Main Header-->
+    <header class="main-header">
+     <div id="main-header" th:include="include_common_top_dashboard::include_common_top_dashboard"></div>
+    </header>
+    <!--End Main Header -->
+
+    <!--Page Title-->
+    <section class="page-titlFe">
+      <div class="auto-container">
+        <div class="title-outer">
+          <h1>Find Jobs</h1>
+          <ul class="page-breadcrumb">
+            <li>구직공고 목록입니다</li>
+            <li><a href="index">메인으로 돌아가기</a></li>
+          </ul>
+        </div>
+      </div>
+    </section>
+    <!--End Page Title-->
+
+    <!-- Listing Section -->
+    <section class="ls-section">
+      <div class="auto-container">
+        <div class="filters-backdrop"></div>
+
+        <div class="row">
+          <!-- Filters Column -->
+          <div class="filters-column hide-left">
+            <div class="inner-column">
+              <div class="filters-outer">
+                <button type="button" class="theme-btn close-filters">X</button>
+
+                <!-- Filter Block -->
+                <div class="filter-block">
+                  <h4>Search by Keywords</h4>
+                  <div class="form-group">
+                    <input type="text" name="listing-search" placeholder="Job title, keywords, or company">
+                    <span class="icon flaticon-search-3"></span>
+                  </div>
+                </div>
+
+                <!-- Filter Block -->
+                <div class="filter-block">
+                  <h4>Location</h4>
+                  <div class="form-group">
+                    <input type="text" name="listing-search" placeholder="City or postcode">
+                    <span class="icon flaticon-map-locator"></span>
+                  </div>
+                  <p>Radius around selected destination</p>
+                  <div class="range-slider-one">
+                    <div class="area-range-slider"></div>
+                    <div class="input-outer">
+                      <div class="amount-outer"><span class="area-amount"></span>km</div>
+                    </div>
+                  </div>
+                </div>
+
+                <!-- Filter Block -->
+                <div class="filter-block">
+                  <h4>Category</h4>
+                  <div class="form-group">
+                    <select class="chosen-select">
+                      <option>Choose a category</option>
+                      <option>Residential</option>
+                      <option>Commercial</option>
+                      <option>Industrial</option>
+                      <option>Apartments</option>
+                    </select>
+                    <span class="icon flaticon-briefcase"></span>
+                  </div>
+                </div>
+
+                <!-- Switchbox Outer -->
+                <div class="switchbox-outer">
+                  <h4>Job type</h4>
+                  <ul class="switchbox">
+                    <li>
+                      <label class="switch">
+                        <input type="checkbox" checked>
+                        <span class="slider round"></span>
+                        <span class="title">Freelance</span>
+                      </label>
+                    </li>
+                    <li>
+                      <label class="switch">
+                        <input type="checkbox">
+                        <span class="slider round"></span>
+                        <span class="title">Full Time</span>
+                      </label>
+                    </li>
+                    <li>
+                      <label class="switch">
+                        <input type="checkbox">
+                        <span class="slider round"></span>
+                        <span class="title">Internship</span>
+                      </label>
+                    </li>
+                    <li>
+                      <label class="switch">
+                        <input type="checkbox">
+                        <span class="slider round"></span>
+                        <span class="title">Part Time</span>
+                      </label>
+                    </li>
+                    <li>
+                      <label class="switch">
+                        <input type="checkbox">
+                        <span class="slider round"></span>
+                        <span class="title">Temporary</span>
+                      </label>
+                    </li>
+                  </ul>
+                </div>
+
+                <!-- Checkboxes Ouer -->
+                <div class="checkbox-outer">
+                  <h4>Date Posted</h4>
+                  <ul class="checkboxes">
+                    <li>
+                      <input id="check-f" type="checkbox" name="check">
+                      <label for="check-f">All</label>
+                    </li>
+                    <li>
+                      <input id="check-a" type="checkbox" name="check">
+                      <label for="check-a">Last Hour</label>
+                    </li>
+                    <li>
+                      <input id="check-b" type="checkbox" name="check">
+                      <label for="check-b">Last 24 Hours</label>
+                    </li>
+                    <li>
+                      <input id="check-c" type="checkbox" name="check">
+                      <label for="check-c">Last 7 Days</label>
+                    </li>
+                    <li>
+                      <input id="check-d" type="checkbox" name="check">
+                      <label for="check-d">Last 14 Days</label>
+                    </li>
+                    <li>
+                      <input id="check-e" type="checkbox" name="check">
+                      <label for="check-e">Last 30 Days</label>
+                    </li>
+                  </ul>
+                </div>
+
+                <!-- Checkboxes Ouer -->
+                <div class="checkbox-outer">
+                  <h4>Experience Level</h4>
+                  <ul class="checkboxes square">
+                    <li>
+                      <input id="check-ba" type="checkbox" name="check">
+                      <label for="check-ba">All</label>
+                    </li>
+                    <li>
+                      <input id="check-bb" type="checkbox" name="check">
+                      <label for="check-bb">Internship</label>
+                    </li>
+                    <li>
+                      <input id="check-bc" type="checkbox" name="check">
+                      <label for="check-bc">Entry level</label>
+                    </li>
+                    <li>
+                      <input id="check-bd" type="checkbox" name="check">
+                      <label for="check-bd">Associate</label>
+                    </li>
+                    <li>
+                      <input id="check-be" type="checkbox" name="check">
+                      <label for="check-be">Mid-Senior level4</label>
+                    </li>
+                    <li>
+                      <button class="view-more"><span class="icon flaticon-plus"></span> View More</button>
+                    </li>
+                  </ul>
+                </div>
+
+                <!-- Filter Block -->
+                <div class="filter-block">
+                  <h4>Salary</h4>
+
+                  <div class="range-slider-one salary-range">
+                    <div class="salary-range-slider"></div>
+                    <div class="input-outer">
+                      <div class="amount-outer">
+                        <span class="amount salary-amount">
+                          $<span class="min">0</span>
+                          $<span class="max">0</span>
+                        </span>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
+                <!-- Filter Block -->
+                <div class="filter-block">
+                  <h4>Tags</h4>
+                  <ul class="tags-style-one">
+                    <li><a href="#">app</a></li>
+                    <li><a href="#">administrative</a></li>
+                    <li><a href="#">android</a></li>
+                    <li><a href="#">wordpress</a></li>
+                    <li><a href="#">design</a></li>
+                    <li><a href="#">react</a></li>
+                  </ul>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Content Column -->
+          <div class="content-column col-lg-12">
+            <div class="ls-outer">
+              <!-- ls Switcher -->
+              <div class="ls-switcher">
+                <div class="showing-result show-filters">
+                  <button type="button" class="theme-btn toggle-filters"><span class="icon icon-filter"></span> Filter</button>
+                  <div class="text">Showing <strong th:text="${recruitList.size()}">41-60</strong> of <strong></strong> Recruits</div>
+                </div>
+                <button class="changeTag" name="all" value="전체">전체</button>
+                <div th:each="tag: ${tagList}" th:if="${tag.tagId}<4">
+					<button class="changeTag" name="${tag.tagName}"
+					th:text="${tag.tagName}" th:value="${tag.tagId}">코프태그</button>
+                </div>
+                <div class="sort-by">
+                  <!-- select class="chosen-select">
+                    <option>New Jobs</option>
+                    <option>Freelance</option>
+                    <option>Full Time</option>
+                    <option>Internship</option>
+                    <option>Part Time</option>
+                    <option>Temporary</option>
+                  </select-->
+
+                  <!-- select class="chosen-select">
+                    <option>Show 10</option>
+                    <option>Show 20</option>
+                    <option>Show 30</option>
+                    <option>Show 40</option>
+                    <option>Show 50</option>
+                    <option>Show 60</option>
+                  </select-->
+                </div>
+              </div>
+			<div id="recruit-main-list">
+              <div class="row">
+                <!-- Job Block -->
+                <div th:each="recruit:${recruitList}" class="job-block col-lg-6 col-md-12 col-sm-12">
+                  <div class="inner-box">
+                    <div class="content">
+                      <span class="company-logo"><img src="images/resource/company-logo/1-2.png" alt=""></span>
+                      <h4><a href="#"
+                      		 th:href="@{recruit-detail(id=${recruit.id})}" 
+                      		 th:text="${recruit.rcTitle}" >Recruiting Coordinator</a></h4>
+                      <ul class="job-info">
+                        <li><span class="icon flaticon-briefcase"></span><span th:text="${recruit.rcPosition}"></span></li>
+                        <li><span class="icon flaticon-map-locator"></span> <span th:text="${recruit.corp.corpAddress}"></span></li>
+                        <li><span class="icon flaticon-clock-3"></span> 11 hours ago</li>
+                        <li><span class="icon flaticon-money"></span> $35k - $45k</li>
+                      </ul>
+                      <ul class="job-other-info">
+                      	<div th:each="recruitTag : ${recruitTagList}">
+                      	<div th:each="tag:${tagList}">
+                        <li class="time" th:if = "${recruit.id}==${recruitTag.recruit.Id} and ${tag.tagId}==${recruitTag.tag.tagId}"  th:text ="${tag.tagName}">Full Time</li>
+                        </div>
+                        </div>
+                        <!--  
+                         <li class="privacy">Private</li>
+                        <li class="required">Urgent</li>
+                        -->
+                      </ul>
+                      <!-- 리크루트 스크랩 ajax로 -->
+                      <div th:if = "${loginUser}!=null">
+                      	<form action="recruit_scrap_insert_delete">
+							<button th:value="${recruit.id}" class="bookmark-btn" name = "id" id="check-bookmark" type="button">
+									<img id = "id1" src="images/bookmark.png" style="width: 23px; margin-left: 2px;"  th:classappend="${countList[recruit.id]==1} ? 'show-img' : 'hidden-img'">
+									<img id = "id2" src="images/bookmark-bin.png" th:classappend="${countList[recruit.id]==0} ? 'show-img' : 'hidden-img'" style="width: 17px; margin-left: 5px;"></img>
+							</button>
+						</form>
+					</div>
+
+                  </div>
+                </div>
+              </div>
+            </div>
+
+ <!-- Pagination 시작-->
+                <nav class="ls-pagination mb-5">
+				  <ul>
+				    <li th:each="page:${#numbers.sequence(0,totalPage -1)}" th:if="${page >= nowPage-1 and page <= nowPage+1}">
+				      <a th:href="@{recruit-list?page=}+${pageStat.index}"></a>
+				    </li>
+				    <li th:unless="${nowPage == 0}" class="prev">
+				      <a th:href="@{recruit-list?page=}+${prePage}"><i class="fa fa-arrow-left"></i></a>
+				    </li>
+				    <li class="prev">
+				      <a th:unless="${nowPage == 0}" th:text="${nowPage}" th:href="@{recruit-list?page=}+${prePage}"><i class="fa fa-arrow-left"></i></a>
+				    </li>
+				    <li>
+				      <a class="current-page" th:text="${nowPage+1}"></a>
+				    </li>
+				    <li class="next">
+				      <a th:unless="${nowPage == totalPage-1}" th:text="${nowPage+2}" th:href="@{recruit-list?page=}+${nextPage}"><i class="fa fa-arrow-right"></i></a>
+				    </li>
+				    <li th:unless="${nowPage == totalPage-1}" class="next">
+				      <a th:href="@{recruit-list?page=}+${nextPage}"><i class="fa fa-arrow-right"></i></a>
+				    </li>
+				    <li></li>
+				    <th:block th:if="${nowPage != 0}">
+				    <li></li>
+				    <li></li>
+				    </th:block>
+				  </ul>
+				</nav>
+<!-- Pagination 끝-->
+              <!-- Call To Action -->
+              <div class="call-to-action-four style-two">
+                <h5>Recruiting?</h5>
+                <p>Advertise your jobs to millions of monthly users and search 15.8 million <br>CVs in our database.</p>
+                <a href="#" class="theme-btn btn-style-one bg-blue"><span class="btn-title">Start Recruiting Now</span></a>
+                <div class="image" style="background-image: url(images/resource/ads-bg-4.png);"></div>
+              </div>
+              <!-- End Call To Action -->
+            </div>
+          </div>
+        </div>
+      </div>
+      </div>
+    </section>
+    <!--End Listing Page Section -->
+
+
+    <!-- Main Footer -->
+    <div th:include="include_main_bottom"></div>
+    <!-- End Main Footer -->
+
+
+  </div><!-- End Page Wrapper -->
+
+	<!-- 리크루트 태그 선택시 ajax요청 -->
+	<script type="text/x-handlebars-template" id="recruit-tag-template">
+		<div class="row">
+                <!-- Job Block -->
+				{{#each data}}
+                <div class="job-block col-lg-6 col-md-12 col-sm-12">
+                  <div class="inner-box">
+                    <div class="content">
+                      <span class="company-logo"><img src="images/resource/company-logo/1-2.png" alt=""></span>
+                      <h4><a href="recruit-detail?id={{recruit.id}}">
+						{{recruit.rcTitle}}</a></h4>
+                      <ul class="job-info">
+                        <li>{{recruit.rcPosition}}<span class="icon flaticon-briefcase"></span></li>
+                        <li>{{recruit.corp.corpAddress}}<span class="icon flaticon-map-locator"></span></li>
+                        <li><span class="icon flaticon-clock-3"></span> 11 hours ago</li>
+                        <li><span class="icon flaticon-money"></span> $35k - $45k</li>
+                      </ul>
+                      <ul class="job-other-info">
+						
+						{{#each tagList}}
+                        <li class="time" >{{tagName}}</li>
+						{{/each}}
+						{{#unless tagList}}
+						<li class="time" >{{tag.tagName}}</li>
+						{{/unless}}
+                        <!--  
+                         <li class="privacy">Private</li>
+                        <li class="required">Urgent</li>
+                        -->
+                      </ul>
+							
+ 								 <form action="recruit_scrap_insert_delete">
+   									 <button class="bookmark-btn" name="id" id="check-bookmark" type="submit" value={{recruit.id}}>
+    									  {{#ifEqual countList.[recruitTag.recruit.id] 1}}
+     									   <img src="images/bookmark.png" style="width: 23px">
+    									  {{/ifEqual}}
+     									 {{#ifEqual countList.[recruitTag.recruit.id] 0}}
+     									   <span class="flaticon-bookmark"></span>
+    									  {{/ifEqual}}
+   									 </button>
+ 								</form>
+                    </div>
+                  </div>
+                </div>
+				{{/each}}
+              </div>
+				<nav class="ls-pagination mb-5">
+				  <ul>
+				    {{#unless (eq nowPage 0)}}
+				      <li class="prev">
+				        <a href="{{url}}?page={{prePage}}"><i class="fa fa-arrow-left"></i></a>
+				      </li>
+				      <li class="prev">
+				        <a href="{{url}}?page={{prePage}}" class="page-link">{{nowPage}}</a>
+				      </li>
+				    {{/unless}}
+				    
+				    <li class="current-page">
+				      <a class="current-page">{{add nowPage 1}}</a>
+				    </li>
+				
+				    {{#if (not (eq nowPage (subtract totalPage 1)))}}
+				      <li class="next">
+				        <a href="{{url}}?page={{nextPage}}">{{add nowPage 2}}</a>
+				      </li>
+				      <li class="next">
+				        <a href="{{url}}?page={{nextPage}}"><i class="fa fa-arrow-right"></i></a>
+				      </li>
+				    {{/if}}
+				
+					{{#each page}}
+				      {{#if (and (gte this (subtract nowPage 1)) (lte this (add nowPage 1)))}}
+				        <li>
+				          <a href="{{../url}}?page={{this}}"></a>
+				        </li>
+				      {{/if}}
+				    {{/each}}
+				  </ul>
+				</nav>
+	</script>
+
+	<!-- End리크루트 태그 선택시 ajax요청 -->
+  <script src="js/jquery.js"></script>
+  <script src="js/popper.min.js"></script>
+  <script src="js/jquery-ui.min.js"></script>
+  <script src="js/chosen.min.js"></script>
+  <script src="js/bootstrap.min.js"></script>
+  <script src="js/jquery.fancybox.js"></script>
+  <script src="js/jquery.modal.min.js"></script>
+  <script src="js/mmenu.polyfills.js"></script>
+  <script src="js/mmenu.js"></script>
+  <script src="js/appear.js"></script>
+  <script src="js/ScrollMagic.min.js"></script>
+  <script src="js/rellax.min.js"></script>
+  <script src="js/owl.js"></script>
+  <script src="js/wow.js"></script>
+  <script src="js/script.js"></script>
+	
+	<script src="js/app_recruit.js" type="module"></script>
+	<script src="js/app_recruit_scrap.js" type="module"></script>
+</body>
+
+</html>

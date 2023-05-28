@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+  <script type="text/javascript">
+
+
+  function blogModify() {
+  	if (document.f.blogCateId.value == "") {
+  		alert("카테고리를 선택하세요.");
+  		document.f.blogCateId.focus();
+  		return false;
+  	}
+  	if (document.f.blogTitle.value == "") {
+  		alert("블로그 제목을 입력하세요.");
+  		document.f.blogTitle.focus();
+  		return false;
+  	}
+  	if (document.f.blogContent.value == "") {
+  		alert("내용을 입력하십시요.");
+  		document.f.blogContent.focus();
+  		return false;
+  	}
+
+  	document.f.action = "blog-modify-action";
+  	document.f.method='POST';
+  	document.f.submit();
+  }
+
+  
+  function blogList() {
+		window.location.href='blog-list';
+	}
+
+
+  
+  
+  </script>
+
+<head>
+  <meta charset="utf-8">
+  <title>ilhajob</title>
+
+  <!-- Stylesheets -->
+  <link href="css/bootstrap.css" rel="stylesheet">
+  <link href="css/style.css" rel="stylesheet">
+  
+
+  <link rel="shortcut icon" href="images/favicon.png" type="image/x-icon">
+  <link rel="icon" href="images/favicon.png" type="image/x-icon">
+
+  <!-- Responsive -->
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0">
+  <!--[if lt IE 9]><script src="https://cdnjs.cloudflare.com/ajax/libs/html5shiv/3.7.3/html5shiv.js"></script><![endif]-->
+  <!--[if lt IE 9]><script src="js/respond.js"></script><![endif]-->
+</head>
+
+<body>
+	<!-----------대쉬보드 CSS 훔쳐옴-------------->
+	
+  <div class="page-wrapper">
+
+    <!-- Preloader -->
+    <div class="preloader"></div>
+
+    <!-- Header Span -->
+    <span class="header-span"></span>
+
+    <!-- Main Header-->
+    <header class="main-header header-shaddow">
+      <div id="main-header" th:include="include_common_top_dashboard::include_common_top_dashboard"></div>
+    </header>
+    <!--End Main Header -->
+	<!-- Sidebar Backdrop -->
+    <div class="sidebar-backdrop"></div>
+
+
+    <!-- Sidebar Page Container -->
+    <div class="sidebar-page-container">
+      <div class="auto-container">
+        <div class="row">
+  
+
+ <!-- Dashboard -->
+    <section class="user-dashboard">
+      <div class="dashboard-outer">
+        <div class="upper-title-box">
+          <h3>블로그 수정</h3>
+          <div class="text" ></div>
+        </div>
+        <!-- Blog Write Form -->
+                  <form class="default-form" name="f" >
+                    <div class="row">
+                    
+                      
+                         <!-- Input Title -->
+                      <div class="form-group col-lg-12 col-md-12">
+                      <input type="hidden" th:value="*{blog.id}" name="id"  />
+                        </div>
+        		  <!-- Select Category -->
+                       <div class="form-group col-lg-6 col-md-12">
+                       <select name="blogCateId"  id="blogCateId" class="chosen-select">
+                        <option value="">카테고리를 선택하세요.</option>
+                        <option th:each="blogCate : ${blogCateList}" th:text="${blogCate.blogCateName}" th:value="${blogCate.id}">
+                        </option>
+                        </select>
+                      </div>
+ 
+                        <!-- Input Title -->
+                      <div class="form-group col-lg-12 col-md-12">
+                        <input type="hidden" th:value="${blog.user.id}" name="userId">
+                        </div>
+                      </div>
+                    
+                      <!-- Input Title -->
+                      <div class="form-group col-lg-12 col-md-12">
+                        <label name = "blogTitle">제목</label>
+                        <input type="text" th:value="${blog.blogTitle}" name="blogTitle">
+                      </div>
+						
+					<!-- Input Image -->
+					<div class="form-group col-lg-12 col-md-12">	
+					 <label name = "blogImage">이미지</label>
+					  <input type="text" th:value="${blog.blogImage}" name="blogImage" >
+					  </div>
+					  
+					  
+                      <!-- Input Content -->
+                      <div class="form-group col-lg-12 col-md-12">
+                        <label>내용</label>
+                        <textarea name ="blogContent" th:text="${blog.blogContent}" style="height: 300px; overflow: auto;" ></textarea>
+                      </div>
+
+                      <!-- Input -->
+                      <div class="form-group col-lg-12 col-md-12 text-right">
+                        <button type="button" class="theme-btn btn-style-one" style="float:right;" onclick="blogModify();">수정완료</button>
+                      <span><button type="button" class="theme-btn btn-style-one" style="float:right; margin-right:5px;" onclick="blogList();" >목록보기</button></span>
+                      </div>
+                      <!-- 이전값 저장용.... -->
+                      	 <input type="hidden" th:value="${blog.blogReadCount}" name="blogReadCount">
+               			 <input type="hidden" th:value="${blog.blogLike}" name="blogLike">
+     	             </form>
+                    </div>
+   			 </section>
+      		 	</div>
+     	 </div>
+  	 </div>
+   </div>
+    <!-- End Write Form -->
+
+    <!-- Copyright -->
+    <div class="copyright-text">
+      <div th:include="include_copyright_bottom::include_copyright_bottom"></div>
+    </div>
+
+  </div><!-- End Page Wrapper -->
+
+
+  <script src="js/jquery.js"></script>
+  <script src="js/popper.min.js"></script>
+  <script src="js/chosen.min.js"></script>
+  <script src="js/bootstrap.min.js"></script>
+  <script src="js/jquery-ui.min.js"></script>
+  <script src="js/jquery.fancybox.js"></script>
+  <script src="js/jquery.modal.min.js"></script>
+  <script src="js/mmenu.polyfills.js"></script>
+  <script src="js/mmenu.js"></script>
+  <script src="js/appear.js"></script>
+  <script src="js/ScrollMagic.min.js"></script>
+  <script src="js/rellax.min.js"></script>
+  <script src="js/owl.js"></script>
+  <script src="js/wow.js"></script>
+  <script src="js/script.js"></script>
+  <!--Google Map APi Key-->
+  <script src="http://maps.google.com/maps/api/js?key=AIzaSyDaaCBm4FEmgKs5cfVrh3JYue3Chj1kJMw&#038;ver=5.2.4"></script>
+  <script src="js/map-script.js"></script>
+  <!--End Google Map APi-->
+</body>
+
+</html>

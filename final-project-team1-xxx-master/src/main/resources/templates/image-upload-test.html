@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<script type="text/javascript">
+	function update(){
+	    document.f.action = "corp-update-action";
+	    document.method="POST"
+	    document.f.submit();
+	 }
+</script>
+<head>
+<meta charset="UTF-8">
+  <title>ilhajob</title>
+
+  <!-- Stylesheets -->
+  <link href="css/bootstrap.css" rel="stylesheet">
+  <link href="css/style.css" rel="stylesheet">
+  
+
+  <link rel="shortcut icon" href="images/favicon.png" type="image/x-icon">
+  <link rel="icon" href="images/favicon.png" type="image/x-icon">
+
+  <!-- Responsive -->
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0">
+  <!--[if lt IE 9]><script src="https://cdnjs.cloudflare.com/ajax/libs/html5shiv/3.7.3/html5shiv.js"></script><![endif]-->
+  <!--[if lt IE 9]><script src="js/respond.js"></script><![endif]-->
+	<title>Insert title here</title>
+</head>
+<body>
+<!-- 
+	<form id="ajaxform" enctype = "multipart/form-data">
+		<div class="uploading-outer">
+	     <div class="uploadButton">
+	       <input class="uploadButton-input" type="file" name="images" accept="image/*" id="upload" multiple onchange="readURL(this);">
+	       <label class="uploadButton-button ripple-effect" for="upload">
+	          <img id="preview" src="" alt="" style="width:150px" /> </label>
+	       <span class="uploadButton-file-name"></span>
+	     </div>
+	     <div class="text">최대 파일 크기는 1MB이고 최소 치수는 330x300이며 적합한 파일은 .jpg 및 .png입니다</div>
+	    </div>
+	    <button id="upload-btn">업로드</button>
+	</form>
+-->
+    
+<!--   
+	<img id="preview" src="" alt="image" style="width:100px" />
+	<input type="file" name="images" accept="image/*" id='fileName' multiple onchange="readURL(this);">
+	<button id="upload-btn">업로드</button>
+	 -->
+	 
+	<div class="widget-content">
+	 <ul><a id="corp-update-image-upload-form" href="#">로고사진 등록</a></ul>
+	<!--image-upload-form  -->
+	<script id="image-upload-form" type="text/x-handlebars-template">
+	  <form id="image-form" enctype = "multipart/form-data">
+		<div class="uploading-outer">
+	     <div class="uploadButton">
+	       <input class="uploadButton-input" type="file" name="images" accept="image/*" id="upload" multiple onchange="readURL(this);">
+	       <label class="uploadButton-button ripple-effect" for="upload">
+	          <img id="preview" src="" alt="" style="width:150px" /> </label>
+	       <span class="uploadButton-file-name"></span>
+	     </div>
+	     <div class="text">최대 파일 크기는 1MB이고 최소 치수는 330x300이며 적합한 파일은 .jpg 및 .png입니다</div>
+	    </div>
+	    <button id="upload-btn">업로드</button>
+	    
+	  </form>
+	</script>
+	
+	<div id="image-form-content">
+				
+	</div>
+	
+	   <form class="default-form" name = "f" method="post">
+	     <div class="row">
+	       <!-- Input -->
+	       <input type="hidden" name="id" th:value = "${corp.id}">
+	       <input type="hidden" name="corpLoginId" th:value = "${corp.corpLoginId}">
+	       <input type="hidden" name="corpPassword" th:value = "${corp.corpPassword}">
+	       <input type="hidden" name="job" th:value = "${corp.job}">
+	
+	       <div class="form-group col-lg-6 col-md-12">
+	         <label >회사 이름</label>
+	         <input type="text" name="corpName" th:value = "${corp.corpName}">
+	       </div>
+	       
+	       <div class="form-group col-lg-6 col-md-12">
+	         <label >사업자 번호</label>
+	         <input type="text" name="corpBusinessNo" th:value = "${corp.corpBusinessNo}">
+	       </div>
+	
+	       <!-- Input -->
+	       <div class="form-group col-lg-6 col-md-12">
+	         <label>주소</label>
+	         <input type="text" name="corpAddress" th:value = "${corp.corpAddress}">
+	       </div>
+	
+	       <!-- Input -->
+	       <div class="form-group col-lg-6 col-md-12">
+	         <label>전화번호</label>
+	         <input type="text" name="corpPhone" th:value="${corp.corpPhone}">
+	       </div>
+	
+	       <!-- Input -->
+	       <div class="form-group col-lg-6 col-md-12">
+	         <label>회사사이트</label>
+	         <input type="text" name="corpWebsite" th:value="${corp.corpWebsite}">
+	       </div>
+	
+	       <!-- Input -->
+	       <div class="form-group col-lg-6 col-md-12">
+	         <label>회사설립일</label>
+	         <input type="date" name="corpEst" th:value="${corp.corpEst}">
+	         <input type="text" th:value="${corp.corpEst}">
+	       </div>
+	
+	       <!-- Input -->
+	      <div class="form-group col-lg-6 col-md-12">
+	         <label>직원수</label>
+	         <input type="text" name="corpSize" th:value="${corp.corpSize}">
+	       </div>
+	
+	      <div class="form-group col-lg-6 col-md-12">
+	         <label>연매출</label>
+	         <input type="text" name="corpSales" th:value="${corp.corpSales}">
+	       </div>
+	       
+	      <div class="form-group col-lg-6 col-md-12">
+	         <label>산업</label>
+	         <input type="text" name="job" th:value="${corp.job}">
+	       </div>
+		
+	
+	       <!-- Search Select -->
+	       <div class="form-group col-lg-6 col-md-12">
+	         <label>업종 </label>
+	         <select data-placeholder="Categories" class="chosen-select multiple" multiple tabindex="4">
+	           <option value="Banking">Banking</option>
+	           <option value="Digital&Creative">Digital & Creative</option>
+	           <option value="Retail">Retail</option>
+	           <option value="Human Resources">Human Resources</option>
+	           <option value="Management">Management</option>
+	         </select>
+	       </div>
+	
+	       <!-- Input -->
+	       <div class="form-group col-lg-6 col-md-12">
+	         <label>복리후생</label>
+	        <input type="text" name="corpWelfare" th:value="${corp.corpWelfare}">
+	       </div>
+	
+	       <!-- About Company -->
+	       <div class="form-group col-lg-12 col-md-12">
+	         <label>회사소개</label>
+	         <input type="text" name="corpComment" th:value="${corp.corpComment}">
+	       </div>
+	
+	       <!-- Input -->
+	       <div class="form-group col-lg-6 col-md-12">
+	         <button class="theme-btn btn-style-one" type="button" onClick ="update();" >저장</button>
+	       </div>
+	     </div>
+	   </form>
+	 </div>
+<img width="90px" height="90px" alt="" src="data:image/gif;base64,R0lGODlhPAA8APcAAP////8A/5zs/23u/0bD/wCU/wBh/wAA//8AAOrqAMuUAJxOAHV1dU5OTiMjIwAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAACH5BAEAAAcALAAAAAA8ADwAAAj+AA8IHEiwoMGDABIqXHiwocOHEAsunAggosWLCBU+2MixI0OMIB8u7EjywceQKAcmLMmSZMKUKVe2nPkSJkaZM1lStGkRZ06XE3lG9PnTJMWKQkUCKOrxaFKlTDn6rPk0Y9SNU5FWJUiUqc8ECbZKXHoVK9mNYMUK7BpVJti3b6uy9UoWLtykc8vCVaDAbtyYZ8uS3NvXb1jAglkaXnwYZN6rjA07Dpy4I1++kdPepFx54+XCkS8+Trzw892QowWXvnx6cueSRxXyTN02tlbUnDvbDor7NdDdVDf7Ngtcdu/hxU9upk0zufKhGl87fw5x5FWZ03mLjl6bePbb0Jm0m/WefbJ4o+Snu0b/E/t36lDZ53T/Pnj88e3J1gdfPXBq+t+t11RLAL4noFS5sbefff3BxllWBh43IFBNRYhSVxQ5WJ5NGE6koXocJuiZAgQCJ5eID/BV4m4nUoTZWyr+pt1Wsb0IVowVzqjWQDYm8Blf1iX02Y4G9fijAkECMCSRBL14JI4pgubjk3yJ5eSTlklJZZVqbfnkjV4qsGOYP4LpJZMCkXkmmk2qSSWbcMaJZkAAADs=">
+  <script src="js/jquery.js"></script>
+  <script src="js/popper.min.js"></script>
+  <script src="js/chosen.min.js"></script>
+  <script src="js/bootstrap.min.js"></script>
+  <script src="js/jquery-ui.min.js"></script>
+  <script src="js/jquery.fancybox.js"></script>
+  <script src="js/jquery.modal.min.js"></script>
+  <script src="js/mmenu.polyfills.js"></script>
+  <script src="js/mmenu.js"></script>
+  <script src="js/appear.js"></script>
+  <script src="js/ScrollMagic.min.js"></script>
+  <script src="js/rellax.min.js"></script>
+  <script src="js/owl.js"></script>
+  <script src="js/wow.js"></script>
+  <script src="js/script.js"></script>
+  
+  <script defer type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/handlebars.js/4.1.2/handlebars.min.js"></script>
+  <script src="js/image-upload.js" type="module"></script>
+</body>
+</html>

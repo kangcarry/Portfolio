@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+  <script type="text/javascript">
+
+  function blogCreateForm() {
+  	window.location.href='blog-write-form';
+  }
+  </script>
+
+<head>
+  <meta charset="utf-8">
+  <title>ilhajob</title>
+
+  <!-- Stylesheets -->
+  <link href="css/bootstrap.css" rel="stylesheet">
+  <link href="css/style.css" rel="stylesheet">
+
+  <link rel="shortcut icon" href="images/favicon.png" type="image/x-icon">
+  <link rel="icon" href="images/favicon.png" type="image/x-icon">
+
+  <!-- Responsive -->
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0">
+  <!--[if lt IE 9]><script src="https://cdnjs.cloudflare.com/ajax/libs/html5shiv/3.7.3/html5shiv.js"></script><![endif]-->
+  <!--[if lt IE 9]><script src="js/respond.js"></script><![endif]-->
+</head>
+
+<body>
+
+  <div class="page-wrapper">
+
+    <!-- Preloader -->
+    <div class="preloader"></div>
+
+    <!-- Header Span -->
+    <span class="header-span"></span>
+
+    <!-- Main Header-->
+    <header class="main-header header-shaddow">
+      <div id="main-header" th:include="include_common_top_dashboard::include_common_top_dashboard"></div>
+    </header>
+    <!--End Main Header -->
+
+    <!--Page Title-->
+    <section class="page-title">
+      <div class="auto-container">
+        <div class="title-outer">
+          <h1>Blog</h1>
+          <ul class="page-breadcrumb">
+            <li><a href="index.html">Home</a></li>
+            <li>Blog</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+    <!--End Page Title-->
+
+    <!-- Sidebar Page Container -->
+    <div class="sidebar-page-container">
+      <div class="auto-container">
+        <div class="row">      
+         <!-- 작성하기 버튼-->
+          <div style="margin-bottom: 10px">
+          <button type="button" class="theme-btn btn-style-one" style="float: right;" onclick="blogCreateForm();">작성하기</button>
+          </div>
+		 </div>
+    
+          <!--Content Side-->
+          <div class="content-side col-lg-12 col-md-12 col-sm-12">
+            <div class="blog-grid">
+              <div class="row">
+              
+             
+                 <!-- News Block -->
+                <div class="news-block col-lg-4 col-md-6 col-sm-12" th:each="blog : ${blogList}">
+                  <div class="inner-box">
+                    <div class="image-box">
+                      <th:block th:if = "${blog.blogImage != null}">
+                          <figure class="image"><img th:src="${blog.blogImage}" src="images/resource/news-1.jpg" alt="" style="width:455px; height:295px"/></figure>
+                      </th:block>
+                      <th:block th:if = "${blog.blogImage == null}">
+                          <figure class="image"><img src="images/index-16/header/배경4.jpg" alt=""/></figure>
+                      </th:block>
+                    </div>
+                    <div class="lower-content">
+                      <ul class="post-meta">
+                        <li><p th:text="${#temporals.format(blog.updatedAt,'yyyy-MM-dd')}" >August 31, 2021</li>
+                        <li><p th:text="|${#lists.size(blog.blogCommentList)} Comment|"></li>
+                        <li><p th:text="|${blog.blogReadCount} views|"></p>
+                        <li><p th:text="|${blog.blogLike} likes |"></p>
+                      </ul>
+                      <h3><a th:text="${blog.blogTitle}" th:href="@{blog-single(id=${blog.id})}">Attract Sales And Profits</a></h3>
+                      <p class="text" th:text="|${#strings.substring(blog.blogContent,0,1)}...|"></p>
+                      <a th:href="@{blog-single(id=${blog.id})}" class="read-more">Read More <i class="fa fa-angle-right"></i></a>
+                    </div>
+                  </div>
+                </div>  
+                
+               
+
+              <!-- Pagination -->
+              <nav class="ls-pagination">
+                  <li th:each="page:${#numbers.sequence(0,totalPage -1)}" th:if="${page >= nowPage-1 and page <= nowPage+1}">
+                  <a th:href="@{blog-list?page=}+${pageStat.index}"></a></li>
+              <ul>
+                <li th:unless="${nowPage == 0}" class="prev"><a th:href="@{blog-list?page=}+${prePage}"><i class="fa fa-arrow-left"></i></a></li>
+                <li class="prev"><a th:unless="${nowPage == 0}" th:text="${nowPage}" th:href="@{blog-list?page=}+${prePage}"><i class="fa fa-arrow-left"></i></a></li>
+     			   <li><a class="current-page" th:text="${nowPage+1}" ></a></li>
+                <li class="next"><a th:unless="${nowPage == totalPage-1}" th:text="${nowPage+2}" th:href="@{blog-list?page=}+${nextPage}"><i class="fa fa-arrow-right"></i></a></li>
+             	<li th:unless="${nowPage == totalPage-1}" class="next"><a th:href="@{blog-list?page=}+${nextPage}"><i class="fa fa-arrow-right"></i></a></li>
+              </ul>
+              </nav>
+
+              
+            </div>
+          </div>
+        </div>
+      </div>
+    <!--End Listing Page Section -->
+    <!-- End Sidebar Container -->
+
+    <!-- Main Footer -->
+    <div th:include="include_main_bottom"></div>
+    <!-- End Main Footer -->
+
+</div>
+  </div><!-- End Page Wrapper -->
+
+
+  <script src="js/jquery.js"></script>
+  <script src="js/popper.min.js"></script>
+  <script src="js/chosen.min.js"></script>
+  <script src="js/bootstrap.min.js"></script>
+  <script src="js/jquery-ui.min.js"></script>
+  <script src="js/jquery.fancybox.js"></script>
+  <script src="js/jquery.modal.min.js"></script>
+  <script src="js/mmenu.polyfills.js"></script>
+  <script src="js/mmenu.js"></script>
+  <script src="js/appear.js"></script>
+  <script src="js/ScrollMagic.min.js"></script>
+  <script src="js/rellax.min.js"></script>
+  <script src="js/owl.js"></script>
+  <script src="js/wow.js"></script>
+  <script src="js/script.js"></script>
+
+</body>

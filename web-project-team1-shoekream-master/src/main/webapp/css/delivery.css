@@ -1,0 +1,20 @@
+@import url("menu.css");
+
+div#add{
+	font-size: x-large;
+}
+div.delivery{
+	margin-bottom: 5px;
+	margin-left: 20px;
+	font-size: large;
+}
+
+#deliveryBtn{
+	margin-left: 50px;
+}
+.delivery_input{
+    vertical-align: top;
+    
+}
+
+

@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+  <meta charset="utf-8">
+  <title>ilhajob</title>
+
+  <!-- Stylesheets -->
+  <link href="css/bootstrap.css" rel="stylesheet">
+  <link href="css/style.css" rel="stylesheet">
+  
+
+  <link rel="shortcut icon" href="images/favicon.png" type="image/x-icon">
+  <link rel="icon" href="images/favicon.png" type="image/x-icon">
+
+  <!-- Responsive -->
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0">
+  <!--[if lt IE 9]><script src="https://cdnjs.cloudflare.com/ajax/libs/html5shiv/3.7.3/html5shiv.js"></script><![endif]-->
+  <!--[if lt IE 9]><script src="js/respond.js"></script><![endif]-->
+
+</head>
+
+<body>
+  <div class="page-wrapper dashboard">
+
+    <!-- Preloader -->
+    <div class="preloader"></div>
+
+    <!-- Header Span -->
+    <span class="header-span"></span>
+
+    <!-- Main Header-->
+    <header class="main-header header-shaddow">
+      <div id="main-header" th:include="include_common_top_dashboard::include_common_top_dashboard"></div>
+    </header>
+    <!--End Main Header -->
+
+    <!-- Sidebar Backdrop -->
+    <div class="sidebar-backdrop"></div>
+
+    <!-- User Sidebar -->
+   <div class="user-sidebar" th:include="user-sidebar::user-sidebar"></div>
+    <!-- End User Sidebar -->
+
+    <!-- Dashboard -->
+    <section class="user-dashboard">
+      <div class="dashboard-outer">
+        <div class="upper-title-box">
+          <h3>나의 이력서 목록</h3>
+          <div class="text">Ready to jump back in?</div>
+        </div>
+        <div class="row">
+
+
+
+          <div class="col-lg-12">
+            <!-- CV Manager Widget -->
+            <div class="cv-manager-widget ls-widget">
+              <div class="widget-title">
+                <h4>이력서 관리</h4>
+              </div>
+              <div class="widget-content">
+                
+                <!-- 
+                <div class="uploading-resume">
+                  <div class="uploadButton">
+                    <input class="uploadButton-input" type="file" name="attachments[]" accept="image/*, application/pdf" id="upload" multiple />
+                    <label class="cv-uploadButton" for="upload">
+                      <span class="title">Drop files here to upload</span>
+                      <span class="text">To upload file size is (Max 5Mb) and allowed file types are (.doc, .docx, .pdf)</span>
+                      <span class="theme-btn btn-style-one">Upload Resume</span>
+                    </label>
+                    <span class="uploadButton-file-name"></span>
+                  </div>
+                </div>
+                 -->
+		<span  th:each="cv:${cvList}">
+		<!-- form start -->
+		<form name="f" th:id="f+${cv.id}" >
+			<!-- cv list -->
+                <div class="files-outer" >
+                  <div class="file-edit-box" >
+                    <span class="title" th:text="${cv.cvName}">Sample CV</span>
+                    <div class="edit-btns">
+                  	<input type="hidden" name="cvId" th:value="${cv.id}"/>
+                      <a th:href="@{cv-detail(cvId=${cv.id})}"><button type="button" th:value="${cv.id}"><span class="la la-pencil"></span></button></a>
+                      <!-- <button type="button" name="detail" th:value="${cv.id}" onclick="detail()"><span class="la la-pencil"></span></button> -->
+                      <button type="button" th:onclick="'cvDelete(' + ${cv.id} + ')'" th:value="${cv.id}"><span class="la la-trash"></span></button>
+                    </div>
+                  </div>
+              </div>
+			<!-- cv list -->
+		</form>
+		</span>
+		<!-- form start -->
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+    <!-- End Dashboard -->
+
+    <!-- Copyright -->
+    <div class="copyright-text">
+      <p>© 2021 Superio. All Right Reserved.</p>
+    </div>
+
+  </div><!-- End Page Wrapper -->
+
+
+  <script src="js/jquery.js"></script>
+  <script src="js/popper.min.js"></script>
+  <script src="js/chosen.min.js"></script>
+  <script src="js/bootstrap.min.js"></script>
+  <script src="js/jquery-ui.min.js"></script>
+  <script src="js/jquery.fancybox.js"></script>
+  <script src="js/jquery.modal.min.js"></script>
+  <script src="js/mmenu.polyfills.js"></script>
+  <script src="js/mmenu.js"></script>
+  <script src="js/appear.js"></script>
+  <script src="js/ScrollMagic.min.js"></script>
+  <script src="js/rellax.min.js"></script>
+  <script src="js/owl.js"></script>
+  <script src="js/wow.js"></script>
+  <script src="js/knob.js"></script>
+  <script src="js/script.js"></script>
+  <script src="js/cv.js"></script>
+</body>
+
+</html>

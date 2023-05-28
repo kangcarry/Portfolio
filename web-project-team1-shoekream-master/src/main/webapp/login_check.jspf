@@ -1,0 +1,17 @@
+<%@page import="com.itwill.shop.user.User"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
+<%
+	String sUserId=(String)session.getAttribute("sUserId");
+	User sUser=(User)session.getAttribute("sUser");
+	if(sUserId==null){
+		try{
+			response.sendRedirect("user_login_form.jsp");
+			return;
+		}catch (Exception e){
+			e.printStackTrace();
+			response.sendRedirect("user_login_form.jsp");
+			return;
+		}
+	}
+%>  
