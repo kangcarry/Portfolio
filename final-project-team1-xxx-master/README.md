@@ -23,7 +23,7 @@
 - 기술 : Spring(Java), HTML/CSS, JPA, Mybatis,  Javascript, JQuery, Thymeleaf, git
 - 발표 자료
     
-   https://www.notion.so/cbb3ce53f2f2425e82d80d84a968dd72?p=82e1005a273b4a828a988ad504b91637&pm=c
+   https://magic-fernleaf-a89.notion.site/_-82e1005a273b4a828a988ad504b91637?pvs=4
 
 ## 3. 회고
 
