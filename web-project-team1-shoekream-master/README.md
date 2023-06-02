@@ -20,8 +20,8 @@
     - 상품 가격, 브랜드, 리뷰내용, 카테고리 등 
 - 기술 : Spring(Java), HTML/CSS, JSP, SQL,  Javascript, git
 - 발표 자료
-    
-  https://www.notion.so/cbb3ce53f2f2425e82d80d84a968dd72?p=bea4464d4bcf4a06a6ef3857fb96143a&pm=c
+  https://magic-fernleaf-a89.notion.site/bea4464d4bcf4a06a6ef3857fb96143a?pvs=4
+
 
 ## 3. 회고
 
