@@ -21,7 +21,7 @@
 - 기술 : Java, SQL, git 
 - 발표 자료
     
-  https://www.notion.so/cbb3ce53f2f2425e82d80d84a968dd72?p=58cadf20f3a2404eab4b7a7e23b5c1a7&pm=c
+  https://magic-fernleaf-a89.notion.site/GUI-_-58cadf20f3a2404eab4b7a7e23b5c1a7?pvs=4
 
 ## 3. 회고
 
